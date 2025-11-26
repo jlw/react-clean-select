@@ -1,41 +1,41 @@
-import faker from '@faker-js/faker';
+import { faker } from '@faker-js/faker';
 
 export const options = [
   ...Array.from(Array(30).keys()).map((data) => ({
-    id: faker.random.uuid(),
-    name: `${faker.name.firstName()} ${faker.name.lastName()}`,
-    username: faker.internet.userName(),
+    id: faker.string.uuid(),
+    name: `${faker.person.firstName()} ${faker.person.lastName()}`,
+    username: faker.internet.username(),
     email: faker.internet.email(),
     address: {
-      street: faker.address.streetName(),
-      suite: faker.random.number(),
-      city: faker.address.city(),
-      zipcode: faker.address.zipCode(),
+      street: faker.location.street(),
+      suite: faker.location.secondaryAddress(),
+      city: faker.location.city(),
+      zipcode: faker.location.zipCode(),
       geo: {
-        lat: faker.address.latitude(),
-        lng: faker.address.longitude()
+        lat: faker.location.latitude(),
+        lng: faker.location.longitude()
       }
     },
-    phone: faker.phone.phoneNumber(),
+    phone: faker.phone.number(),
     website: faker.internet.domainName(),
     company: {
-      name: faker.company.companyName(),
+      name: faker.company.name(),
       catchPhrase: faker.company.catchPhrase(),
-      bs: faker.company.bs()
+      bs: faker.company.buzzPhrase()
     }
   }))
 ];
 
 export const optionsBase = (count = 30) => [
   ...Array.from(Array(count).keys()).map((data) => ({
-    value: faker.random.uuid(),
-    label: `${faker.name.firstName()} ${faker.name.lastName()}`
+    value: faker.string.uuid(),
+    label: `${faker.person.firstName()} ${faker.person.lastName()}`
   }))
 ];
 
 export const optionsSimple = (count = 30) => [
   ...Array.from(Array(count).keys()).map((data) => ({
-    id: faker.random.uuid(),
-    name: `${faker.name.firstName()} ${faker.name.lastName()}`
+    id: faker.string.uuid(),
+    name: `${faker.person.firstName()} ${faker.person.lastName()}`
   }))
 ];
