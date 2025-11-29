@@ -1,5 +1,4 @@
 import React from 'react';
-import styled from '@emotion/styled';
 import PropTypes from 'prop-types';
 
 import Option from './Option';
@@ -12,7 +11,7 @@ import SelectStateModel from '../models/SelectStateModel';
 
 const Content = ({ props, state, methods }) => {
   return (
-    <ContentComponent
+    <div
       className={`${LIB_NAME}-content ${
         props.multi ? `${LIB_NAME}-type-multi` : `${LIB_NAME}-type-single`
       }`}
@@ -44,7 +43,7 @@ const Content = ({ props, state, methods }) => {
           <Input props={props} methods={methods} state={state} />
         </React.Fragment>
       )}
-    </ContentComponent>
+    </div>
   );
 };
 
@@ -53,10 +52,5 @@ Content.propTypes = {
   state: PropTypes.shape(SelectStateModel),
   methods: PropTypes.shape(SelectMethodsModel),
 };
-const ContentComponent = styled.div`
-  display: flex;
-  flex: 1;
-  flex-wrap: wrap;
-`;
 
 export default Content;

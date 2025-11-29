@@ -210,10 +210,6 @@ const SelectPropsModel = Object.freeze({
    */
   placeholder: PropTypes.string,
   /**
-   * If valid DOM element specified - dropdown will break out to render inside the specified element
-   */
-  portal: PropTypes.element,
-  /**
    * If set, input type hidden would be added in the component with required prop as true/false
    */
   required: PropTypes.bool,
@@ -249,10 +245,6 @@ const SelectPropsModel = Object.freeze({
    * Sort by object property in values
    */
   sortBy: PropTypes.string,
-  /**
-   * Style object to pass to select
-   */
-  style: PropTypes.object,
   /**
    * Field in data to use for value
    */

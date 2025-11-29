@@ -84,7 +84,6 @@ declare module 'react-clean-select' {
     addPlaceholder?: string;
     placeholder?: string;
     loading?: boolean;
-    style?: CSSProperties;
     values: T[];
     options: T[];
     multi?: boolean;
@@ -113,7 +112,6 @@ declare module 'react-clean-select' {
     dropdownPosition?: 'top' | 'bottom' | 'auto';
     dropdownHeight?: string;
     autoFocus?: boolean;
-    portal?: HTMLElement;
     create?: boolean;
     direction?: 'ltr' | 'rtl';
     name?: string;
@@ -169,7 +167,6 @@ declare module 'react-clean-select' {
   export interface DropDownProps {
     selectBounds: DOMRect;
     dropdownGap: number;
-    portal: HTMLElement;
     dropdownHeight: string;
     dropdownPosition: 'auto' | 'top' | 'bottom';
   }

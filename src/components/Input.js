@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import styled from '@emotion/styled';
 import { valueExistInSelected } from '../util';
 import * as PropTypes from 'prop-types';
 import { LIB_NAME } from '../constants';
@@ -70,14 +69,12 @@ class Input extends Component {
     }
 
     return (
-      <InputComponent
+      <input
         ref={this.input}
         tabIndex="-1"
         onFocus={(event) => event.stopPropagation()}
-        className={`${LIB_NAME}-input`}
-        size={methods.getInputSize()}
+        className={`${LIB_NAME}-input${props.searchable ? '' : ` ${LIB_NAME}-input-readonly`}`}
         value={state.search}
-        readOnly={!props.searchable}
         onClick={() => methods.dropDown('open')}
         onKeyPress={this.handleKeyPress}
         onChange={methods.setSearch}
@@ -94,19 +91,5 @@ Input.propTypes = {
   state: PropTypes.object,
   methods: PropTypes.object
 };
-
-const InputComponent = styled.input`
-  line-height: inherit;
-  border: none;
-  margin-left: 5px;
-  background: transparent;
-  padding: 0;
-  width: calc(${({ size }) => `${size}ch`} + 5px);
-  font-size: smaller;
-  ${({ readOnly }) => readOnly && 'cursor: pointer;'}
-  :focus {
-    outline: none;
-  }
-`;
 
 export default Input;

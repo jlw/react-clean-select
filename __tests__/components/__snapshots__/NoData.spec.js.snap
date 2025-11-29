@@ -1,12 +1,7 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
+// Jest Snapshot v1, https://jestjs.io/docs/snapshot-testing
 
 exports[`<NoData/> renders correctly 1`] = `
-.emotion-0 {
-  padding: 10px;
-  text-align: center;
-}
-
 <div
-  className="react-clean-select-no-data emotion-0 emotion-1"
+  className="react-clean-select-no-data"
 />
 `;

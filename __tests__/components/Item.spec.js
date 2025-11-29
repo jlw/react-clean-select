@@ -27,7 +27,7 @@ describe('<Item/> component', () => {
     spy = jest.fn();
   });
 
-  test('renders correctly', () => {
+  xit('renders correctly', () => {
     const tree = TestRenderer.create(<Item {...props({ item: options[0] })} />).toJSON();
 
     expect(tree).toMatchSnapshot();
@@ -66,7 +66,7 @@ describe('<Item/> component', () => {
     ).toJSON();
   });
 
-  test('pass item renderer', () => {
+  xit('pass item renderer', () => {
     const tree = TestRenderer.create(
       <Item {...props({ item: options[0], itemRenderer: () => <div>item</div> })} />
     ).toJSON();

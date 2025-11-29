@@ -1,6 +1,6 @@
 {
   "name": "react-clean-select",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Customizable single- and multi- select component for react with basic, easily-overrideable CSS",
   "main": "dist/react-clean-select.js",
   "module": "lib/index.js",
@@ -95,10 +95,6 @@
     "webpack": "5.88.1",
     "webpack-cli": "^5.0.1",
     "webpack-dev-server": "4.15.1"
-  },
-  "dependencies": {
-    "@emotion/react": "11.11.0",
-    "@emotion/styled": "11.11.0"
   },
   "jest": {
     "snapshotSerializers": [
