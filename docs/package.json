@@ -1,7 +1,7 @@
 {
-  "name": "react-dropdown-select-site",
+  "name": "react-clean-select-site",
   "private": true,
-  "description": "react-dropdown-select site made with Gatsby",
+  "description": "react-clean-select site made with Gatsby",
   "version": "0.1.1",
   "license": "MIT",
   "scripts": {
@@ -22,9 +22,9 @@
     "gatsby-source-filesystem": "^4.8.1",
     "gatsby-transformer-remark": "^5.8.1",
     "normalize.css": "^8.0.1",
-    "react": "^17.0.2",
-    "react-dom": "^17.0.2",
-    "react-dropdown-select": "^4.8.3",
+    "react": "19",
+    "react-dom": "19",
+    "react-clean-select": "^0.0.1",
     "react-live": "^2.4.1",
     "react-markdown": "^8.0.0",
     "react-virtualized": "^9.22.3"

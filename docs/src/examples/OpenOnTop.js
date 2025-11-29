@@ -7,7 +7,7 @@ const OpenOnTop = ({ options, title }) => (
   <React.Fragment>
     <Heading
       title={title}
-      source="https://github.com/sanusart/react-dropdown-select/tree/master/docs/src/examples/OpenOnTop.js"
+      source="https://github.com/jlw/react-clean-select/tree/master/docs/src/examples/OpenOnTop.js"
     />
 
     <Select

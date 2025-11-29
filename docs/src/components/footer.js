@@ -6,11 +6,5 @@ export default () => (
     <div className="align-left">
       <Navigation />
     </div>
-
-    <div className="center p1">
-      <span className="p1">
-        &copy;{new Date().getFullYear()} Sasha Khamkov | All rights reserved
-      </span>
-    </div>
   </footer>
 );

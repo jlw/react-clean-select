@@ -5,8 +5,8 @@ module.exports = {
   entry: path.join(__dirname, 'src/index.js'),
   output: {
     path: path.join(__dirname, 'dist'),
-    filename: 'react-dropdown-select.js',
-    library: 'reactDropdownSelect',
+    filename: 'react-clean-select.js',
+    library: 'reactCleanSelect',
     libraryTarget: 'umd',
     umdNamedDefine: true,
     globalObject: 'this'

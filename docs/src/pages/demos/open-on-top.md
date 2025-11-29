@@ -11,9 +11,9 @@ Open dropdown above the select or bellow, based on space
 
 ```
 <Select
-	multi
-	dropdownPosition="auto"
-	options={options}
-	onChange={(values) => this.onChange(values)}
-	/>
+  multi
+  dropdownPosition="auto"
+  options={options}
+  onChange={(values) => this.onChange(values)}
+  />
 ```

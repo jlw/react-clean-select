@@ -1,5 +1,5 @@
 module.exports = {
-  pathPrefix: process.env.NETLIFY ?  '/' : '/react-dropdown-select',
+  pathPrefix: process.env.NETLIFY ?  '/' : '/react-clean-select',
   plugins: [
     "gatsby-plugin-emotion",
     {
@@ -25,7 +25,7 @@ module.exports = {
     'gatsby-plugin-catch-links'
   ],
   siteMetadata: {
-    title: 'react-dropdown-select',
+    title: 'react-clean-select',
     description: 'Customisable dropdown select for react',
     navigation: [
       {

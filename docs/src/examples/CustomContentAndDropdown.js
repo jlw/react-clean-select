@@ -80,7 +80,7 @@ export class CustomContentAndDropdown extends React.Component {
       <div>
         <Heading
           title={this.props.title}
-          source="https://github.com/sanusart/react-dropdown-select/tree/master/docs/src/examples/CustomContentAndDropdown.js"
+          source="https://github.com/jlw/react-clean-select/tree/master/docs/src/examples/CustomContentAndDropdown.js"
         />
 
         <StyledSelect
@@ -110,7 +110,7 @@ const Title = styled.div`
 `;
 
 const StyledSelect = styled(Select)`
-  .react-dropdown-select-dropdown {
+  .react-clean-select-dropdown {
     overflow: initial;
   }
 `;

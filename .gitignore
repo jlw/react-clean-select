@@ -1,7 +1,5 @@
-node_modules
-.idea
-/src/helpers.js
 .DS_Store
-coverage
+coverage/
 dist/
 lib/
+node_modules/

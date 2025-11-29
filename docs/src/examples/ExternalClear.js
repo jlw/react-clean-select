@@ -25,7 +25,7 @@ class ExternalClear extends Component {
       <React.Fragment>
         <Heading
           title={title}
-          source="https://github.com/sanusart/react-dropdown-select/tree/master/docs/src/examples/ExternalClear.js"
+          source="https://github.com/jlw/react-clean-select/tree/master/docs/src/examples/ExternalClear.js"
         />
 
         <p>I can be cleared from outside by setting values to <code>[]</code> <button href={() => null} onClick={() => this.onChange([])}>&times; clear</button></p>

@@ -1,38 +1,41 @@
-# react-dropdown-select
+# react-clean-select
 
-Customisable dropdown select for react
+Customisable dropdown select for react (without @emotion or inline styles)
 
-[![](https://badgen.net/bundlephobia/minzip/react-dropdown-select)](https://bundlephobia.com/result?p=react-dropdown-select)
-[![](https://img.shields.io/npm/v/react-dropdown-select.svg)](https://www.npmjs.com/package/react-dropdown-select)
-[![Coverage Status](https://coveralls.io/repos/github/sanusart/react-dropdown-select/badge.svg?branch=master&service=github)](https://coveralls.io/github/sanusart/react-dropdown-select?branch=master)
-[![Codacy Badge](https://app.codacy.com/project/badge/Grade/b24446a1398a4308ad5d2b825e61bf76)](https://app.codacy.com/gh/sanusart/react-dropdown-select/dashboard?utm_source=gh&utm_medium=referral&utm_content=&utm_campaign=Badge_grade)
+[![](https://badgen.net/bundlephobia/minzip/react-clean-select)](https://bundlephobia.com/result?p=react-clean-select)
+[![](https://img.shields.io/npm/v/react-clean-select.svg)](https://www.npmjs.com/package/react-clean-select)
+[![Coverage Status](https://coveralls.io/repos/github/jlw/react-clean-select/badge.svg?branch=master&service=github)](https://coveralls.io/github/jlw/react-clean-select?branch=master)
+[![Codacy Badge](https://app.codacy.com/project/badge/Grade/b24446a1398a4308ad5d2b825e61bf76)](https://app.codacy.com/gh/jlw/react-clean-select/dashboard?utm_source=gh&utm_medium=referral&utm_content=&utm_campaign=Badge_grade)
 
 ### Features
 
 - configurable via `prop`s
 - total custom components overrides for all internals via render prop callbacks (with access to internal props, state and methods)
-- stylable via css (or custom components)
-- portal support for rendering dropdown outside local DOM tree. e.g. in `document.body`
+- stylable via CSS
 - auto position
 - small bundle size
 
 ### Installation
 
-> `npm install --save react-dropdown-select`
+> `npm install --save react-clean-select`
 
 ### Web site
 
-[Web site, docs and demo](https://sanusart.github.io/react-dropdown-select)
+[Web site with docs and demo](https://jlw.github.io/react-clean-select)
 
 ### Motivation
 
-react-select is very nice, but sometimes project requirements are beyond it's abilities
+I need a combobox component that A) can work on a site where the Content-Security-Policy does not allow inline styles and B) allows changing the available option list. Downshift met the needs for the Content-Secuity-Policy, but could not handle changing options after the component renders. All of the other packages I tried relied on inline styles and/or non-deterministic CSS class names that fought customization.
+
+#### Credits
+
+This is a fork of the [react-clean-select](https://github.com/sanusart/react-clean-select) package by Sasha Khamkov.
 
 ### Usage
 
 import:
 
-`import Select from "react-dropdown-select";`
+`import Select from "react-clean-select";`
 
 and use as:
 
@@ -79,14 +82,10 @@ const options = [
 
 #### How to help/contribute
 
-- fix issues, pull request are very welcome
+- fix issues and pull request are very welcome
 - write, improve docs
 - write tests (we use jest)
 - suggest features and improvements
-
-### Demo
-
-[![Edit react-dropdown-select](https://codesandbox.io/static/img/play-codesandbox.svg)](https://codesandbox.io/s/p54p8y1987?autoresize=1)
 
 # API
 
@@ -126,7 +125,7 @@ const options = [
 | closeOnScroll                                                                               | bool        | false          | If true, scrolling the page will close the dropdown                                                                                    |
 | closeOnSelect                                                                               | bool        | false          | If true, selecting option will close the dropdown                                                                                      |
 | closeOnClickInput                                                                           | bool        | false          | If true, clicking input will close the dropdown if you are not searching.                                                              |
-| [dropdownPosition](https://sanusart.github.io/react-dropdown-select/prop/dropdown-position) | string      | "bottom"       | Available options are "auto", "top" and "bottom" defaults to "bottom". Auto will adjust itself according Select's position on the page |
+| [dropdownPosition](https://jlw.github.io/react-clean-select/prop/dropdown-position) | string      | "bottom"       | Available options are "auto", "top" and "bottom" defaults to "bottom". Auto will adjust itself according Select's position on the page |
 | keepSelectedInList                                                                          | bool        | true           | If false, selected item will not appear in a list                                                                                      |
 | portal                                                                                      | DOM element | false          | If valid dom element specified - dropdown will break out to render inside the specified element                                        |
 | create                                                                                      | bool        | false          | If true, select will create value from search string and fire `onCreateNew` callback prop                                              |
@@ -153,19 +152,19 @@ const options = [
 | onClearAll                                                                                               | func |           | Fires upon clearing all values (via custom renderers)                                          |
 | onSelectAll                                                                                              | func |           | Fires upon selecting all values (via custom renderers)                                         |
 | onDropdownCloseRequest                                                                                   | func | undefined | Fires upon dropdown closing state, stops the closing and provides own method `close()`         |
-| [contentRenderer](https://sanusart.github.io/react-dropdown-select/prop/content-renderer)                | func |           | Overrides internal content component (the contents of the select component)                    |
-| [itemRenderer](https://sanusart.github.io/react-dropdown-select/prop/item-renderer)                      | func |           | Overrides internal item in a dropdown                                                          |
-| [noDataRenderer](https://sanusart.github.io/react-dropdown-select/prop/no-data-renderer)                 | func |           | Overrides internal "no data" (shown where search has no results)                               |
-| [optionRenderer](https://sanusart.github.io/react-dropdown-select/prop/option-renderer)                  | func |           | Overrides internal option (the pillow with an "x") on the select content                       |
-| [inputRenderer](https://sanusart.github.io/react-dropdown-select/prop/input-renderer)                    | func |           | Overrides internal input text                                                                  |
-| [loadingRenderer](https://sanusart.github.io/react-dropdown-select/prop/loading-renderer)                | func |           | Overrides internal loading                                                                     |
-| [clearRenderer](https://sanusart.github.io/react-dropdown-select/prop/clear-renderer)                    | func |           | Overrides internal clear button                                                                |
-| [separatorRenderer](https://sanusart.github.io/react-dropdown-select/prop/separator-renderer)            | func |           | Overrides internal separator                                                                   |
-| [dropdownRenderer](https://sanusart.github.io/react-dropdown-select/prop/dropdown-renderer)              | func |           | Overrides internal dropdown component                                                          |
-| [dropdownHandleRenderer](https://sanusart.github.io/react-dropdown-select/prop/dropdown-handle-renderer) | func |           | Overrides internal dropdown handle                                                             |
+| [contentRenderer](https://jlw.github.io/react-clean-select/prop/content-renderer)                | func |           | Overrides internal content component (the contents of the select component)                    |
+| [itemRenderer](https://jlw.github.io/react-clean-select/prop/item-renderer)                      | func |           | Overrides internal item in a dropdown                                                          |
+| [noDataRenderer](https://jlw.github.io/react-clean-select/prop/no-data-renderer)                 | func |           | Overrides internal "no data" (shown where search has no results)                               |
+| [optionRenderer](https://jlw.github.io/react-clean-select/prop/option-renderer)                  | func |           | Overrides internal option (the pillow with an "x") on the select content                       |
+| [inputRenderer](https://jlw.github.io/react-clean-select/prop/input-renderer)                    | func |           | Overrides internal input text                                                                  |
+| [loadingRenderer](https://jlw.github.io/react-clean-select/prop/loading-renderer)                | func |           | Overrides internal loading                                                                     |
+| [clearRenderer](https://jlw.github.io/react-clean-select/prop/clear-renderer)                    | func |           | Overrides internal clear button                                                                |
+| [separatorRenderer](https://jlw.github.io/react-clean-select/prop/separator-renderer)            | func |           | Overrides internal separator                                                                   |
+| [dropdownRenderer](https://jlw.github.io/react-clean-select/prop/dropdown-renderer)              | func |           | Overrides internal dropdown component                                                          |
+| [dropdownHandleRenderer](https://jlw.github.io/react-clean-select/prop/dropdown-handle-renderer) | func |           | Overrides internal dropdown handle                                                             |
 | searchFn                                                                                                 | func | undefined | Overrides internal search function                                                             |
 | handleKeyDownFn                                                                                          | func | undefined | Overrides internal keyDown function                                                            |
 
 ### License
 
-[MIT](https://github.com/sanusart/react-dropdown-select/blob/master/LICENSE)
+[MIT](https://github.com/jlw/react-clean-select/blob/master/LICENSE)

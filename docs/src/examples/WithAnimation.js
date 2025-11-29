@@ -12,7 +12,7 @@ const WithAnimation = ({ options, title }) => {
     <React.Fragment>
       <Heading
         title={title}
-        source="https://github.com/sanusart/react-dropdown-select/tree/master/docs/src/examples/WithAnimation.js"
+        source="https://github.com/jlw/react-clean-select/tree/master/docs/src/examples/WithAnimation.js"
       />
 
       <StyledSelect
@@ -62,7 +62,7 @@ const show = keyframes`
 const StyledSelect = styled(Select)`
   transition: all 0.3s ease-out;
 
-  .react-dropdown-select-dropdown {
+  .react-clean-select-dropdown {
     height: 310px;
     ${({ isOpen }) =>
       isOpen
@@ -74,7 +74,7 @@ const StyledSelect = styled(Select)`
           `};
   }
 
-  .react-dropdown-select-option {
+  .react-clean-select-option {
     transition: all 0.3s ease-out;
   }
 `;

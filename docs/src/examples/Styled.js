@@ -7,7 +7,7 @@ const Styled = ({ options, title }) => (
   <React.Fragment>
     <Heading
       title={title}
-      source="https://github.com/sanusart/react-dropdown-select/tree/master/docs/src/examples/Styled.js"
+      source="https://github.com/jlw/react-clean-select/tree/master/docs/src/examples/Styled.js"
     />
 
     <StyledSelect
@@ -28,24 +28,24 @@ const StyledSelect = styled(Select)`
   border: #333 !important;
   color: #fff;
 
-  .react-dropdown-select-clear,
-  .react-dropdown-select-dropdown-handle {
+  .react-clean-select-clear,
+  .react-clean-select-dropdown-handle {
     color: #fff;
   }
 
-  .react-dropdown-select-option {
+  .react-clean-select-option {
     border: 1px solid #fff;
   }
 
-  .react-dropdown-select-item {
+  .react-clean-select-item {
     color: #333;
   }
 
-  .react-dropdown-select-input {
+  .react-clean-select-input {
     color: #fff;
   }
 
-  .react-dropdown-select-dropdown {
+  .react-clean-select-dropdown {
     position: absolute;
     left: 0;
     border: none;
@@ -62,24 +62,24 @@ const StyledSelect = styled(Select)`
     color: #fff !important;
   }
 
-  .react-dropdown-select-item {
+  .react-clean-select-item {
     color: #f2f2f2;
     border-bottom: 1px solid #333;
-       
+
     :hover {
        color: #ffffff80;
     }
   }
 
-  .react-dropdown-select-item.react-dropdown-select-item-selected,
-  .react-dropdown-select-item.react-dropdown-select-item-active {
+  .react-clean-select-item.react-clean-select-item-selected,
+  .react-clean-select-item.react-clean-select-item-active {
     //background: #111;
     border-bottom: 1px solid #333;
     color: #fff;
     font-weight: bold;
   }
 
-  .react-dropdown-select-item.react-dropdown-select-item-disabled {
+  .react-clean-select-item.react-clean-select-item-disabled {
     background: #777;
     color: #ccc;
   }
