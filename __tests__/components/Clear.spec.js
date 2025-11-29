@@ -36,7 +36,7 @@ describe('<Clear/> component', () => {
 
   it('onClick clears all', () => {
     TestRenderer.create(<Clear {...props({ parentItem: options[0] })} onClick={spy} />)
-      .root.findByProps({ className: 'react-dropdown-select-clear' })
+      .root.findByProps({ className: 'react-clean-select-clear' })
       .props.onClick();
 
     expect(spy).toHaveBeenCalled;
@@ -44,7 +44,7 @@ describe('<Clear/> component', () => {
 
   it('onKeyPress clears all', () => {
     TestRenderer.create(<Clear {...props({ parentItem: options[0] })} onKeyPress={spy} />)
-      .root.findByProps({ className: 'react-dropdown-select-clear' })
+      .root.findByProps({ className: 'react-clean-select-clear' })
       .props.onKeyPress();
 
     expect(spy).toHaveBeenCalled;

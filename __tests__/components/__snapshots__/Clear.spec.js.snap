@@ -1,22 +1,8 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
+// Jest Snapshot v1, https://jestjs.io/docs/snapshot-testing
 
 exports[`<Clear/> component <Clear/> renders correctly 1`] = `
-.emotion-0 {
-  line-height: 25px;
-  margin: 0 10px;
-  cursor: pointer;
-}
-
-.emotion-0:focus {
-  outline: none;
-}
-
-.emotion-0:hover {
-  color: tomato;
-}
-
 <div
-  className="react-dropdown-select-clear emotion-0 emotion-1"
+  className="react-clean-select-clear"
   onClick={[Function]}
   onKeyPress={[Function]}
   tabIndex="-1"

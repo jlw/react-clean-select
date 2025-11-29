@@ -1,0 +1,236 @@
+.react-clean-select {
+  box-sizing: border-box;
+  position: relative;
+  display: flex;
+  border: 1px solid #ccc;
+  width: 100%;
+  border-radius: 2px;
+  padding: 2px 5px;
+  flex-direction: row;
+  direction: ltr;
+  align-items: center;
+  cursor: pointer;
+  min-height: 36px;
+  pointer-events: all;
+}
+.react-clean-select:focus,
+.react-clean-select:focus-within {
+  outline: 0;
+}
+.react-clean-select-disabled {
+  cursor: not-allowed;
+  pointer-events: none;
+  opacity: 0.3;
+}
+.react-clean-select-rtl {
+  direction: rtl;
+}
+.react-clean-select * {
+  box-sizing: border-box;
+}
+
+.react-clean-select-clear {
+  line-height: 25px;
+  margin: 0 10px;
+  cursor: pointer;
+}
+.react-clean-select-clear:focus {
+  outline: none;
+}
+.react-clean-select-clear:hover {
+  color: tomato;
+}
+
+.react-clean-select-content {
+  display: flex;
+  flex: 1;
+  flex-wrap: wrap;
+}
+
+.react-clean-select-dropdown {
+  position: absolute;
+  top: 43px;
+  left: -1px;
+  border: 1px solid #ccc;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  background: #fff;
+  border-radius: 2px;
+  box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.2);
+  max-height: 300px;
+  overflow: auto;
+  z-index: 9;
+}
+.react-clean-select-dropdown:focus {
+  outline: none;
+}
+
+.react-clean-select-dropdown-add-new {
+  padding: 5px 10px;
+}
+.react-clean-select-dropdown-add-new:hover {
+  outline: none;
+  cursor: pointer;
+}
+
+.react-clean-select-dropdown-select-all {
+  padding: 5px 10px;
+  position: sticky;
+  bottom: 0;
+  margin: 0;
+  opacity: 1;
+  background: #fff;
+  box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.2);
+}
+.react-clean-select-dropdown-select-all:hover {
+  outline: none;
+  cursor: pointer;
+}
+
+.react-clean-select-dropdown-handle {
+  text-align: center;
+  cursor: pointer;
+}
+.react-clean-select-dropdown-handle:focus {
+  outline: none;
+}
+.react-clean-select-dropdown-handle svg {
+  width: 16px;
+  height: 16px;
+}
+.react-clean-select-dropdown-handle-closed {
+  pointer-events: none;
+}
+.react-clean-select-dropdown-handle-closed.react-clean-select-dropdown-handle-rotate {
+  margin: 0 0 0 5px;
+  transform: rotate(180deg);
+}
+.react-clean-select-dropdown-handle-open {
+  pointer-events: all;
+}
+.react-clean-select-dropdown-handle-open.react-clean-select-dropdown-handle-rotate {
+  transform: rotate(0deg);
+  margin: 0px 0 -3px 5px;
+}
+
+.react-clean-select-input {
+  line-height: inherit;
+  border: none;
+  margin-left: 5px;
+  background: transparent;
+  padding: 0;
+  font-size: smaller;
+}
+.react-clean-select-input:focus {
+  outline: none;
+}
+.react-clean-select-input-readonly {
+  cursor: pointer;
+}
+.react-clean-select-input-zero {
+  opacity: 0;
+  width: 0;
+  position: absolute;
+}
+
+.react-clean-select-item {
+  padding: 5px 10px;
+  cursor: pointer;
+  border-bottom: 1px solid #fff;
+}
+.react-clean-select-item-active {
+  border-bottom: 1px solid #fff;
+}
+.react-clean-select-item-disabled {
+  background: #f2f2f2;
+  color: #ccc;
+}
+.react-clean-select-item-disabled ins {
+  text-decoration: none;
+  border:1px solid #ccc;
+  border-radius: 2px;
+  padding: 0px 3px;
+  font-size: x-small;
+  text-transform: uppercase;
+}
+.react-clean-select-item:hover,
+.react-clean-select-item:focus {
+  outline: none;
+}
+.react-clean-select-item-selected {
+  color: #fff;
+  border-bottom: 1px solid #fff;
+}
+.react-clean-select-item-disabled.react-clean-select-item-selected {
+  background: #f2f2f2;
+  color: #ccc;
+}
+
+.react-clean-select-loading {
+  @keyframes dual-ring-spin {
+    0% {
+      transform: rotate(0deg);
+    }
+    100% {
+      transform: rotate(180deg);
+    }
+  }
+
+  padding: 0 5px;
+  display: block;
+  width: auto;
+  height: auto;
+}
+.react-clean-select-loading:after {
+  content: ' ';
+  display: block;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  border-width: 1px;
+  border-style: solid;
+  animation: dual-ring-spin 0.7s ease-in-out infinite;
+  margin: 0 0 0 -10px;
+}
+
+.react-clean-select-no-data {
+  padding: 10px;
+  text-align: center;
+}
+
+.react-clean-select-option {
+  padding: 0 5px;
+  border-radius: 2px;
+  line-height: 21px;
+  margin: 3px 0 3px 5px;
+  color: #fff;
+  display: flex;
+  flex-direction: row;
+}
+.react-clean-select-option-rtl {
+  flex-direction: row-reverse;
+}
+.react-clean-select-option-remove {
+  cursor: pointer;
+  width: 22px;
+  height: 22px;
+  display: inline-block;
+  text-align: center;
+  margin: 0 -5px 0 0px;
+  border-radius: 0 3px 3px 0;
+}
+.react-clean-select-option-remove:hover {
+  color: tomato;
+}
+.react-clean-select-option:hover,
+.react-clean-select-option:hover > span {
+  opacity: 0.9;
+}
+
+.react-clean-select-separator {
+  border-left: 1px solid #ccc;
+  width: 1px;
+  height: 25px;
+  display: block;
+}

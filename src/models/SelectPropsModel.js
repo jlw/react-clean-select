@@ -63,7 +63,7 @@ const SelectPropsModel = Object.freeze({
   compareValuesFunc: PropTypes.func,
   /**
    * Overrides internal content component (the contents of the select component)
-   * | <a href="https://sanusart.github.io/react-dropdown-select/prop/content-renderer">example</a>
+   * | <a href="https://jlw.github.io/react-clean-select/prop/content-renderer">example</a>
    */
   contentRenderer: PropTypes.func,
   /**
@@ -108,7 +108,7 @@ const SelectPropsModel = Object.freeze({
   dropdownHeight: PropTypes.string,
   /**
    * Available options are "auto", "top" and "bottom" defaults to "bottom". Auto will adjust itself according Select's position on the page
-   * | <a href="https://sanusart.github.io/react-dropdown-select/prop/dropdown-position">example</a>
+   * | <a href="https://jlw.github.io/react-clean-select/prop/dropdown-position">example</a>
    */
   dropdownPosition: PropTypes.oneOf(['top', 'bottom', 'auto']),
   /**
@@ -210,10 +210,6 @@ const SelectPropsModel = Object.freeze({
    */
   placeholder: PropTypes.string,
   /**
-   * If valid DOM element specified - dropdown will break out to render inside the specified element
-   */
-  portal: PropTypes.element,
-  /**
    * If set, input type hidden would be added in the component with required prop as true/false
    */
   required: PropTypes.bool,
@@ -249,10 +245,6 @@ const SelectPropsModel = Object.freeze({
    * Sort by object property in values
    */
   sortBy: PropTypes.string,
-  /**
-   * Style object to pass to select
-   */
-  style: PropTypes.object,
   /**
    * Field in data to use for value
    */

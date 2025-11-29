@@ -1,6 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
+import { LIB_NAME } from '../constants';
+
 class ClickOutside extends React.Component {
   container = React.createRef();
 
@@ -23,10 +25,10 @@ class ClickOutside extends React.Component {
   };
 
   render() {
-    const { className, children } = this.props;
+    const { children } = this.props;
 
     return (
-      <div className={className} ref={this.container}>
+      <div className={`${LIB_NAME}-container`} ref={this.container}>
         {children}
       </div>
     );

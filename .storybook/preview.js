@@ -1,6 +1,8 @@
 import { DocsPage, Canvas } from '@storybook/addon-docs';
 import React from 'react';
 
+import '../assets/index.css'
+
 const preview = {
   parameters: {
     actions: { argTypesRegex: '^on[A-Z].*' },
