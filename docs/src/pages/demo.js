@@ -152,7 +152,7 @@ export class Demo extends React.Component {
   inputRenderer = ({ state, methods }) => (
     <input
       tabIndex="1"
-      className="react-dropdown-select-input"
+      className="react-clean-select-input"
       size={methods.getInputSize()}
       value={state.search}
       onClick={() => methods.dropDown('open')}
@@ -508,10 +508,10 @@ const StyledSelect = styled(Select)`
   ${({ dropdownRenderer }) =>
     dropdownRenderer &&
     `
-		.react-dropdown-select-dropdown {
-			overflow: initial;
-		}
-	`}
+    .react-clean-select-dropdown {
+      overflow: initial;
+    }
+  `}
 `;
 
 const SearchAndToggle = styled.div`
@@ -551,9 +551,9 @@ const Item = styled.div`
   ${({ disabled }) =>
     disabled
       ? `
-  	opacity: 0.5;
-  	pointer-events: none;
-  	cursor: not-allowed;
+    opacity: 0.5;
+    pointer-events: none;
+    cursor: not-allowed;
   `
       : ''}
 `;

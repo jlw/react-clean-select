@@ -63,7 +63,7 @@ const SelectPropsModel = Object.freeze({
   compareValuesFunc: PropTypes.func,
   /**
    * Overrides internal content component (the contents of the select component)
-   * | <a href="https://sanusart.github.io/react-dropdown-select/prop/content-renderer">example</a>
+   * | <a href="https://jlw.github.io/react-clean-select/prop/content-renderer">example</a>
    */
   contentRenderer: PropTypes.func,
   /**
@@ -108,7 +108,7 @@ const SelectPropsModel = Object.freeze({
   dropdownHeight: PropTypes.string,
   /**
    * Available options are "auto", "top" and "bottom" defaults to "bottom". Auto will adjust itself according Select's position on the page
-   * | <a href="https://sanusart.github.io/react-dropdown-select/prop/dropdown-position">example</a>
+   * | <a href="https://jlw.github.io/react-clean-select/prop/dropdown-position">example</a>
    */
   dropdownPosition: PropTypes.oneOf(['top', 'bottom', 'auto']),
   /**

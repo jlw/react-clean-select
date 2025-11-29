@@ -7,7 +7,7 @@ exports[`<Item/> component pass item renderer 1`] = `
   border-bottom: 1px solid #fff;
 }
 
-.emotion-0.react-dropdown-select-item-active {
+.emotion-0.react-clean-select-item-active {
   border-bottom: 1px solid #fff;
 }
 
@@ -16,20 +16,20 @@ exports[`<Item/> component pass item renderer 1`] = `
   outline: none;
 }
 
-.emotion-0.react-dropdown-select-item-selected {
+.emotion-0.react-clean-select-item-selected {
   background: undefined;
   color: #fff;
   border-bottom: 1px solid #fff;
 }
 
 <span
-  className="react-dropdown-select-item    emotion-0 emotion-1"
+  className="react-clean-select-item    emotion-0 emotion-1"
   onClick={[Function]}
   onKeyPress={[Function]}
   role="option"
   tabIndex="-1"
 >
-   
+
 </span>
 `;
 
@@ -40,7 +40,7 @@ exports[`<Item/> component renders correctly 1`] = `
   border-bottom: 1px solid #fff;
 }
 
-.emotion-0.react-dropdown-select-item-active {
+.emotion-0.react-clean-select-item-active {
   border-bottom: 1px solid #fff;
 }
 
@@ -49,19 +49,19 @@ exports[`<Item/> component renders correctly 1`] = `
   outline: none;
 }
 
-.emotion-0.react-dropdown-select-item-selected {
+.emotion-0.react-clean-select-item-selected {
   background: undefined;
   color: #fff;
   border-bottom: 1px solid #fff;
 }
 
 <span
-  className="react-dropdown-select-item    emotion-0 emotion-1"
+  className="react-clean-select-item    emotion-0 emotion-1"
   onClick={[Function]}
   onKeyPress={[Function]}
   role="option"
   tabIndex="-1"
 >
-   
+
 </span>
 `;

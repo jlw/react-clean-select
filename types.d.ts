@@ -1,4 +1,4 @@
-declare module 'react-dropdown-select' {
+declare module 'react-clean-select' {
   import {
     ChangeEvent,
     CSSProperties,

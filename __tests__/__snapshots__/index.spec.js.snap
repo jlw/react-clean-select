@@ -102,7 +102,7 @@ exports[`<Select/> component <Select/> is disabled 1`] = `
   <div
     aria-expanded={false}
     aria-label="Dropdown select"
-    className="react-dropdown-select undefined emotion-0 emotion-1"
+    className="react-clean-select undefined emotion-0 emotion-1"
     color="#0074D9"
     direction="ltr"
     disabled={true}
@@ -111,11 +111,11 @@ exports[`<Select/> component <Select/> is disabled 1`] = `
     tabIndex="-1"
   >
     <div
-      className="react-dropdown-select-content react-dropdown-select-type-single emotion-2 emotion-3"
+      className="react-clean-select-content react-clean-select-type-single emotion-2 emotion-3"
       onClick={[Function]}
     >
       <input
-        className="react-dropdown-select-input emotion-4 emotion-5"
+        className="react-clean-select-input emotion-4 emotion-5"
         disabled={true}
         onBlur={[Function]}
         onChange={[Function]}
@@ -130,7 +130,7 @@ exports[`<Select/> component <Select/> is disabled 1`] = `
       />
     </div>
     <div
-      className="react-dropdown-select-dropdown-handle emotion-6 emotion-7"
+      className="react-clean-select-dropdown-handle emotion-6 emotion-7"
       color="#0074D9"
       onClick={[Function]}
       onKeyDown={[Function]}
@@ -251,7 +251,7 @@ exports[`<Select/> component <Select/> renders correctly 1`] = `
   <div
     aria-expanded={false}
     aria-label="Dropdown select"
-    className="react-dropdown-select undefined emotion-0 emotion-1"
+    className="react-clean-select undefined emotion-0 emotion-1"
     color="#0074D9"
     direction="ltr"
     disabled={false}
@@ -260,11 +260,11 @@ exports[`<Select/> component <Select/> renders correctly 1`] = `
     tabIndex="0"
   >
     <div
-      className="react-dropdown-select-content react-dropdown-select-type-single emotion-2 emotion-3"
+      className="react-clean-select-content react-clean-select-type-single emotion-2 emotion-3"
       onClick={[Function]}
     >
       <input
-        className="react-dropdown-select-input emotion-4 emotion-5"
+        className="react-clean-select-input emotion-4 emotion-5"
         disabled={false}
         onBlur={[Function]}
         onChange={[Function]}
@@ -279,7 +279,7 @@ exports[`<Select/> component <Select/> renders correctly 1`] = `
       />
     </div>
     <div
-      className="react-dropdown-select-dropdown-handle emotion-6 emotion-7"
+      className="react-clean-select-dropdown-handle emotion-6 emotion-7"
       color="#0074D9"
       onClick={[Function]}
       onKeyDown={[Function]}
@@ -414,7 +414,7 @@ exports[`<Select/> component <Select/> renders with clearable 1`] = `
   <div
     aria-expanded={false}
     aria-label="Dropdown select"
-    className="react-dropdown-select undefined emotion-0 emotion-1"
+    className="react-clean-select undefined emotion-0 emotion-1"
     color="#0074D9"
     direction="ltr"
     disabled={false}
@@ -423,11 +423,11 @@ exports[`<Select/> component <Select/> renders with clearable 1`] = `
     tabIndex="0"
   >
     <div
-      className="react-dropdown-select-content react-dropdown-select-type-single emotion-2 emotion-3"
+      className="react-clean-select-content react-clean-select-type-single emotion-2 emotion-3"
       onClick={[Function]}
     >
       <input
-        className="react-dropdown-select-input emotion-4 emotion-5"
+        className="react-clean-select-input emotion-4 emotion-5"
         disabled={false}
         onBlur={[Function]}
         onChange={[Function]}
@@ -442,7 +442,7 @@ exports[`<Select/> component <Select/> renders with clearable 1`] = `
       />
     </div>
     <div
-      className="react-dropdown-select-clear emotion-6 emotion-7"
+      className="react-clean-select-clear emotion-6 emotion-7"
       onClick={[Function]}
       onKeyPress={[Function]}
       tabIndex="-1"
@@ -450,7 +450,7 @@ exports[`<Select/> component <Select/> renders with clearable 1`] = `
       ×
     </div>
     <div
-      className="react-dropdown-select-dropdown-handle emotion-8 emotion-9"
+      className="react-clean-select-dropdown-handle emotion-8 emotion-9"
       color="#0074D9"
       onClick={[Function]}
       onKeyDown={[Function]}
@@ -571,7 +571,7 @@ exports[`<Select/> component <Select/> renders with custom search function 1`] =
   <div
     aria-expanded={false}
     aria-label="Dropdown select"
-    className="react-dropdown-select undefined emotion-0 emotion-1"
+    className="react-clean-select undefined emotion-0 emotion-1"
     color="#0074D9"
     direction="ltr"
     disabled={false}
@@ -580,11 +580,11 @@ exports[`<Select/> component <Select/> renders with custom search function 1`] =
     tabIndex="0"
   >
     <div
-      className="react-dropdown-select-content react-dropdown-select-type-single emotion-2 emotion-3"
+      className="react-clean-select-content react-clean-select-type-single emotion-2 emotion-3"
       onClick={[Function]}
     >
       <input
-        className="react-dropdown-select-input emotion-4 emotion-5"
+        className="react-clean-select-input emotion-4 emotion-5"
         disabled={false}
         onBlur={[Function]}
         onChange={[Function]}
@@ -599,7 +599,7 @@ exports[`<Select/> component <Select/> renders with custom search function 1`] =
       />
     </div>
     <div
-      className="react-dropdown-select-dropdown-handle emotion-6 emotion-7"
+      className="react-clean-select-dropdown-handle emotion-6 emotion-7"
       color="#0074D9"
       onClick={[Function]}
       onKeyDown={[Function]}
@@ -741,7 +741,7 @@ exports[`<Select/> component <Select/> renders with loading 1`] = `
   <div
     aria-expanded={false}
     aria-label="Dropdown select"
-    className="react-dropdown-select undefined emotion-0 emotion-1"
+    className="react-clean-select undefined emotion-0 emotion-1"
     color="#0074D9"
     direction="ltr"
     disabled={false}
@@ -750,11 +750,11 @@ exports[`<Select/> component <Select/> renders with loading 1`] = `
     tabIndex="0"
   >
     <div
-      className="react-dropdown-select-content react-dropdown-select-type-single emotion-2 emotion-3"
+      className="react-clean-select-content react-clean-select-type-single emotion-2 emotion-3"
       onClick={[Function]}
     >
       <input
-        className="react-dropdown-select-input emotion-4 emotion-5"
+        className="react-clean-select-input emotion-4 emotion-5"
         disabled={false}
         onBlur={[Function]}
         onChange={[Function]}
@@ -769,11 +769,11 @@ exports[`<Select/> component <Select/> renders with loading 1`] = `
       />
     </div>
     <div
-      className="react-dropdown-select-loading emotion-6 emotion-7"
+      className="react-clean-select-loading emotion-6 emotion-7"
       color="#0074D9"
     />
     <div
-      className="react-dropdown-select-dropdown-handle emotion-8 emotion-9"
+      className="react-clean-select-dropdown-handle emotion-8 emotion-9"
       color="#0074D9"
       onClick={[Function]}
       onKeyDown={[Function]}
@@ -894,7 +894,7 @@ exports[`<Select/> component <Select/> renders with name 1`] = `
   <div
     aria-expanded={false}
     aria-label="Dropdown select"
-    className="react-dropdown-select undefined emotion-0 emotion-1"
+    className="react-clean-select undefined emotion-0 emotion-1"
     color="#0074D9"
     direction="ltr"
     disabled={false}
@@ -903,11 +903,11 @@ exports[`<Select/> component <Select/> renders with name 1`] = `
     tabIndex="0"
   >
     <div
-      className="react-dropdown-select-content react-dropdown-select-type-single emotion-2 emotion-3"
+      className="react-clean-select-content react-clean-select-type-single emotion-2 emotion-3"
       onClick={[Function]}
     >
       <input
-        className="react-dropdown-select-input emotion-4 emotion-5"
+        className="react-clean-select-input emotion-4 emotion-5"
         disabled={false}
         onBlur={[Function]}
         onChange={[Function]}
@@ -936,7 +936,7 @@ exports[`<Select/> component <Select/> renders with name 1`] = `
       tabIndex={-1}
     />
     <div
-      className="react-dropdown-select-dropdown-handle emotion-6 emotion-7"
+      className="react-clean-select-dropdown-handle emotion-6 emotion-7"
       color="#0074D9"
       onClick={[Function]}
       onKeyDown={[Function]}
@@ -1064,7 +1064,7 @@ exports[`<Select/> component <Select/> renders with separator 1`] = `
   <div
     aria-expanded={false}
     aria-label="Dropdown select"
-    className="react-dropdown-select undefined emotion-0 emotion-1"
+    className="react-clean-select undefined emotion-0 emotion-1"
     color="#0074D9"
     direction="ltr"
     disabled={false}
@@ -1073,11 +1073,11 @@ exports[`<Select/> component <Select/> renders with separator 1`] = `
     tabIndex="0"
   >
     <div
-      className="react-dropdown-select-content react-dropdown-select-type-single emotion-2 emotion-3"
+      className="react-clean-select-content react-clean-select-type-single emotion-2 emotion-3"
       onClick={[Function]}
     >
       <input
-        className="react-dropdown-select-input emotion-4 emotion-5"
+        className="react-clean-select-input emotion-4 emotion-5"
         disabled={false}
         onBlur={[Function]}
         onChange={[Function]}
@@ -1092,10 +1092,10 @@ exports[`<Select/> component <Select/> renders with separator 1`] = `
       />
     </div>
     <div
-      className="react-dropdown-select-separator emotion-6 emotion-7"
+      className="react-clean-select-separator emotion-6 emotion-7"
     />
     <div
-      className="react-dropdown-select-dropdown-handle emotion-8 emotion-9"
+      className="react-clean-select-dropdown-handle emotion-8 emotion-9"
       color="#0074D9"
       onClick={[Function]}
       onKeyDown={[Function]}
@@ -1216,7 +1216,7 @@ exports[`<Select/> component <Select/> renders with short color 1`] = `
   <div
     aria-expanded={false}
     aria-label="Dropdown select"
-    className="react-dropdown-select undefined emotion-0 emotion-1"
+    className="react-clean-select undefined emotion-0 emotion-1"
     color="#000"
     direction="ltr"
     disabled={false}
@@ -1225,11 +1225,11 @@ exports[`<Select/> component <Select/> renders with short color 1`] = `
     tabIndex="0"
   >
     <div
-      className="react-dropdown-select-content react-dropdown-select-type-single emotion-2 emotion-3"
+      className="react-clean-select-content react-clean-select-type-single emotion-2 emotion-3"
       onClick={[Function]}
     >
       <input
-        className="react-dropdown-select-input emotion-4 emotion-5"
+        className="react-clean-select-input emotion-4 emotion-5"
         disabled={false}
         onBlur={[Function]}
         onChange={[Function]}
@@ -1244,7 +1244,7 @@ exports[`<Select/> component <Select/> renders with short color 1`] = `
       />
     </div>
     <div
-      className="react-dropdown-select-dropdown-handle emotion-6 emotion-7"
+      className="react-clean-select-dropdown-handle emotion-6 emotion-7"
       color="#000"
       onClick={[Function]}
       onKeyDown={[Function]}

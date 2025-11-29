@@ -38,7 +38,7 @@ describe('<Clear/> component', () => {
 
   it('onClick toggles dropdown', () => {
     TestRenderer.create(<DropdownHandle {...props()} onClick={spy} />)
-      .root.findByProps({ className: 'react-dropdown-select-dropdown-handle' })
+      .root.findByProps({ className: 'react-clean-select-dropdown-handle' })
       .props.onClick();
 
     expect(spy).toHaveBeenCalled;
@@ -46,7 +46,7 @@ describe('<Clear/> component', () => {
 
   it('onKeyPress toggles dropdown', () => {
     TestRenderer.create(<DropdownHandle {...props()} onKeyPress={spy} />)
-      .root.findByProps({ className: 'react-dropdown-select-dropdown-handle' })
+      .root.findByProps({ className: 'react-clean-select-dropdown-handle' })
       .props.onKeyPress();
 
     expect(spy).toHaveBeenCalled;
@@ -54,7 +54,7 @@ describe('<Clear/> component', () => {
 
   it('onKeyDown toggles dropdown', () => {
     TestRenderer.create(<DropdownHandle {...props()} onKeyDown={spy} />)
-      .root.findByProps({ className: 'react-dropdown-select-dropdown-handle' })
+      .root.findByProps({ className: 'react-clean-select-dropdown-handle' })
       .props.onKeyDown();
 
     expect(spy).toHaveBeenCalled;

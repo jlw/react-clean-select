@@ -180,7 +180,7 @@ export class Select extends Component {
       event &&
       target &&
       target.offsetParent &&
-      target.offsetParent.classList.contains('react-dropdown-select-dropdown')
+      target.offsetParent.classList.contains('react-clean-select-dropdown')
     ) {
       return;
     }

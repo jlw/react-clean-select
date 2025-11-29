@@ -259,14 +259,14 @@ const options = [
   { value: 'TH', label: 'תאילנד' },
   { value: 'YE', label: 'תימן' },
   { value: 'EZ', label: 'Eurozone' },
-  { value: 'LONG', label: 'https://github.com/sanusart/react-dropdown-select/tree/master/docs/src/examples/Rtl.js' }
+  { value: 'LONG', label: 'https://github.com/jlw/react-clean-select/tree/master/docs/src/examples/Rtl.js' }
 ];
 
 const Rtl = ({ title }) => (
   <React.Fragment>
     <Heading
       title={title}
-      source="https://github.com/sanusart/react-dropdown-select/tree/master/docs/src/examples/Rtl.js"
+      source="https://github.com/jlw/react-clean-select/tree/master/docs/src/examples/Rtl.js"
     />
 
     <Select

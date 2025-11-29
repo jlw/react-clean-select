@@ -18,7 +18,7 @@ const SelectAll = ({ options, title }) => (
   <React.Fragment>
     <Heading
       title={title}
-      source="https://github.com/sanusart/react-dropdown-select/tree/master/docs/src/examples/Basic.js"
+      source="https://github.com/jlw/react-clean-select/tree/master/docs/src/examples/Basic.js"
     />
 
     <LiveProvider theme={theme} code={code} scope={{ Select, options }}>

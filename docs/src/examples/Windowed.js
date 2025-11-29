@@ -40,11 +40,11 @@ const Windowed = ({ title }) => (
   <React.Fragment>
     <Heading
       title={title}
-      source="https://github.com/sanusart/react-dropdown-select/tree/master/docs/src/examples/Windowed.js"
+      source="https://github.com/jlw/react-clean-select/tree/master/docs/src/examples/Windowed.js"
     />
 
     <p>
-      Using <a href="https://sanusart.github.io/react-dropdown-select/prop/dropdown-renderer">dropdownRenderer</a> and <a href="https://github.com/bvaughn/react-virtualized">
+      Using <a href="https://jlw.github.io/react-clean-select/prop/dropdown-renderer">dropdownRenderer</a> and <a href="https://github.com/bvaughn/react-virtualized">
       bvaughn/react-virtualized
     </a>
     </p>
@@ -84,11 +84,11 @@ const Item = styled.div`
   cursor: pointer;
   width: 480px;
   height: 40px;
-  
+
   &:hover {
     background: #f2f2f2;
   }
-  
+
   ${({ disabled }) => disabled && 'text-decoration: line-through;'}
 `;
 

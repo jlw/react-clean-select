@@ -7,7 +7,7 @@ const CreateEntries = ({ options, title }) => (
   <React.Fragment>
     <Heading
       title={title}
-      source="https://github.com/sanusart/react-dropdown-select/tree/master/docs/src/examples/CreateEntries.js"
+      source="https://github.com/jlw/react-clean-select/tree/master/docs/src/examples/CreateEntries.js"
     />
 
     <p>Type search and hit `Return` key</p>

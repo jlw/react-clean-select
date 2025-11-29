@@ -16,7 +16,7 @@ exports[`<Option/> component renders correctly 1`] = `
   flex-direction: row;
 }
 
-.emotion-0 .react-dropdown-select-option-remove {
+.emotion-0 .react-clean-select-option-remove {
   cursor: pointer;
   width: 22px;
   height: 22px;
@@ -26,7 +26,7 @@ exports[`<Option/> component renders correctly 1`] = `
   border-radius: 0 3px 3px 0;
 }
 
-.emotion-0 .react-dropdown-select-option-remove:hover {
+.emotion-0 .react-clean-select-option-remove:hover {
   color: tomato;
 }
 
@@ -36,14 +36,14 @@ exports[`<Option/> component renders correctly 1`] = `
 }
 
 <span
-  className="react-dropdown-select-option emotion-0 emotion-1"
+  className="react-clean-select-option emotion-0 emotion-1"
   role="listitem"
 >
   <span
-    className="react-dropdown-select-option-label"
+    className="react-clean-select-option-label"
   />
   <span
-    className="react-dropdown-select-option-remove"
+    className="react-clean-select-option-remove"
     onClick={[Function]}
   >
     ×

@@ -19,7 +19,7 @@ export default ({ page, title }) =>
           <div className="flex-auto">
             <div className="mxn1">
               <Link to="/" className="btn compact btn-link btn-small p1">
-                react-dropdown-select
+                react-clean-select
               </Link>
               <span>v{version}</span>
             </div>

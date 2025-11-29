@@ -24,14 +24,14 @@ const Home = () => (
           </h3>
 
           <pre>
-            <span>SHELL</span>npm install --save react-dropdown-select
+            <span>SHELL</span>npm install --save react-clean-select
           </pre>
 
           <h3>Use:</h3>
 
           <pre>
             <span>JSX</span>
-            {`import Select from 'react-dropdown-select';
+            {`import Select from 'react-clean-select';
 
 export const App = ({ options }) => (
   <Select

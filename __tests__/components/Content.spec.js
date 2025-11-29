@@ -53,7 +53,7 @@ describe('<Clear/> component', () => {
       render(<Content {...componentProps} />, container);
     });
 
-    const content = document.querySelector('.react-dropdown-select-content');
+    const content = document.querySelector('.react-clean-select-content');
 
     expect(componentProps.methods.dropDown).toHaveBeenCalledTimes(0);
 

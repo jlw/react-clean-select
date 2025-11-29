@@ -30,7 +30,7 @@ exports[`<Clear/> component <Content/> renders correctly 1`] = `
   flex-direction: row;
 }
 
-.emotion-2 .react-dropdown-select-option-remove {
+.emotion-2 .react-clean-select-option-remove {
   cursor: pointer;
   width: 22px;
   height: 22px;
@@ -40,7 +40,7 @@ exports[`<Clear/> component <Content/> renders correctly 1`] = `
   border-radius: 0 3px 3px 0;
 }
 
-.emotion-2 .react-dropdown-select-option-remove:hover {
+.emotion-2 .react-clean-select-option-remove:hover {
   color: tomato;
 }
 
@@ -65,27 +65,27 @@ exports[`<Clear/> component <Content/> renders correctly 1`] = `
 }
 
 <div
-  className="react-dropdown-select-content react-dropdown-select-type-multi emotion-0 emotion-1"
+  className="react-clean-select-content react-clean-select-type-multi emotion-0 emotion-1"
   onClick={[Function]}
 >
   <span
-    className="react-dropdown-select-option emotion-2 emotion-3"
+    className="react-clean-select-option emotion-2 emotion-3"
     role="listitem"
   >
     <span
-      className="react-dropdown-select-option-label"
+      className="react-clean-select-option-label"
     >
       Leanne Graham
     </span>
     <span
-      className="react-dropdown-select-option-remove"
+      className="react-clean-select-option-remove"
       onClick={[Function]}
     >
       ×
     </span>
   </span>
   <input
-    className="react-dropdown-select-input emotion-4 emotion-5"
+    className="react-clean-select-input emotion-4 emotion-5"
     onBlur={[Function]}
     onClick={[Function]}
     onFocus={[Function]}

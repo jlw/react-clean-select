@@ -1,38 +1,35 @@
 {
-  "name": "react-dropdown-select",
-  "version": "4.12.2",
-  "description": "Customizable dropdown select for react",
-  "main": "dist/react-dropdown-select.js",
+  "name": "react-clean-select",
+  "version": "0.0.1",
+  "description": "Customizable single- and multi- select component for react with basic, easily-overrideable CSS",
+  "main": "dist/react-clean-select.js",
   "module": "lib/index.js",
   "types": "types.d.ts",
   "sideEffects": false,
   "files": [
+    "assets",
     "dist",
     "lib",
     "types.d.ts"
   ],
   "scripts": {
-    "test": "jest --bail",
-    "test:watch": "jest --bail --watch",
+    "test": "jest",
+    "test:watch": "jest --watch",
     "coveralls": "jest --coverage && cat ./coverage/lcov.info | coveralls",
     "build": "webpack && npm run transpile",
     "transpile": "babel src -d lib",
     "prepublishOnly": "npm run build",
-    "version": "replace \"vPLACEHOLDER\" \"v$npm_package_version\" ./CHANGELOG.md && git add .",
     "preversion": "sh change-log-builder.sh",
-    "release:patch": "npm version patch -m \"v%s \nSee changelog: https://github.com/sanusart/react-dropdown-select/blob/master/CHANGELOG.md\"",
-    "release:minor": "npm version minor -m \"v%s \nSee changelog: https://github.com/sanusart/react-dropdown-select/blob/master/CHANGELOG.md\"",
-    "release:major": "npm version major -m \"v%s \nSee changelog: https://github.com/sanusart/react-dropdown-select/blob/master/CHANGELOG.md\"",
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build"
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/sanusart/react-dropdown-select"
+    "url": "https://github.com/jlw/react-clean-select"
   },
   "bundlesize": [
     {
-      "path": "./dist/react-dropdown-select.js",
+      "path": "./dist/react-clean-select.js",
       "maxSize": "20 kB"
     },
     {
@@ -47,7 +44,7 @@
     "multiselect",
     "dropdown"
   ],
-  "author": "Sasha Khamkov <sanusart@gmail.com>",
+  "author": "Jeremy Weathers <jeremy@codekindly.com>",
   "license": "MIT",
   "peerDependencies": {
     "prop-types": ">=15.7.2",

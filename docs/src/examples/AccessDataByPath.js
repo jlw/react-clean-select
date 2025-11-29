@@ -7,11 +7,11 @@ const AccessDataByPath = ({ title }) => (
   <React.Fragment>
     <Heading
       title={title}
-      source="https://github.com/sanusart/react-dropdown-select/tree/master/docs/src/examples/AccessDataByPath.js"
+      source="https://github.com/jlw/react-clean-select/tree/master/docs/src/examples/AccessDataByPath.js"
     />
     <p>
       "Label" is accessed via <code>company.catchPhrase</code> nested property of the{' '}
-      <a href="https://github.com/sanusart/react-dropdown-select/tree/master/docs/src/options.js#L21">
+      <a href="https://github.com/jlw/react-clean-select/tree/master/docs/src/options.js#L21">
         options
       </a>{' '}
       object

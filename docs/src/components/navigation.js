@@ -16,7 +16,7 @@ const Navigation = () => (
       Examples
     </Link>
 
-    <a href="https://github.com/sanusart/react-dropdown-select" className="m1">
+    <a href="https://github.com/jlw/react-clean-select" className="m1">
       <GithubIcon
         role="img"
         style={{ width: '16px', height: '16px' }}

@@ -21,7 +21,7 @@ const Form = ({ options, title }) => (
   <React.Fragment>
     <Heading
       title={title}
-      source="https://github.com/sanusart/react-dropdown-select/tree/master/docs/src/examples/Form.js"
+      source="https://github.com/jlw/react-clean-select/tree/master/docs/src/examples/Form.js"
     />
 
     <LiveProvider theme={theme} code={code} scope={{ Select, options }}>

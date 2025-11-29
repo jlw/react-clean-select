@@ -1,4 +1,4 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
+// Jest Snapshot v1, https:/react-clean-select/goo.gl/fbAQLP
 
 exports[`<Clear/> component <Clear/> renders correctly 1`] = `
 .emotion-0 {
@@ -16,7 +16,7 @@ exports[`<Clear/> component <Clear/> renders correctly 1`] = `
 }
 
 <div
-  className="react-dropdown-select-clear emotion-0 emotion-1"
+  className="react-clean-select-clear emotion-0 emotion-1"
   onClick={[Function]}
   onKeyPress={[Function]}
   tabIndex="-1"
