@@ -1,6 +1,17 @@
-// Jest Snapshot v1, https://jestjs.io/docs/snapshot-testing
+// Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`<Clear/> component <Clear/> renders correctly 1`] = `
+exports[`<Clear /> component renders correctly 1`] = `
+<div
+  className="react-clean-select-clear"
+  onClick={[Function]}
+  onKeyPress={[Function]}
+  tabIndex="-1"
+>
+  ×
+</div>
+`;
+
+exports[`<Clear /> renders correctly 1`] = `
 <div
   className="react-clean-select-clear"
   onClick={[Function]}

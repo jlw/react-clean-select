@@ -14,7 +14,7 @@ const CreateEntries = ({ options, title }) => (
     <Select
       multi
       create
-      onCreateNew={(item) => console.log('%c New item created ', 'background: #555; color: tomato', item)}
+      onCreateNew={(option) => console.log('%c New option created ', 'background: #555; color: tomato', option)}
       options={options}
       values={[]}
       onChange={(value) =>

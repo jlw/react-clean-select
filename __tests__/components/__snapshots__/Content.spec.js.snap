@@ -1,21 +1,55 @@
-// Jest Snapshot v1, https://jestjs.io/docs/snapshot-testing
+// Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`<Clear/> component <Content/> renders correctly 1`] = `
+exports[`<Content /> component renders correctly 1`] = `
 <div
   className="react-clean-select-content react-clean-select-type-multi"
   onClick={[Function]}
 >
   <span
-    className="react-clean-select-option"
+    className="react-clean-select-selection"
     role="listitem"
   >
     <span
-      className="react-clean-select-option-label"
+      className="react-clean-select-selection-label"
     >
       Leanne Graham
     </span>
     <span
-      className="react-clean-select-option-remove"
+      className="react-clean-select-selection-remove"
+      onClick={[Function]}
+    >
+      ×
+    </span>
+  </span>
+  <input
+    className="react-clean-select-input react-clean-select-input-readonly"
+    onBlur={[Function]}
+    onClick={[Function]}
+    onFocus={[Function]}
+    onKeyPress={[Function]}
+    placeholder=""
+    tabIndex="-1"
+    value=""
+  />
+</div>
+`;
+
+exports[`<Content /> renders correctly 1`] = `
+<div
+  className="react-clean-select-content react-clean-select-type-multi"
+  onClick={[Function]}
+>
+  <span
+    className="react-clean-select-selection"
+    role="listitem"
+  >
+    <span
+      className="react-clean-select-selection-label"
+    >
+      Leanne Graham
+    </span>
+    <span
+      className="react-clean-select-selection-remove"
       onClick={[Function]}
     >
       ×

@@ -1,18 +1,25 @@
 // Jest Snapshot v1, https://jestjs.io/docs/snapshot-testing
 
-exports[`<Option/> component renders correctly 1`] = `
+exports[`<Option /> component pass option renderer 1`] = `
 <span
   className="react-clean-select-option"
-  role="listitem"
+  onClick={[Function]}
+  onKeyPress={[Function]}
+  role="option"
+  tabIndex="-1"
 >
-  <span
-    className="react-clean-select-option-label"
-  />
-  <span
-    className="react-clean-select-option-remove"
-    onClick={[Function]}
-  >
-    ×
-  </span>
+
+</span>
+`;
+
+exports[`<Option /> component renders correctly 1`] = `
+<span
+  className="react-clean-select-option"
+  onClick={[Function]}
+  onKeyPress={[Function]}
+  role="option"
+  tabIndex="-1"
+>
+
 </span>
 `;

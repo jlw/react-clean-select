@@ -1,0 +1,35 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<Selection /> component renders correctly 1`] = `
+<span
+  className="react-clean-select-selection"
+  role="listitem"
+>
+  <span
+    className="react-clean-select-selection-label"
+  />
+  <span
+    className="react-clean-select-selection-remove"
+    onClick={[Function]}
+  >
+    ×
+  </span>
+</span>
+`;
+
+exports[`<Selection /> component renders correctly 1`] = `
+<span
+  className="react-clean-select-selection"
+  role="listitem"
+>
+  <span
+    className="react-clean-select-selection-label"
+  />
+  <span
+    className="react-clean-select-selection-remove"
+    onClick={[Function]}
+  >
+    ×
+  </span>
+</span>
+`;

@@ -19,7 +19,7 @@ const props = (props = {}) => ({
   ...props
 });
 
-describe('<Clear/> component', () => {
+describe('<Clear /> component', () => {
   beforeEach(() => {
     spy = jest.fn();
   });
@@ -28,14 +28,14 @@ describe('<Clear/> component', () => {
     spy = null;
   });
 
-  it('<Clear/> renders correctly', () => {
+  it('renders correctly', () => {
     const tree = TestRenderer.create(<Clear {...props()} />).toJSON();
 
     expect(tree).toMatchSnapshot();
   });
 
   it('onClick clears all', () => {
-    TestRenderer.create(<Clear {...props({ parentItem: options[0] })} onClick={spy} />)
+    TestRenderer.create(<Clear {...props({ parentOption: options[0] })} onClick={spy} />)
       .root.findByProps({ className: 'react-clean-select-clear' })
       .props.onClick();
 
@@ -43,7 +43,7 @@ describe('<Clear/> component', () => {
   });
 
   it('onKeyPress clears all', () => {
-    TestRenderer.create(<Clear {...props({ parentItem: options[0] })} onKeyPress={spy} />)
+    TestRenderer.create(<Clear {...props({ parentOption: options[0] })} onKeyPress={spy} />)
       .root.findByProps({ className: 'react-clean-select-clear' })
       .props.onKeyPress();
 

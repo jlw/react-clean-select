@@ -14,6 +14,6 @@ Override default element content
 
 ```
 contentRenderer={
-  ({ props, state, methods }) => <component/>
+  ({ props, state, methods }) => <component />
 }
 ```

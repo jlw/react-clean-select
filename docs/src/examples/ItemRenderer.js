@@ -3,27 +3,27 @@ import styled from '@emotion/styled';
 import Select from '../../../src';
 import { Heading } from './components/Heading';
 
-const ItemRenderer = ({ options, title }) => (
+const OptionRenderer = ({ options, title }) => (
   <React.Fragment>
     <Heading
       title={title}
-      source="https://github.com/jlw/react-clean-select/tree/master/docs/src/examples/ItemRenderer.js"
+      source="https://github.com/jlw/react-clean-select/tree/master/docs/src/examples/OptionRenderer.js"
     />
 
     <Select
       multi
       options={options}
       values={[]}
-      itemRenderer={({ item, methods }) => (
-        <StyledItem>
-          {item.disabled ? (
-            <div aria-disabled>{item.label}</div>
+      optionRenderer={({ option, methods }) => (
+        <StyledOption>
+          {option.disabled ? (
+            <div aria-disabled>{option.label}</div>
           ) : (
-            <div onClick={() => methods.addItem(item)}>
-              <input onChange={() => methods.addItem(item)} type="checkbox" checked={methods.isSelected(item)} /> {item.label}
+            <div onClick={() => methods.addOption(option)}>
+              <input onChange={() => methods.addOption(option)} type="checkbox" checked={methods.isSelected(option)} /> {option.label}
             </div>
           )}
-        </StyledItem>
+        </StyledOption>
       )}
       onChange={(value) =>
         console.log(`%c > onChange ${title} `, 'background: #555; color: tomato', value)
@@ -32,9 +32,9 @@ const ItemRenderer = ({ options, title }) => (
   </React.Fragment>
 );
 
-ItemRenderer.propTypes = {};
+OptionRenderer.propTypes = {};
 
-const StyledItem = styled.div`
+const StyledOption = styled.div`
   padding: 10px;
   color: #555;
   border-radius: 3px;
@@ -54,4 +54,4 @@ const StyledItem = styled.div`
   }
 `;
 
-export default ItemRenderer;
+export default OptionRenderer;

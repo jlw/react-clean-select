@@ -2,7 +2,7 @@ import React from 'react';
 
 import { LIB_NAME } from '../constants';
 import NoData from '../components/NoData';
-import Item from '../components/Item';
+import Option from '../components/Option';
 
 import { valueExistInSelected, hexToRGBA, isomorphicWindow } from '../util';
 
@@ -54,11 +54,11 @@ const Dropdown = ({ props, state, methods }) => (
         {state.searchResults.length === 0 ? (
           <NoData className={`${LIB_NAME}-no-data`} state={state} props={props} methods={methods} />
         ) : (
-          state.searchResults.map((item, itemIndex) => (
-            <Item
-              key={item[props.valueField].toString()}
-              item={item}
-              itemIndex={itemIndex}
+          state.searchResults.map((option, optionIndex) => (
+            <Option
+              key={option[props.valueField].toString()}
+              option={option}
+              optionIndex={optionIndex}
               state={state}
               props={props}
               methods={methods}

@@ -18,7 +18,7 @@ import Multi from '../examples/Multi';
 import SelectAll from '../examples/SelectAll';
 import OpenOnTop from '../examples/OpenOnTop';
 import Styled from '../examples/Styled';
-import ItemRenderer from '../examples/ItemRenderer';
+import OptionRenderer from '../examples/OptionRenderer';
 import CreateEntries from '../examples/CreateEntries';
 import CustomContentAndDropdown from '../examples/CustomContentAndDropdown';
 import RenderInBody from '../examples/RenderInBody';
@@ -66,7 +66,7 @@ const Examples = () => (
     </Wrapper>
 
     <Wrapper>
-      <ItemRenderer options={demoOptions} title="Item custom renderer" />
+      <OptionRenderer options={demoOptions} title="Option custom renderer" />
     </Wrapper>
 
     <Wrapper>

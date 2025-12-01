@@ -15,7 +15,7 @@ declare module 'react-clean-select' {
     search?: string;
     selectBounds?: DOMRect | {};
     cursor?: number | null;
-    activeCursorItem?: any;
+    activeCursorOption?: any;
   }
 
   export interface SelectState<T> {
@@ -27,21 +27,21 @@ declare module 'react-clean-select' {
   }
 
   export interface SelectMethods<T> {
-    removeItem: (event: MouseEvent<HTMLElement> | null, item: T, close: boolean) => void;
+    removeOption: (event: MouseEvent<HTMLElement> | null, option: T, close: boolean) => void;
     dropDown: (action: string, event?: MouseEvent<HTMLElement> | null) => void;
-    addItem: (item: T) => void;
+    addOption: (option: T) => void;
     setSearch: (event: ChangeEvent<HTMLInputElement>) => void;
     getInputSize: () => number;
     toggleSelectAll: () => void;
     clearAll: () => void;
-    selectAll: (items?: T[]) => void;
+    selectAll: (options?: T[]) => void;
     searchResults: () => T[];
     getSelectRef: () => HTMLDivElement;
-    isSelected: (item: T) => boolean;
+    isSelected: (option: T) => boolean;
     getSelectBounds: () => {} | DOMRect;
     areAllSelected: () => boolean;
     handleKeyDown: (event: KeyboardEvent) => void;
-    activeCursorItem: (activeCursorItem: any) => void;
+    activeCursorOption: (activeCursorOption: any) => void;
     createNew: (searchText: string) => void;
     sortBy: () => T[];
     safeString: (input: string) => string;
@@ -70,9 +70,9 @@ declare module 'react-clean-select' {
     ) => void;
   }
 
-  export interface SelectItemRenderer<T> {
-    item: T;
-    itemIndex?: number;
+  export interface SelectOptionRenderer<T> {
+    option: T;
+    optionIndex?: number;
     props: SelectProps<T>;
     state: SelectState<T>;
     methods: SelectMethods<T>;
@@ -126,7 +126,7 @@ declare module 'react-clean-select' {
     onClearAll?: () => void;
     clearAllLabel?: string;
     onSelectAll?: () => void;
-    onCreateNew?: (item: T) => void;
+    onCreateNew?: (option: T) => void;
     onDropdownCloseRequest?: ({
       props,
       state,
@@ -147,16 +147,16 @@ declare module 'react-clean-select' {
     }: SelectRenderer<T> & {
       inputRef: RefObject<HTMLInputElement>;
     }) => JSX.Element;
-    itemRenderer?: ({
-      item,
-      itemIndex,
+    optionRenderer?: ({
+      option,
+      optionIndex,
       props,
       state,
       methods
-    }: SelectItemRenderer<T>) => JSX.Element;
-    loadingRenderer?: ({ props }: SelectItemRenderer<T>) => JSX.Element;
+    }: SelectOptionRenderer<T>) => JSX.Element;
+    loadingRenderer?: ({ props }: SelectOptionRenderer<T>) => JSX.Element;
     noDataRenderer?: ({ props, state, methods }: SelectRenderer<T>) => JSX.Element;
-    optionRenderer?: ({ item, props, state, methods }: SelectItemRenderer<T>) => JSX.Element;
+    selectionRenderer?: ({ option, props, state, methods }: SelectOptionRenderer<T>) => JSX.Element;
     separatorRenderer?: ({ props, state, methods }: SelectRenderer<T>) => JSX.Element;
     additionalProps?: HTMLAttributes<HTMLDivElement>;
     wrapperClassName?: string;

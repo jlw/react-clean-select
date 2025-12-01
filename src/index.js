@@ -37,8 +37,8 @@ export class Select extends Component {
     };
 
     this.methods = {
-      activeCursorItem: this.activeCursorItem,
-      addItem: this.addItem,
+      activeCursorOption: this.activeCursorOption,
+      addOption: this.addOption,
       areAllSelected: this.areAllSelected,
       clearAll: this.clearAll,
       createNew: this.createNew,
@@ -48,7 +48,7 @@ export class Select extends Component {
       getSelectRef: this.getSelectRef,
       handleKeyDown: this.handleKeyDown,
       isSelected: this.isSelected,
-      removeItem: this.removeItem,
+      removeOption: this.removeOption,
       safeString: this.safeString,
       searchResults: this.searchResults,
       selectAll: this.selectAll,
@@ -198,24 +198,24 @@ export class Select extends Component {
 
   getSelectRef = () => this.select.current;
 
-  addItem = (item) => {
+  addOption = (option) => {
     if (this.props.multi) {
       if (
-        valueExistInSelected(getByPath(item, this.props.valueField), this.state.values, this.props)
+        valueExistInSelected(getByPath(option, this.props.valueField), this.state.values, this.props)
       ) {
-        return this.removeItem(null, item, false);
+        return this.removeOption(null, option, false);
       }
 
       this.setState({
-        values: [...this.state.values, item]
+        values: [...this.state.values, option]
       });
-      this.props.onSelect([...this.state.values, item]);
+      this.props.onSelect([...this.state.values, option]);
     } else {
       this.setState({
-        values: [item],
+        values: [option],
         dropdown: false
       });
-      this.props.onSelect([item]);
+      this.props.onSelect([option]);
     }
 
     this.props.clearOnSelect &&
@@ -226,7 +226,7 @@ export class Select extends Component {
     return true;
   };
 
-  removeItem = (event, item, close = false) => {
+  removeOption = (event, option, close = false) => {
     if (event && close) {
       event.preventDefault();
       event.stopPropagation();
@@ -235,7 +235,7 @@ export class Select extends Component {
 
     const values = this.state.values.filter(
       (values) =>
-        getByPath(values, this.props.valueField) !== getByPath(item, this.props.valueField)
+        getByPath(values, this.props.valueField) !== getByPath(option, this.props.valueField)
     );
     this.setState({
       values
@@ -327,8 +327,8 @@ export class Select extends Component {
 
     return methods
       .sortBy()
-      .filter((item) =>
-        regexp.test(getByPath(item, this.props.searchBy) || getByPath(item, this.props.valueField))
+      .filter((option) =>
+        regexp.test(getByPath(option, this.props.searchBy) || getByPath(option, this.props.valueField))
       );
   };
 
@@ -338,9 +338,9 @@ export class Select extends Component {
     return this.props.searchFn(args) || this.searchFn(args);
   };
 
-  activeCursorItem = (activeCursorItem) =>
+  activeCursorOption = (activeCursorOption) =>
     this.setState({
-      activeCursorItem
+      activeCursorOption
     });
 
   handleKeyDown = (event) => {
@@ -388,13 +388,13 @@ export class Select extends Component {
     }
 
     if (enter) {
-      const currentItem = searchResults[cursor];
-      if (currentItem && !currentItem.disabled) {
+      const currentOption = searchResults[cursor];
+      if (currentOption && !currentOption.disabled) {
         if (props.create && valueExistInSelected(state.search, state.values, props)) {
           return null;
         }
 
-        methods.addItem(currentItem);
+        methods.addOption(currentOption);
       }
     }
 
@@ -431,13 +431,13 @@ export class Select extends Component {
 
   renderDropdown = () => ( <Dropdown props={this.props} state={this.state} methods={this.methods} /> );
 
-  createNew = (item) => {
+  createNew = (option) => {
     const newValue = {
-      [this.props.labelField]: item,
-      [this.props.valueField]: item
+      [this.props.labelField]: option,
+      [this.props.valueField]: option
     };
 
-    this.addItem(newValue);
+    this.addOption(newValue);
     this.props.onCreateNew(newValue);
     this.setState({ search: '' });
   };

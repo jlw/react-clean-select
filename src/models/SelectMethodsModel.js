@@ -1,21 +1,21 @@
 import PropTypes from 'prop-types';
 
 const SelectMethodsModel = Object.freeze({
-  activeCursorItem: PropTypes.func,
+  activeCursorOption: PropTypes.func,
   /**
-   * Add a new item
+   * Add a new option
    */
-  addItem: PropTypes.func.isRequired,
+  addOption: PropTypes.func.isRequired,
   /**
-   * Check if all items are selected
+   * Check if all options are selected
    */
   areAllSelected: PropTypes.func.isRequired,
   /**
-   * Clear all selected items
+   * Clear all selected options
    */
   clearAll: PropTypes.func.isRequired,
   /**
-   * Create a new item
+   * Create a new option
    */
   createNew: PropTypes.func.isRequired,
   /**
@@ -39,13 +39,13 @@ const SelectMethodsModel = Object.freeze({
    */
   handleKeyDown: PropTypes.func.isRequired,
   /**
-   * Check if an item is selected
+   * Check if an option is selected
    */
   isSelected: PropTypes.func.isRequired,
   /**
-   * Remove an item
+   * Remove an option
    */
-  removeItem: PropTypes.func.isRequired,
+  removeOption: PropTypes.func.isRequired,
   /**
    * Make a string safe
    */
@@ -55,7 +55,7 @@ const SelectMethodsModel = Object.freeze({
    */
   searchResults: PropTypes.func.isRequired,
   /**
-   * Select all items
+   * Select all options
    */
   selectAll: PropTypes.func.isRequired,
   /**
@@ -63,7 +63,7 @@ const SelectMethodsModel = Object.freeze({
    */
   setSearch: PropTypes.func.isRequired,
   /**
-   * Sort items
+   * Sort options
    */
   sortBy: PropTypes.func.isRequired,
   /**

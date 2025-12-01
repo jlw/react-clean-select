@@ -14,6 +14,6 @@ Override default separator
 
 ```
 separatorRenderer={
-  ({ props, state, methods }) => <component/>
+  ({ props, state, methods }) => <component />
 }
 ```

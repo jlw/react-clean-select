@@ -18,8 +18,8 @@ const Basic = ({ options, title }) => (
     />
 
     <LiveProvider theme={theme} code={code} scope={{ Select, options }}>
-      <LiveEditor/>
-      <br/>
+      <LiveEditor />
+      <br />
       <LiveError />
       <LivePreview />
     </LiveProvider>

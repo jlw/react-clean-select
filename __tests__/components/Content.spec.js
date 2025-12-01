@@ -28,7 +28,7 @@ const props = (props = {}) => ({
   ...props
 });
 
-describe('<Clear/> component', () => {
+describe('<Content /> component', () => {
   beforeEach(() => {
     container = document.createElement('div');
     document.body.appendChild(container);
@@ -40,7 +40,7 @@ describe('<Clear/> component', () => {
     container = null;
   });
 
-  it('<Content/> renders correctly', () => {
+  it('renders correctly', () => {
     const tree = TestRenderer.create(<Content {...props()} />).toJSON();
 
     expect(tree).toMatchSnapshot();

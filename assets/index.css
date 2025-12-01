@@ -134,19 +134,19 @@
   position: absolute;
 }
 
-.react-clean-select-item {
+.react-clean-select-option {
   padding: 5px 10px;
   cursor: pointer;
   border-bottom: 1px solid #fff;
 }
-.react-clean-select-item-active {
+.react-clean-select-option-active {
   border-bottom: 1px solid #fff;
 }
-.react-clean-select-item-disabled {
+.react-clean-select-option-disabled {
   background: #f2f2f2;
   color: #ccc;
 }
-.react-clean-select-item-disabled ins {
+.react-clean-select-option-disabled ins {
   text-decoration: none;
   border:1px solid #ccc;
   border-radius: 2px;
@@ -154,15 +154,15 @@
   font-size: x-small;
   text-transform: uppercase;
 }
-.react-clean-select-item:hover,
-.react-clean-select-item:focus {
+.react-clean-select-option:hover,
+.react-clean-select-option:focus {
   outline: none;
 }
-.react-clean-select-item-selected {
+.react-clean-select-option-selected {
   color: #fff;
   border-bottom: 1px solid #fff;
 }
-.react-clean-select-item-disabled.react-clean-select-item-selected {
+.react-clean-select-option-disabled.react-clean-select-option-selected {
   background: #f2f2f2;
   color: #ccc;
 }
@@ -199,7 +199,7 @@
   text-align: center;
 }
 
-.react-clean-select-option {
+.react-clean-select-selection {
   padding: 0 5px;
   border-radius: 2px;
   line-height: 21px;
@@ -208,10 +208,10 @@
   display: flex;
   flex-direction: row;
 }
-.react-clean-select-option-rtl {
+.react-clean-select-selection-rtl {
   flex-direction: row-reverse;
 }
-.react-clean-select-option-remove {
+.react-clean-select-selection-remove {
   cursor: pointer;
   width: 22px;
   height: 22px;
@@ -220,11 +220,11 @@
   margin: 0 -5px 0 0px;
   border-radius: 0 3px 3px 0;
 }
-.react-clean-select-option-remove:hover {
+.react-clean-select-selection-remove:hover {
   color: tomato;
 }
-.react-clean-select-option:hover,
-.react-clean-select-option:hover > span {
+.react-clean-select-selection:hover,
+.react-clean-select-selection:hover > span {
   opacity: 0.9;
 }
 

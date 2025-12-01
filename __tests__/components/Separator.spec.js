@@ -12,7 +12,7 @@ const props = {
   }
 };
 
-it('<Separator/> renders correctly', () => {
+it('<Separator /> renders correctly', () => {
   const tree = renderer.create(<Separator {...props} />).toJSON();
 
   expect(tree).toMatchSnapshot();

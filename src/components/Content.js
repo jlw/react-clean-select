@@ -1,12 +1,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import Option from './Option';
-import Input from './Input';
 import { LIB_NAME } from '../constants';
-import {getByPath} from '../util';
-import SelectPropsModel from '../models/SelectPropsModel';
+import { getByPath } from '../util';
+
+import Input from './Input';
+import Selection from './Selection';
 import SelectMethodsModel from '../models/SelectMethodsModel';
+import SelectPropsModel from '../models/SelectPropsModel';
 import SelectStateModel from '../models/SelectStateModel';
 
 const Content = ({ props, state, methods }) => {
@@ -29,10 +30,10 @@ const Content = ({ props, state, methods }) => {
         <React.Fragment>
           {props.multi
             ? state.values &&
-              state.values.map((item) => (
-                <Option
-                  key={`${getByPath(item, props.valueField)}${getByPath(item, props.labelField)}`}
-                  item={item}
+              state.values.map((option) => (
+                <Selection
+                  key={`${getByPath(option, props.valueField)}${getByPath(option, props.labelField)}`}
+                  option={option}
                   state={state}
                   props={props}
                   methods={methods}

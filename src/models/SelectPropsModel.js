@@ -124,15 +124,15 @@ const SelectPropsModel = Object.freeze({
    */
   inputRenderer: PropTypes.func,
   /**
-   * Overrides internal item in a dropdown
+   * Overrides internal option in a dropdown
    */
-  itemRenderer: PropTypes.func,
+  optionRenderer: PropTypes.func,
   /**
    * If true, dropdown will always stay open (good for debugging)
    */
   keepOpen: PropTypes.bool,
   /**
-   * If false, selected item will not appear in a list
+   * If false, selected option will not appear in a list
    */
   keepSelectedInList: PropTypes.bool,
   /**
@@ -173,7 +173,7 @@ const SelectPropsModel = Object.freeze({
    */
   onClearAll: PropTypes.func,
   /**
-   * Fires upon creation of new item if create prop set to true
+   * Fires upon creation of new option if create prop set to true
    */
   onCreateNew: PropTypes.func,
   /**
@@ -194,9 +194,9 @@ const SelectPropsModel = Object.freeze({
    */
   onSelectAll: PropTypes.func,
   /**
-   * Overrides internal option (the pillow with an "x") on the select content
+   * Overrides internal selection (the pillow with an "x") on the select content
    */
-  optionRenderer: PropTypes.func,
+  selectionRenderer: PropTypes.func,
   /**
    * Available options, (option with key disabled: true will be disabled)
    */

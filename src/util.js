@@ -42,7 +42,7 @@ export const getProp = (object, path, defaultValue) => {
     return object;
   }
 
-  const normalizedPath = Array.isArray(path) ? path : path.split('.').filter((item) => item.length);
+  const normalizedPath = Array.isArray(path) ? path : path.split('.').filter((option) => option.length);
 
   if (!normalizedPath.length) {
     return object === undefined ? defaultValue : object;

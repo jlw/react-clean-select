@@ -13,8 +13,8 @@ const WithSearchFn = ({ options, title }) => {
     const regexp = new RegExp(methods.safeString(state.search), 'i');
     return methods
       .sortBy()
-      .filter((item) =>
-        regexp.test(getByPath(item, props.searchBy) || getByPath(item, props.valueField))
+      .filter((option) =>
+        regexp.test(getByPath(option, props.searchBy) || getByPath(option, props.valueField))
       );
   };
 

@@ -1,6 +1,6 @@
-// Jest Snapshot v1, https://jestjs.io/docs/snapshot-testing
+// Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`<Select/> component <Select/> is disabled 1`] = `
+exports[`<Select /> component <Select /> is disabled 1`] = `
 <div
   className="react-clean-select-container"
 >
@@ -49,7 +49,7 @@ exports[`<Select/> component <Select/> is disabled 1`] = `
 </div>
 `;
 
-exports[`<Select/> component <Select/> renders correctly 1`] = `
+exports[`<Select /> component <Select /> renders correctly 1`] = `
 <div
   className="react-clean-select-container"
 >
@@ -98,7 +98,7 @@ exports[`<Select/> component <Select/> renders correctly 1`] = `
 </div>
 `;
 
-exports[`<Select/> component <Select/> renders with clearable 1`] = `
+exports[`<Select /> component <Select /> renders with clearable 1`] = `
 <div
   className="react-clean-select-container"
 >
@@ -155,7 +155,7 @@ exports[`<Select/> component <Select/> renders with clearable 1`] = `
 </div>
 `;
 
-exports[`<Select/> component <Select/> renders with custom search function 1`] = `
+exports[`<Select /> component <Select /> renders with custom search function 1`] = `
 <div
   className="react-clean-select-container"
 >
@@ -204,7 +204,7 @@ exports[`<Select/> component <Select/> renders with custom search function 1`] =
 </div>
 `;
 
-exports[`<Select/> component <Select/> renders with loading 1`] = `
+exports[`<Select /> component <Select /> renders with loading 1`] = `
 <div
   className="react-clean-select-container"
 >
@@ -256,7 +256,7 @@ exports[`<Select/> component <Select/> renders with loading 1`] = `
 </div>
 `;
 
-exports[`<Select/> component <Select/> renders with name 1`] = `
+exports[`<Select /> component <Select /> renders with name 1`] = `
 <div
   className="react-clean-select-container"
 >
@@ -313,7 +313,7 @@ exports[`<Select/> component <Select/> renders with name 1`] = `
 </div>
 `;
 
-exports[`<Select/> component <Select/> renders with separator 1`] = `
+exports[`<Select /> component <Select /> renders with separator 1`] = `
 <div
   className="react-clean-select-container"
 >
@@ -365,7 +365,421 @@ exports[`<Select/> component <Select/> renders with separator 1`] = `
 </div>
 `;
 
-exports[`<Select/> component <Select/> renders with short color 1`] = `
+exports[`<Select /> component <Select /> renders with short color 1`] = `
+<div
+  className="react-clean-select-container"
+>
+  <div
+    aria-expanded={false}
+    aria-label="Dropdown select"
+    className="react-clean-select"
+    onClick={[Function]}
+    onKeyDown={[Function]}
+    tabIndex="0"
+  >
+    <div
+      className="react-clean-select-content react-clean-select-type-single"
+      onClick={[Function]}
+    >
+      <input
+        className="react-clean-select-input"
+        disabled={false}
+        onBlur={[Function]}
+        onChange={[Function]}
+        onClick={[Function]}
+        onFocus={[Function]}
+        onKeyPress={[Function]}
+        placeholder="Select..."
+        tabIndex="-1"
+        value=""
+      />
+    </div>
+    <div
+      className="react-clean-select-dropdown-handle react-clean-select-dropdown-handle-closed react-clean-select-dropdown-handle-rotate"
+      onClick={[Function]}
+      onKeyDown={[Function]}
+      onKeyPress={[Function]}
+      tabIndex="-1"
+    >
+      <svg
+        fill="currentColor"
+        viewBox="0 0 40 40"
+      >
+        <path
+          d="M31 26.4q0 .3-.2.5l-1.1 1.2q-.3.2-.6.2t-.5-.2l-8.7-8.8-8.8 8.8q-.2.2-.5.2t-.5-.2l-1.2-1.2q-.2-.2-.2-.5t.2-.5l10.4-10.4q.3-.2.6-.2t.5.2l10.4 10.4q.2.2.2.5z"
+        />
+      </svg>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`<Select /> is disabled 1`] = `
+<div
+  className="react-clean-select-container"
+>
+  <div
+    aria-expanded={false}
+    aria-label="Dropdown select"
+    className="react-clean-select react-clean-select-disabled"
+    onClick={[Function]}
+    onKeyDown={[Function]}
+    tabIndex="-1"
+  >
+    <div
+      className="react-clean-select-content react-clean-select-type-single"
+      onClick={[Function]}
+    >
+      <input
+        className="react-clean-select-input"
+        disabled={true}
+        onBlur={[Function]}
+        onChange={[Function]}
+        onClick={[Function]}
+        onFocus={[Function]}
+        onKeyPress={[Function]}
+        placeholder="Select..."
+        tabIndex="-1"
+        value=""
+      />
+    </div>
+    <div
+      className="react-clean-select-dropdown-handle react-clean-select-dropdown-handle-closed react-clean-select-dropdown-handle-rotate"
+      onClick={[Function]}
+      onKeyDown={[Function]}
+      onKeyPress={[Function]}
+      tabIndex="-1"
+    >
+      <svg
+        fill="currentColor"
+        viewBox="0 0 40 40"
+      >
+        <path
+          d="M31 26.4q0 .3-.2.5l-1.1 1.2q-.3.2-.6.2t-.5-.2l-8.7-8.8-8.8 8.8q-.2.2-.5.2t-.5-.2l-1.2-1.2q-.2-.2-.2-.5t.2-.5l10.4-10.4q.3-.2.6-.2t.5.2l10.4 10.4q.2.2.2.5z"
+        />
+      </svg>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`<Select /> renders correctly 1`] = `
+<div
+  className="react-clean-select-container"
+>
+  <div
+    aria-expanded={false}
+    aria-label="Dropdown select"
+    className="react-clean-select"
+    onClick={[Function]}
+    onKeyDown={[Function]}
+    tabIndex="0"
+  >
+    <div
+      className="react-clean-select-content react-clean-select-type-single"
+      onClick={[Function]}
+    >
+      <input
+        className="react-clean-select-input"
+        disabled={false}
+        onBlur={[Function]}
+        onChange={[Function]}
+        onClick={[Function]}
+        onFocus={[Function]}
+        onKeyPress={[Function]}
+        placeholder="Select..."
+        tabIndex="-1"
+        value=""
+      />
+    </div>
+    <div
+      className="react-clean-select-dropdown-handle react-clean-select-dropdown-handle-closed react-clean-select-dropdown-handle-rotate"
+      onClick={[Function]}
+      onKeyDown={[Function]}
+      onKeyPress={[Function]}
+      tabIndex="-1"
+    >
+      <svg
+        fill="currentColor"
+        viewBox="0 0 40 40"
+      >
+        <path
+          d="M31 26.4q0 .3-.2.5l-1.1 1.2q-.3.2-.6.2t-.5-.2l-8.7-8.8-8.8 8.8q-.2.2-.5.2t-.5-.2l-1.2-1.2q-.2-.2-.2-.5t.2-.5l10.4-10.4q.3-.2.6-.2t.5.2l10.4 10.4q.2.2.2.5z"
+        />
+      </svg>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`<Select /> renders with clearable 1`] = `
+<div
+  className="react-clean-select-container"
+>
+  <div
+    aria-expanded={false}
+    aria-label="Dropdown select"
+    className="react-clean-select"
+    onClick={[Function]}
+    onKeyDown={[Function]}
+    tabIndex="0"
+  >
+    <div
+      className="react-clean-select-content react-clean-select-type-single"
+      onClick={[Function]}
+    >
+      <input
+        className="react-clean-select-input"
+        disabled={false}
+        onBlur={[Function]}
+        onChange={[Function]}
+        onClick={[Function]}
+        onFocus={[Function]}
+        onKeyPress={[Function]}
+        placeholder="Select..."
+        tabIndex="-1"
+        value=""
+      />
+    </div>
+    <div
+      className="react-clean-select-clear"
+      onClick={[Function]}
+      onKeyPress={[Function]}
+      tabIndex="-1"
+    >
+      ×
+    </div>
+    <div
+      className="react-clean-select-dropdown-handle react-clean-select-dropdown-handle-closed react-clean-select-dropdown-handle-rotate"
+      onClick={[Function]}
+      onKeyDown={[Function]}
+      onKeyPress={[Function]}
+      tabIndex="-1"
+    >
+      <svg
+        fill="currentColor"
+        viewBox="0 0 40 40"
+      >
+        <path
+          d="M31 26.4q0 .3-.2.5l-1.1 1.2q-.3.2-.6.2t-.5-.2l-8.7-8.8-8.8 8.8q-.2.2-.5.2t-.5-.2l-1.2-1.2q-.2-.2-.2-.5t.2-.5l10.4-10.4q.3-.2.6-.2t.5.2l10.4 10.4q.2.2.2.5z"
+        />
+      </svg>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`<Select /> renders with custom search function 1`] = `
+<div
+  className="react-clean-select-container"
+>
+  <div
+    aria-expanded={false}
+    aria-label="Dropdown select"
+    className="react-clean-select"
+    onClick={[Function]}
+    onKeyDown={[Function]}
+    tabIndex="0"
+  >
+    <div
+      className="react-clean-select-content react-clean-select-type-single"
+      onClick={[Function]}
+    >
+      <input
+        className="react-clean-select-input"
+        disabled={false}
+        onBlur={[Function]}
+        onChange={[Function]}
+        onClick={[Function]}
+        onFocus={[Function]}
+        onKeyPress={[Function]}
+        placeholder="Select..."
+        tabIndex="-1"
+        value="Zer"
+      />
+    </div>
+    <div
+      className="react-clean-select-dropdown-handle react-clean-select-dropdown-handle-closed react-clean-select-dropdown-handle-rotate"
+      onClick={[Function]}
+      onKeyDown={[Function]}
+      onKeyPress={[Function]}
+      tabIndex="-1"
+    >
+      <svg
+        fill="currentColor"
+        viewBox="0 0 40 40"
+      >
+        <path
+          d="M31 26.4q0 .3-.2.5l-1.1 1.2q-.3.2-.6.2t-.5-.2l-8.7-8.8-8.8 8.8q-.2.2-.5.2t-.5-.2l-1.2-1.2q-.2-.2-.2-.5t.2-.5l10.4-10.4q.3-.2.6-.2t.5.2l10.4 10.4q.2.2.2.5z"
+        />
+      </svg>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`<Select /> renders with loading 1`] = `
+<div
+  className="react-clean-select-container"
+>
+  <div
+    aria-expanded={false}
+    aria-label="Dropdown select"
+    className="react-clean-select"
+    onClick={[Function]}
+    onKeyDown={[Function]}
+    tabIndex="0"
+  >
+    <div
+      className="react-clean-select-content react-clean-select-type-single"
+      onClick={[Function]}
+    >
+      <input
+        className="react-clean-select-input"
+        disabled={false}
+        onBlur={[Function]}
+        onChange={[Function]}
+        onClick={[Function]}
+        onFocus={[Function]}
+        onKeyPress={[Function]}
+        placeholder="Select..."
+        tabIndex="-1"
+        value=""
+      />
+    </div>
+    <div
+      className="react-clean-select-loading"
+    />
+    <div
+      className="react-clean-select-dropdown-handle react-clean-select-dropdown-handle-closed react-clean-select-dropdown-handle-rotate"
+      onClick={[Function]}
+      onKeyDown={[Function]}
+      onKeyPress={[Function]}
+      tabIndex="-1"
+    >
+      <svg
+        fill="currentColor"
+        viewBox="0 0 40 40"
+      >
+        <path
+          d="M31 26.4q0 .3-.2.5l-1.1 1.2q-.3.2-.6.2t-.5-.2l-8.7-8.8-8.8 8.8q-.2.2-.5.2t-.5-.2l-1.2-1.2q-.2-.2-.2-.5t.2-.5l10.4-10.4q.3-.2.6-.2t.5.2l10.4 10.4q.2.2.2.5z"
+        />
+      </svg>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`<Select /> renders with name 1`] = `
+<div
+  className="react-clean-select-container"
+>
+  <div
+    aria-expanded={false}
+    aria-label="Dropdown select"
+    className="react-clean-select"
+    onClick={[Function]}
+    onKeyDown={[Function]}
+    tabIndex="0"
+  >
+    <div
+      className="react-clean-select-content react-clean-select-type-single"
+      onClick={[Function]}
+    >
+      <input
+        className="react-clean-select-input"
+        disabled={false}
+        onBlur={[Function]}
+        onChange={[Function]}
+        onClick={[Function]}
+        onFocus={[Function]}
+        onKeyPress={[Function]}
+        placeholder="Select..."
+        tabIndex="-1"
+        value=""
+      />
+    </div>
+    <input
+      className="react-clean-select-input-zero"
+      defaultValue={[]}
+      disabled={false}
+      name="form-select"
+      required={false}
+      tabIndex={-1}
+    />
+    <div
+      className="react-clean-select-dropdown-handle react-clean-select-dropdown-handle-closed react-clean-select-dropdown-handle-rotate"
+      onClick={[Function]}
+      onKeyDown={[Function]}
+      onKeyPress={[Function]}
+      tabIndex="-1"
+    >
+      <svg
+        fill="currentColor"
+        viewBox="0 0 40 40"
+      >
+        <path
+          d="M31 26.4q0 .3-.2.5l-1.1 1.2q-.3.2-.6.2t-.5-.2l-8.7-8.8-8.8 8.8q-.2.2-.5.2t-.5-.2l-1.2-1.2q-.2-.2-.2-.5t.2-.5l10.4-10.4q.3-.2.6-.2t.5.2l10.4 10.4q.2.2.2.5z"
+        />
+      </svg>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`<Select /> renders with separator 1`] = `
+<div
+  className="react-clean-select-container"
+>
+  <div
+    aria-expanded={false}
+    aria-label="Dropdown select"
+    className="react-clean-select"
+    onClick={[Function]}
+    onKeyDown={[Function]}
+    tabIndex="0"
+  >
+    <div
+      className="react-clean-select-content react-clean-select-type-single"
+      onClick={[Function]}
+    >
+      <input
+        className="react-clean-select-input"
+        disabled={false}
+        onBlur={[Function]}
+        onChange={[Function]}
+        onClick={[Function]}
+        onFocus={[Function]}
+        onKeyPress={[Function]}
+        placeholder="Select..."
+        tabIndex="-1"
+        value=""
+      />
+    </div>
+    <div
+      className="react-clean-select-separator"
+    />
+    <div
+      className="react-clean-select-dropdown-handle react-clean-select-dropdown-handle-closed react-clean-select-dropdown-handle-rotate"
+      onClick={[Function]}
+      onKeyDown={[Function]}
+      onKeyPress={[Function]}
+      tabIndex="-1"
+    >
+      <svg
+        fill="currentColor"
+        viewBox="0 0 40 40"
+      >
+        <path
+          d="M31 26.4q0 .3-.2.5l-1.1 1.2q-.3.2-.6.2t-.5-.2l-8.7-8.8-8.8 8.8q-.2.2-.5.2t-.5-.2l-1.2-1.2q-.2-.2-.2-.5t.2-.5l10.4-10.4q.3-.2.6-.2t.5.2l10.4 10.4q.2.2.2.5z"
+        />
+      </svg>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`<Select /> renders with short color 1`] = `
 <div
   className="react-clean-select-container"
 >

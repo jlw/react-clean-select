@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://jestjs.io/docs/snapshot-testing
 
-exports[`<Dropdown/> renders correctly 1`] = `
+exports[`<Dropdown /> renders correctly 1`] = `
 <div
   aria-expanded="true"
   className="react-clean-select-dropdown react-clean-select-dropdown-position-undefined"

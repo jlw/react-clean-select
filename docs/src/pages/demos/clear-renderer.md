@@ -14,6 +14,6 @@ Override default clear all button
 
 ```
 clearRenderer={
-  ({ props, state, methods }) => <component/>
+  ({ props, state, methods }) => <component />
 }
 ```

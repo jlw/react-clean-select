@@ -21,7 +21,7 @@ const props = (props = {}) => ({
   ...props
 });
 
-describe('<Clear/> component', () => {
+describe('<DropdownHandle /> component', () => {
   beforeEach(() => {
     spy = jest.fn();
   });
@@ -30,7 +30,7 @@ describe('<Clear/> component', () => {
     spy = null;
   });
 
-  it('<DropdownHandle/> renders correctly', () => {
+  it('renders correctly', () => {
     const tree = TestRenderer.create(<DropdownHandle {...props()} />).toJSON();
 
     expect(tree).toMatchSnapshot();

@@ -4,31 +4,31 @@ import { List, AutoSizer } from 'react-virtualized';
 import { Heading } from './components/Heading';
 import Select from '../../../src';
 
-const itemData = Array.from(Array(20000).keys()).map((value) => ({
+const optionData = Array.from(Array(20000).keys()).map((value) => ({
   value: `value ${value}`,
-  label: `Item # ${value}`
+  label: `Option # ${value}`
 }));
 
 const customDropdownRenderer = ({ methods, state, props }) => {
   const regexp = new RegExp(state.search, 'i');
-  const items =  props.searchable
-    ? itemData.filter((item) => regexp.test(item[props.searchBy] || item[props.labelField]))
-    : itemData;
+  const options =  props.searchable
+    ? optionData.filter((option) => regexp.test(option[props.searchBy] || option[props.labelField]))
+    : optionData;
 
   return (
     <AutoSizer style={{ height: '200px' }}>
       {({width, height}) => (
         <StyledList
           height={height}
-          rowCount={items.length}
+          rowCount={options.length}
           rowHeight={40}
           width={width - 2}
           rowRenderer={({ index, style, key }) => (
-            <Item key={key}
+            <Option key={key}
                   style={style}
-                  onClick={() => methods.addItem(items[index])}>
-              {items[index].label}
-            </Item>
+                  onClick={() => methods.addOption(options[index])}>
+              {options[index].label}
+            </Option>
           )}
         />
   )}
@@ -53,7 +53,7 @@ const Windowed = ({ title }) => (
       dropdownRenderer={ customDropdownRenderer }
       values={[{
         value: 'value 42',
-        label: 'Item # 42'
+        label: 'Option # 42'
       }]}
       multi
       onChange={(value) =>
@@ -77,7 +77,7 @@ const StyledList = styled(List)`
   max-height: 200px;
 `;
 
-const Item = styled.div`
+const Option = styled.div`
   display: flex;
   padding: 0 10px;
   align-items: center;

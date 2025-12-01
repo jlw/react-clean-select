@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://jestjs.io/docs/snapshot-testing
 
-exports[`<NoData/> renders correctly 1`] = `
+exports[`<NoData /> renders correctly 1`] = `
 <div
   className="react-clean-select-no-data"
 />

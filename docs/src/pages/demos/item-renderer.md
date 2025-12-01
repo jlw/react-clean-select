@@ -1,19 +1,19 @@
 ---
-path: '/prop/item-renderer'
+path: '/prop/option-renderer'
 date: '2017-11-07'
-title: 'itemRenderer'
+title: 'optionRenderer'
 demo: '6y835v1m3r'
 innerProps: true
 innerState: true
 innerMethods: true
 ---
 
-Override default list item component in a dropdown
+Override default list option component in a dropdown
 
 ### Usage
 
 ```
-itemRenderer={
-  ({ item, itemIndex, props, state, methods }) => <component/>
+optionRenderer={
+  ({ option, optionIndex, props, state, methods }) => <component />
 }
 ```

@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://jestjs.io/docs/snapshot-testing
 
-exports[`<Input/> is disabled 1`] = `
+exports[`<Input /> is disabled 1`] = `
 <input
   className="react-clean-select-input"
   onBlur={[Function]}
@@ -12,7 +12,7 @@ exports[`<Input/> is disabled 1`] = `
 />
 `;
 
-exports[`<Input/> renders correctly 1`] = `
+exports[`<Input /> renders correctly 1`] = `
 <input
   className="react-clean-select-input"
   onBlur={[Function]}

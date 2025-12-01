@@ -14,6 +14,6 @@ Override default "no data" content
 
 ```
 noDataRenderer={
-  ({ props, state, methods }) => <component/>
+  ({ props, state, methods }) => <component />
 }
 ```

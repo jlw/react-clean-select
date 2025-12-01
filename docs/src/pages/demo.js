@@ -22,8 +22,8 @@ export class Demo extends React.Component {
       contentRenderer: false,
       dropdownRenderer: false,
       inputRenderer: false,
-      itemRenderer: false,
       optionRenderer: false,
+      selectionRenderer: false,
       noDataRenderer: false,
       values: options ? [options.find((opt, index) => index === 3)] : [],
       searchBy: 'name',
@@ -84,11 +84,11 @@ export class Demo extends React.Component {
     );
   };
 
-  itemRenderer = ({item, props, methods}) => (
-    <div key={item[props.valueField]} onClick={() => methods.addItem(item)}>
+  optionRenderer = ({option, props, methods}) => (
+    <div key={option[props.valueField]} onClick={() => methods.addOption(option)}>
       <div style={{ margin: '10px' }}>
-        <input type="checkbox" checked={methods.isSelected(item)} />
-        &nbsp;&nbsp;&nbsp;{item[props.labelField]}
+        <input type="checkbox" checked={methods.isSelected(option)} />
+        &nbsp;&nbsp;&nbsp;{option[props.labelField]}
       </div>
     </div>
   );
@@ -116,36 +116,36 @@ export class Demo extends React.Component {
             placeholder="Type anything"
           />
         </SearchAndToggle>
-        <Items>
+        <Options>
           {props.options
-            .filter((item) => regexp.test(item[props.searchBy] || item[props.labelField]))
+            .filter((option) => regexp.test(option[props.searchBy] || option[props.labelField]))
             .map((option) => {
               if (!this.state.keepSelectedInList && methods.isSelected(option)) {
                 return null;
               }
 
               return (
-                <Item
+                <Option
                   disabled={option.disabled}
                   key={option[props.valueField]}
-                  onClick={option.disabled ? null : () => methods.addItem(option)}>
+                  onClick={option.disabled ? null : () => methods.addOption(option)}>
                   <input
                     type="checkbox"
-                    onChange={() => methods.addItem(option)}
+                    onChange={() => methods.addOption(option)}
                     checked={state.values.indexOf(option) !== -1}
                   />
-                  <ItemLabel>{option[props.labelField]}</ItemLabel>
-                </Item>
+                  <OptionLabel>{option[props.labelField]}</OptionLabel>
+                </Option>
               );
             })}
-        </Items>
+        </Options>
       </div>
     );
   };
 
-  optionRenderer = ({ option, methods }) => (
+  selectionRenderer = ({ option, methods }) => (
     <React.Fragment>
-      <div onClick={(event) => methods.removeItem(event, option, true)}>{option.label}</div>
+      <div onClick={(event) => methods.removeOption(event, option, true)}>{option.label}</div>
     </React.Fragment>
   );
 
@@ -202,9 +202,9 @@ export class Demo extends React.Component {
               closeOnClickInput={this.state.closeOnClickInput}
               noDataRenderer={this.state.noDataRenderer ? () => this.noDataRenderer() : undefined}
               dropdownPosition={this.state.dropdownPosition}
-              itemRenderer={
-                this.state.itemRenderer
-                  ? this.itemRenderer
+              optionRenderer={
+                this.state.optionRenderer
+                  ? this.optionRenderer
                   : undefined
               }
               inputRenderer={
@@ -212,9 +212,9 @@ export class Demo extends React.Component {
                   ? this.inputRenderer
                   : undefined
               }
-              optionRenderer={
-                this.state.optionRenderer
-                  ? this.optionRenderer
+              selectionRenderer={
+                this.state.selectionRenderer
+                  ? this.selectionRenderer
                   : undefined
               }
               contentRenderer={
@@ -356,14 +356,14 @@ export class Demo extends React.Component {
           <br />
           <input
             type="checkbox"
-            checked={this.state.itemRenderer}
+            checked={this.state.optionRenderer}
             onChange={() =>
               this.setState({
-                itemRenderer: !this.state.itemRenderer
+                optionRenderer: !this.state.optionRenderer
               })
             }
           />{' '}
-          Custom dropdown item renderer
+          Custom dropdown option renderer
           <br />
           <input
             type="checkbox"
@@ -374,7 +374,7 @@ export class Demo extends React.Component {
               })
             }
           />{' '}
-          Keep selected item in a list
+          Keep selected option in a list
           <br />
           <input
             type="checkbox"
@@ -531,13 +531,13 @@ const SearchAndToggle = styled.div`
   }
 `;
 
-const Items = styled.div`
+const Options = styled.div`
   overflow: auto;
   min-height: 10px;
   max-height: 200px;
 `;
 
-const Item = styled.div`
+const Option = styled.div`
   display: flex;
   margin: 10px;
   align-items: baseline;
@@ -558,7 +558,7 @@ const Item = styled.div`
       : ''}
 `;
 
-const ItemLabel = styled.div`
+const OptionLabel = styled.div`
   margin: 5px 10px;
 `;
 

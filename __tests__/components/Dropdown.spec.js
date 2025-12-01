@@ -25,7 +25,7 @@ const props = {
   }
 };
 
-it('<Dropdown/> renders correctly', () => {
+it('<Dropdown /> renders correctly', () => {
   const tree = renderer.create(<Dropdown {...props} />).toJSON();
 
   expect(tree).toMatchSnapshot();

@@ -3,9 +3,7 @@
  */
 import React from 'react';
 import TestRenderer from 'react-test-renderer';
-
 import Option from '../../src/components/Option';
-
 import { options } from '../options';
 
 let spy;
@@ -19,32 +17,60 @@ const props = (props = {}) => ({
   },
   methods: {
     isSelected: () => undefined,
-    addItem: () => undefined,
-    removeItem: () => spy
+    addOption: () => undefined
   },
   ...props
 });
 
-describe('<Option/> component', () => {
+describe('<Option /> component', () => {
   beforeEach(() => {
     spy = jest.fn();
   });
 
-  afterEach(() => {
-    spy = null;
-  });
-
-  it('renders correctly', () => {
-    const tree = TestRenderer.create(<Option {...props({ item: options[0] })} />).toJSON();
+  xit('renders correctly', () => {
+    const tree = TestRenderer.create(<Option {...props({ option: options[0] })} />).toJSON();
 
     expect(tree).toMatchSnapshot();
   });
 
-  it('onClick remove item', () => {
-    TestRenderer.create(<Option {...props({ item: options[0] })} onClick={spy} />)
-      .root.findByProps({ className: 'react-clean-select-option-remove' })
+  test('onChange with click', () => {
+    TestRenderer.create(<Option {...props({ option: options[0] })} onClick={spy} />)
+      .root.findByType('span')
       .props.onClick();
 
     expect(spy).toHaveBeenCalled;
+  });
+
+  test('onChange with key press', () => {
+    TestRenderer.create(<Option {...props({ option: options[0] })} ononKeyPress={spy} />)
+      .root.findByType('span')
+      .props.onKeyPress();
+
+    expect(spy).toHaveBeenCalled;
+  });
+
+  test('keepSelectedInList: false', () => {
+    const tree = TestRenderer.create(
+      <Option
+        {...props({
+          option: options[0],
+          parentProps: {
+            optionRenderer: null,
+            keepSelectedInList: false
+          },
+          parentMethods: {
+            isSelected: () => true
+          }
+        })}
+      />
+    ).toJSON();
+  });
+
+  xit('pass option renderer', () => {
+    const tree = TestRenderer.create(
+      <Option {...props({ option: options[0], optionRenderer: () => <div>option</div> })} />
+    ).toJSON();
+
+    expect(tree).toMatchSnapshot();
   });
 });

@@ -1,19 +1,19 @@
 ---
-path: '/prop/option-renderer'
+path: '/prop/selection-renderer'
 date: '2017-11-07'
-title: 'optionRenderer'
+title: 'selectionRenderer'
 demo: '502o47x8rx'
 innerProps: true
 innerState: true
 innerMethods: true
 ---
 
-Override default "option" component (the pillow with label and &times;) in the content
+Override default "selection" component (the pillow with label and &times;) in the content
 
 ### Usage
 
 ```
-optionRenderer={
-  ({ item, props, state, methods }) => <component/>
+selectionRenderer={
+  ({ option, props, state, methods }) => <component />
 }
 ```

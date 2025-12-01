@@ -14,6 +14,6 @@ Override default loading indicator
 
 ```
 loadingRenderer={
-  ({ props }) => <component/>
+  ({ props }) => <component />
 }
 ```

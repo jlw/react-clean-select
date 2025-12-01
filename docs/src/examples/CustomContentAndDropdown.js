@@ -48,29 +48,29 @@ export class CustomContentAndDropdown extends React.Component {
             placeholder="Type anything"
           />
         </SearchAndToggle>
-        <Items>
+        <Options>
           {props.options
-            .filter((item) => regexp.test(item[props.searchBy] || item[props.labelField]))
+            .filter((option) => regexp.test(option[props.searchBy] || option[props.labelField]))
             .map((option) => {
               if (!props.keepSelectedInList && methods.isSelected(option)) {
                 return null;
               }
 
               return (
-                <Item
+                <Option
                   disabled={option.disabled}
                   key={option[props.valueField]}
-                  onClick={option.disabled ? null : () => methods.addItem(option)}>
+                  onClick={option.disabled ? null : () => methods.addOption(option)}>
                   <input
                     type="checkbox"
-                    onChange={() => (option.disabled ? undefined : methods.addItem(option))}
+                    onChange={() => (option.disabled ? undefined : methods.addOption(option))}
                     checked={state.values.indexOf(option) !== -1}
                   />
-                  <ItemLabel>{option[props.labelField]}</ItemLabel>
-                </Item>
+                  <OptionLabel>{option[props.labelField]}</OptionLabel>
+                </Option>
               );
             })}
-        </Items>
+        </Options>
       </div>
     );
   };
@@ -132,20 +132,20 @@ const SearchAndToggle = styled.div`
   }
 `;
 
-const Items = styled.div`
+const Options = styled.div`
   overflow: auto;
   min-height: 10px;
   max-height: 200px;
 `;
 
-const Item = styled.div`
+const Option = styled.div`
   display: flex;
   margin: 10px;
   align-items: baseline;
   ${({ disabled }) => disabled && 'text-decoration: line-through;'}
 `;
 
-const ItemLabel = styled.div`
+const OptionLabel = styled.div`
   margin: 5px 10px;
 `;
 
