@@ -1,5 +1,5 @@
-const path = require('path');
-const webpack = require('webpack');
+const path = require('path')
+const webpack = require('webpack')
 
 module.exports = {
   entry: path.join(__dirname, 'src/index.js'),
@@ -55,4 +55,4 @@ module.exports = {
       DEBUG: false
     })
   ]
-};
+}

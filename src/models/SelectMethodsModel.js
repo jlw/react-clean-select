@@ -1,4 +1,4 @@
-import PropTypes from 'prop-types';
+import PropTypes from 'prop-types'
 
 const SelectMethodsModel = Object.freeze({
   activeCursorOption: PropTypes.func,
@@ -69,7 +69,7 @@ const SelectMethodsModel = Object.freeze({
   /**
    * Toggle select all
    */
-  toggleSelectAll: PropTypes.func.isRequired,
-});
+  toggleSelectAll: PropTypes.func.isRequired
+})
 
-export default SelectMethodsModel;
+export default SelectMethodsModel

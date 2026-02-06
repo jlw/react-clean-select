@@ -1,4 +1,4 @@
-import PropTypes from 'prop-types';
+import PropTypes from 'prop-types'
 
 const SelectStateModel = Object.freeze({
   /**
@@ -24,7 +24,7 @@ const SelectStateModel = Object.freeze({
   /**
    * Array of search results
    */
-  searchResults: PropTypes.arrayOf(PropTypes.shape({})),
-});
+  searchResults: PropTypes.arrayOf(PropTypes.shape({}))
+})
 
-export default SelectStateModel;
+export default SelectStateModel

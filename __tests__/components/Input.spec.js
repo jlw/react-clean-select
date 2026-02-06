@@ -1,11 +1,11 @@
 /**
  * @jest-environment jsdom
  */
-import React from 'react';
-import renderer from 'react-test-renderer';
+import React from 'react'
+import renderer from 'react-test-renderer'
 
-import Input from '../../src/components/Input';
-import { options } from '../options';
+import Input from '../../src/components/Input'
+import { options } from '../options'
 
 const props = (props = {}) => ({
   props: {
@@ -20,16 +20,16 @@ const props = (props = {}) => ({
     getInputSize: () => undefined
   },
   ...props
-});
+})
 
 it('<Input /> renders correctly', () => {
-  const tree = renderer.create(<Input {...props()} />).toJSON();
+  const tree = renderer.create(<Input {...props()} />).toJSON()
 
-  expect(tree).toMatchSnapshot();
-});
+  expect(tree).toMatchSnapshot()
+})
 
 it('<Input /> is disabled', () => {
-  const tree = renderer.create(<Input {...props({ disabled: true })} />).toJSON();
+  const tree = renderer.create(<Input {...props({ disabled: true })} />).toJSON()
 
-  expect(tree).toMatchSnapshot();
-});
+  expect(tree).toMatchSnapshot()
+})

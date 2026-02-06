@@ -1,37 +1,37 @@
-import React from 'react';
-import PropTypes from 'prop-types';
+import React from 'react'
+import PropTypes from 'prop-types'
 
-import { LIB_NAME } from '../constants';
+import { LIB_NAME } from '../constants'
 
 class ClickOutside extends React.Component {
-  container = React.createRef();
+  container = React.createRef()
 
-  componentDidMount() {
-    document.addEventListener('click', this.handleClick, true);
+  componentDidMount () {
+    document.addEventListener('click', this.handleClick, true)
   }
 
-  componentWillUnmount() {
-    document.removeEventListener('click', this.handleClick, true);
+  componentWillUnmount () {
+    document.removeEventListener('click', this.handleClick, true)
   }
 
   handleClick = (event) => {
-    const container = this.container.current;
-    const { target } = event;
-    const { onClickOutside } = this.props;
+    const container = this.container.current
+    const { target } = event
+    const { onClickOutside } = this.props
 
     if ((container && container === target) || (container && !container.contains(target))) {
-      onClickOutside(event);
+      onClickOutside(event)
     }
-  };
+  }
 
-  render() {
-    const { children } = this.props;
+  render () {
+    const { children } = this.props
 
     return (
       <div className={`${LIB_NAME}-container`} ref={this.container}>
         {children}
       </div>
-    );
+    )
   }
 }
 
@@ -39,6 +39,6 @@ ClickOutside.propTypes = {
   onClickOutside: PropTypes.func.isRequired,
   children: PropTypes.node.isRequired,
   className: PropTypes.string
-};
+}
 
-export default ClickOutside;
+export default ClickOutside

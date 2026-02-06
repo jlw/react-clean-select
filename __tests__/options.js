@@ -230,4 +230,4 @@ export const options = [
       bs: 'target end-to-end models'
     }
   }
-];
+]

@@ -1,10 +1,10 @@
 /**
  * @jest-environment jsdom
  */
-import React from 'react';
-import renderer from 'react-test-renderer';
+import React from 'react'
+import renderer from 'react-test-renderer'
 
-import Dropdown from '../../src/components/Dropdown';
+import Dropdown from '../../src/components/Dropdown'
 
 const props = {
   props: {
@@ -23,10 +23,10 @@ const props = {
       getBoundingClientRect: () => ({ top: 100, bottom: 100 })
     })
   }
-};
+}
 
 it('<Dropdown /> renders correctly', () => {
-  const tree = renderer.create(<Dropdown {...props} />).toJSON();
+  const tree = renderer.create(<Dropdown {...props} />).toJSON()
 
-  expect(tree).toMatchSnapshot();
-});
+  expect(tree).toMatchSnapshot()
+})

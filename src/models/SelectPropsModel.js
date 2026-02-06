@@ -1,4 +1,4 @@
-import PropTypes from 'prop-types';
+import PropTypes from 'prop-types'
 
 const SelectPropsModel = Object.freeze({
   /**
@@ -253,10 +253,10 @@ const SelectPropsModel = Object.freeze({
    * Selected values
    */
   values: PropTypes.array,
-   /**
+  /**
     * If true, dropdown will be open by default
     */
-  defaultMenuIsOpen: PropTypes.bool,
-});
+  defaultMenuIsOpen: PropTypes.bool
+})
 
-export default SelectPropsModel;
+export default SelectPropsModel

@@ -1,31 +1,29 @@
-import React, { Component } from 'react';
-import ReactDOM from 'react-dom';
-import ClickOutside from './components/ClickOutside';
+import React, { Component } from 'react'
+import ClickOutside from './components/ClickOutside'
 
-import Content from './components/Content';
-import Dropdown from './components/Dropdown';
-import Loading from './components/Loading';
-import Clear from './components/Clear';
-import Separator from './components/Separator';
-import DropdownHandle from './components/DropdownHandle';
+import Content from './components/Content'
+import Dropdown from './components/Dropdown'
+import Loading from './components/Loading'
+import Clear from './components/Clear'
+import Separator from './components/Separator'
+import DropdownHandle from './components/DropdownHandle'
 
 import {
   debounce,
-  hexToRGBA,
   isEqual,
   getByPath,
   getProp,
   valueExistInSelected,
   isomorphicWindow
-} from './util';
-import { LIB_NAME } from './constants';
-import SelectPropsModel from './models/SelectPropsModel';
+} from './util'
+import { LIB_NAME } from './constants'
+import SelectPropsModel from './models/SelectPropsModel'
 
 export class Select extends Component {
-  static propTypes = SelectPropsModel;
+  static propTypes = SelectPropsModel
 
-  constructor(props) {
-    super(props);
+  constructor (props) {
+    super(props)
 
     this.state = {
       dropdown: false,
@@ -34,7 +32,7 @@ export class Select extends Component {
       selectBounds: {},
       cursor: null,
       searchResults: props.options
-    };
+    }
 
     this.methods = {
       activeCursorOption: this.activeCursorOption,
@@ -55,27 +53,27 @@ export class Select extends Component {
       setSearch: this.setSearch,
       sortBy: this.sortBy,
       toggleSelectAll: this.toggleSelectAll
-    };
+    }
 
-    this.select = React.createRef();
-    this.dropdownRoot = typeof document !== 'undefined' && document.createElement('div');
+    this.select = React.createRef()
+    this.dropdownRoot = typeof document !== 'undefined' && document.createElement('div')
   }
 
-  componentDidMount() {
-    isomorphicWindow().addEventListener('resize', debounce(this.updateSelectBounds));
-    isomorphicWindow().addEventListener('scroll', debounce(this.onScroll));
+  componentDidMount () {
+    isomorphicWindow().addEventListener('resize', debounce(this.updateSelectBounds))
+    isomorphicWindow().addEventListener('scroll', debounce(this.onScroll))
 
-    this.dropDown('close');
+    this.dropDown('close')
 
     if (this.select) {
-      this.updateSelectBounds();
+      this.updateSelectBounds()
     }
     if (this.props.defaultMenuIsOpen) {
-      this.dropDown('open');
+      this.dropDown('open')
     }
   }
 
-  componentDidUpdate(prevProps, prevState) {
+  componentDidUpdate (prevProps, prevState) {
     if (
       !this.props.compareValuesFunc(prevProps.values, this.props.values) &&
       this.props.compareValuesFunc(prevProps.values, prevState.values)
@@ -85,76 +83,76 @@ export class Select extends Component {
           values: this.props.values
         },
         () => {
-          this.props.onChange(this.state.values);
+          this.props.onChange(this.state.values)
         }
-      );
-      this.updateSelectBounds();
+      )
+      this.updateSelectBounds()
     }
 
     if (prevProps.options !== this.props.options) {
-      this.setState({ searchResults: this.searchResults() });
+      this.setState({ searchResults: this.searchResults() })
     }
 
     if (prevState.values !== this.state.values) {
-      this.props.onChange(this.state.values);
-      this.updateSelectBounds();
+      this.props.onChange(this.state.values)
+      this.updateSelectBounds()
     }
 
     if (prevState.search !== this.state.search) {
-      this.updateSelectBounds();
+      this.updateSelectBounds()
     }
 
     if (prevState.values !== this.state.values && this.props.closeOnSelect) {
-      this.dropDown('close');
+      this.dropDown('close')
     }
 
     if (prevProps.multi !== this.props.multi) {
-      this.updateSelectBounds();
+      this.updateSelectBounds()
     }
 
     if (prevState.dropdown && prevState.dropdown !== this.state.dropdown) {
-      this.onDropdownClose();
+      this.onDropdownClose()
     }
 
     if (!prevState.dropdown && prevState.dropdown !== this.state.dropdown) {
-      this.props.onDropdownOpen();
+      this.props.onDropdownOpen()
     }
   }
 
-  componentWillUnmount() {
+  componentWillUnmount () {
     isomorphicWindow().removeEventListener(
       'resize',
       debounce(this.updateSelectBounds, this.props.debounceDelay)
-    );
+    )
     isomorphicWindow().removeEventListener(
       'scroll',
       debounce(this.onScroll, this.props.debounceDelay)
-    );
+    )
   }
 
   onDropdownClose = () => {
-    this.setState({ cursor: null });
-    this.props.onDropdownClose();
-  };
+    this.setState({ cursor: null })
+    this.props.onDropdownClose()
+  }
 
   onScroll = () => {
     if (this.props.closeOnScroll) {
-      this.dropDown('close');
+      this.dropDown('close')
     }
 
-    this.updateSelectBounds();
-  };
+    this.updateSelectBounds()
+  }
 
   updateSelectBounds = () =>
     this.select.current &&
     this.setState({
       selectBounds: this.select.current.getBoundingClientRect()
-    });
+    })
 
-  getSelectBounds = () => this.state.selectBounds;
+  getSelectBounds = () => this.state.selectBounds
 
   dropDown = (action = 'toggle', event, force = false) => {
-    const target = (event && event.target) || (event && event.srcElement);
+    // const target = (event && event.target) || (event && event.srcElement)
 
     if (
       this.props.onDropdownCloseRequest !== undefined &&
@@ -167,181 +165,181 @@ export class Select extends Component {
         methods: this.methods,
         state: this.state,
         close: () => this.dropDown('close', null, true)
-      });
+      })
     }
 
     if (this.props.keepOpen) {
-      return this.setState({ dropdown: true });
+      return this.setState({ dropdown: true })
     }
 
     if (action === 'close' && this.state.dropdown) {
-      this.select.current.blur();
+      this.select.current.blur()
 
       return this.setState({
         dropdown: false,
         search: this.props.clearOnBlur ? '' : this.state.search,
         searchResults: this.props.options
-      });
+      })
     }
 
     if (action === 'open' && !this.state.dropdown) {
-      return this.setState({ dropdown: true });
+      return this.setState({ dropdown: true })
     }
 
     if (action === 'toggle') {
-      this.select.current.focus();
-      return this.setState({ dropdown: !this.state.dropdown });
+      this.select.current.focus()
+      return this.setState({ dropdown: !this.state.dropdown })
     }
 
-    return false;
-  };
+    return false
+  }
 
-  getSelectRef = () => this.select.current;
+  getSelectRef = () => this.select.current
 
   addOption = (option) => {
     if (this.props.multi) {
       if (
         valueExistInSelected(getByPath(option, this.props.valueField), this.state.values, this.props)
       ) {
-        return this.removeOption(null, option, false);
+        return this.removeOption(null, option, false)
       }
 
       this.setState({
         values: [...this.state.values, option]
-      });
-      this.props.onSelect([...this.state.values, option]);
+      })
+      this.props.onSelect([...this.state.values, option])
     } else {
       this.setState({
         values: [option],
         dropdown: false
-      });
-      this.props.onSelect([option]);
+      })
+      this.props.onSelect([option])
     }
 
     this.props.clearOnSelect &&
       this.setState({ search: '' }, () => {
-        this.setState({ searchResults: this.searchResults() });
-      });
+        this.setState({ searchResults: this.searchResults() })
+      })
 
-    return true;
-  };
+    return true
+  }
 
   removeOption = (event, option, close = false) => {
     if (event && close) {
-      event.preventDefault();
-      event.stopPropagation();
-      this.dropDown('close');
+      event.preventDefault()
+      event.stopPropagation()
+      this.dropDown('close')
     }
 
     const values = this.state.values.filter(
       (values) =>
         getByPath(values, this.props.valueField) !== getByPath(option, this.props.valueField)
-    );
+    )
     this.setState({
       values
-    });
+    })
     this.props.onDeselect(values)
-  };
+  }
 
   setSearch = (event) => {
     this.setState({
       cursor: null
-    });
+    })
 
     this.setState(
       {
         search: event.target.value
       },
       () => {
-        this.setState({ searchResults: this.searchResults() });
+        this.setState({ searchResults: this.searchResults() })
       }
-    );
-  };
+    )
+  }
 
   getInputSize = () => {
     if (this.state.search) {
-      return this.state.search.length;
+      return this.state.search.length
     }
 
     if (this.state.values.length > 0) {
-      return this.props.addPlaceholder.length;
+      return this.props.addPlaceholder.length
     }
 
-    return this.props.placeholder.length;
-  };
+    return this.props.placeholder.length
+  }
 
   toggleSelectAll = () => {
     return this.setState({
       values: this.state.values.length === 0 ? this.selectAll() : this.clearAll()
-    });
-  };
+    })
+  }
 
   clearAll = () => {
-    this.props.onClearAll();
+    this.props.onClearAll()
     this.setState({
       values: []
-    });
-  };
+    })
+  }
 
   selectAll = (valuesList = []) => {
-    this.props.onSelectAll();
+    this.props.onSelectAll()
     const values =
-      valuesList.length > 0 ? valuesList : this.props.options.filter((option) => !option.disabled);
+      valuesList.length > 0 ? valuesList : this.props.options.filter((option) => !option.disabled)
 
-    this.setState({ values });
-  };
+    this.setState({ values })
+  }
 
   isSelected = (option) =>
     !!this.state.values.find(
       (value) =>
         getByPath(value, this.props.valueField) === getByPath(option, this.props.valueField)
-    );
+    )
 
   areAllSelected = () =>
-    this.state.values.length === this.props.options.filter((option) => !option.disabled).length;
+    this.state.values.length === this.props.options.filter((option) => !option.disabled).length
 
-  safeString = (string) => string.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+  safeString = (string) => string.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')
 
   sortBy = () => {
-    const { sortBy, options } = this.props;
+    const { sortBy, options } = this.props
 
     if (!sortBy) {
-      return options;
+      return options
     }
 
     options.sort((a, b) => {
       if (getProp(a, sortBy) < getProp(b, sortBy)) {
-        return -1;
+        return -1
       } else if (getProp(a, sortBy) > getProp(b, sortBy)) {
-        return 1;
+        return 1
       } else {
-        return 0;
+        return 0
       }
-    });
+    })
 
-    return options;
-  };
+    return options
+  }
 
   searchFn = ({ state, methods }) => {
-    const regexp = new RegExp(methods.safeString(state.search), 'i');
+    const regexp = new RegExp(methods.safeString(state.search), 'i')
 
     return methods
       .sortBy()
       .filter((option) =>
         regexp.test(getByPath(option, this.props.searchBy) || getByPath(option, this.props.valueField))
-      );
-  };
+      )
+  }
 
   searchResults = () => {
-    const args = { state: this.state, props: this.props, methods: this.methods };
+    const args = { state: this.state, props: this.props, methods: this.methods }
 
-    return this.props.searchFn(args) || this.searchFn(args);
-  };
+    return this.props.searchFn(args) || this.searchFn(args)
+  }
 
   activeCursorOption = (activeCursorOption) =>
     this.setState({
       activeCursorOption
-    });
+    })
 
   handleKeyDown = (event) => {
     const args = {
@@ -350,99 +348,99 @@ export class Select extends Component {
       props: this.props,
       methods: this.methods,
       setState: this.setState.bind(this)
-    };
+    }
 
-    return this.props.handleKeyDownFn(args) || this.handleKeyDownFn(args);
-  };
+    return this.props.handleKeyDownFn(args) || this.handleKeyDownFn(args)
+  }
 
   handleKeyDownFn = ({ event, state, props, methods, setState }) => {
-    const { cursor, searchResults } = state;
-    const escape = event.key === 'Escape';
-    const enter = event.key === 'Enter';
-    const arrowUp = event.key === 'ArrowUp';
-    const arrowDown = event.key === 'ArrowDown';
-    const backspace = event.key === 'Backspace';
-    const tab = event.key === 'Tab' && !event.shiftKey;
-    const shiftTab = event.shiftKey && event.key === 'Tab';
+    const { cursor, searchResults } = state
+    const escape = event.key === 'Escape'
+    const enter = event.key === 'Enter'
+    const arrowUp = event.key === 'ArrowUp'
+    const arrowDown = event.key === 'ArrowDown'
+    const backspace = event.key === 'Backspace'
+    const tab = event.key === 'Tab' && !event.shiftKey
+    const shiftTab = event.shiftKey && event.key === 'Tab'
 
     if (arrowDown && !state.dropdown) {
-      event.preventDefault();
-      this.dropDown('open');
+      event.preventDefault()
+      this.dropDown('open')
       return setState({
         cursor: 0
-      });
+      })
     }
 
     if ((arrowDown || (tab && state.dropdown)) && cursor === null) {
       return setState({
         cursor: 0
-      });
+      })
     }
 
     if (arrowUp || arrowDown || (shiftTab && state.dropdown) || (tab && state.dropdown)) {
-      event.preventDefault();
+      event.preventDefault()
     }
 
     if (escape) {
-      this.dropDown('close');
+      this.dropDown('close')
     }
 
     if (enter) {
-      const currentOption = searchResults[cursor];
+      const currentOption = searchResults[cursor]
       if (currentOption && !currentOption.disabled) {
         if (props.create && valueExistInSelected(state.search, state.values, props)) {
-          return null;
+          return null
         }
 
-        methods.addOption(currentOption);
+        methods.addOption(currentOption)
       }
     }
 
     if ((arrowDown || (tab && state.dropdown)) && searchResults.length === cursor) {
       return setState({
         cursor: 0
-      });
+      })
     }
 
     if (arrowDown || (tab && state.dropdown)) {
       setState((prevState) => ({
         cursor: prevState.cursor + 1
-      }));
+      }))
     }
 
     if ((arrowUp || (shiftTab && state.dropdown)) && cursor > 0) {
       setState((prevState) => ({
         cursor: prevState.cursor - 1
-      }));
+      }))
     }
 
     if ((arrowUp || (shiftTab && state.dropdown)) && cursor === 0) {
       setState({
         cursor: searchResults.length
-      });
+      })
     }
 
     if (backspace && props.backspaceDelete && this.getInputSize() === 0) {
       this.setState({
         values: this.state.values.slice(0, -1)
-      });
+      })
     }
-  };
+  }
 
-  renderDropdown = () => ( <Dropdown props={this.props} state={this.state} methods={this.methods} /> );
+  renderDropdown = () => (<Dropdown props={this.props} state={this.state} methods={this.methods} />)
 
   createNew = (option) => {
     const newValue = {
       [this.props.labelField]: option,
       [this.props.valueField]: option
-    };
+    }
 
-    this.addOption(newValue);
-    this.props.onCreateNew(newValue);
-    this.setState({ search: '' });
-  };
+    this.addOption(newValue)
+    this.props.onCreateNew(newValue)
+    this.setState({ search: '' })
+  }
 
-  render() {
+  render () {
     const classNames = [LIB_NAME]
     if (this.props.direction === 'rtl') { classNames.push(`${LIB_NAME}-rtl`) }
     if (this.props.disabled) { classNames.push(`${LIB_NAME}-disabled`) }
@@ -452,13 +450,14 @@ export class Select extends Component {
       <ClickOutside onClickOutside={(event) => this.dropDown('close', event)}>
         <div
           onKeyDown={this.handleKeyDown}
-          aria-label="Dropdown select"
+          aria-label='Dropdown select'
           aria-expanded={this.state.dropdown}
           onClick={(event) => this.dropDown('open', event)}
           tabIndex={this.props.disabled ? '-1' : '0'}
           ref={this.select}
           className={classNames.join(' ')}
-          {...this.props.additionalProps}>
+          {...this.props.additionalProps}
+        >
           <Content props={this.props} state={this.state} methods={this.methods} />
 
           {(this.props.name || this.props.required) && (
@@ -497,7 +496,7 @@ export class Select extends Component {
           {this.state.dropdown && !this.props.disabled && this.renderDropdown()}
         </div>
       </ClickOutside>
-    );
+    )
   }
 }
 
@@ -555,6 +554,6 @@ Select.defaultProps = {
   valueField: 'value',
   values: [],
   defaultMenuIsOpen: false
-};
+}
 
-export default Select;
+export default Select

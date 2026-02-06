@@ -1,14 +1,14 @@
-import React from 'react';
-import PropTypes from 'prop-types';
+import React from 'react'
+import PropTypes from 'prop-types'
 
-import { LIB_NAME } from '../constants';
-import { getByPath } from '../util';
+import { LIB_NAME } from '../constants'
+import { getByPath } from '../util'
 
-import Input from './Input';
-import Selection from './Selection';
-import SelectMethodsModel from '../models/SelectMethodsModel';
-import SelectPropsModel from '../models/SelectPropsModel';
-import SelectStateModel from '../models/SelectStateModel';
+import Input from './Input'
+import Selection from './Selection'
+import SelectMethodsModel from '../models/SelectMethodsModel'
+import SelectPropsModel from '../models/SelectPropsModel'
+import SelectStateModel from '../models/SelectStateModel'
 
 const Content = ({ props, state, methods }) => {
   return (
@@ -17,19 +17,22 @@ const Content = ({ props, state, methods }) => {
         props.multi ? `${LIB_NAME}-type-multi` : `${LIB_NAME}-type-single`
       }`}
       onClick={(event) => {
-        event.stopPropagation();
+        event.stopPropagation()
         if (state.dropdown === true && props.closeOnClickInput && !state.search) {
-          return methods.dropDown('close');
+          return methods.dropDown('close')
         } else {
-          return methods.dropDown('open');
+          return methods.dropDown('open')
         }
-      }}>
-      {props.contentRenderer ? (
-        props.contentRenderer({ props, state, methods })
-      ) : (
-        <React.Fragment>
-          {props.multi
-            ? state.values &&
+      }}
+    >
+      {props.contentRenderer
+        ? (
+            props.contentRenderer({ props, state, methods })
+          )
+        : (
+          <>
+            {props.multi
+              ? state.values &&
               state.values.map((option) => (
                 <Selection
                   key={`${getByPath(option, props.valueField)}${getByPath(option, props.labelField)}`}
@@ -39,19 +42,19 @@ const Content = ({ props, state, methods }) => {
                   methods={methods}
                 />
               ))
-            : state.values &&
+              : state.values &&
               state.values.length > 0 && <span>{getByPath(state.values[0], props.labelField)}</span>}
-          <Input props={props} methods={methods} state={state} />
-        </React.Fragment>
-      )}
+            <Input props={props} methods={methods} state={state} />
+          </>
+          )}
     </div>
-  );
-};
+  )
+}
 
 Content.propTypes = {
   props: PropTypes.shape(SelectPropsModel),
   state: PropTypes.shape(SelectStateModel),
-  methods: PropTypes.shape(SelectMethodsModel),
-};
+  methods: PropTypes.shape(SelectMethodsModel)
+}
 
-export default Content;
+export default Content
