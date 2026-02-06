@@ -29,7 +29,7 @@ I need a combobox component that A) can work on a site where the Content-Securit
 
 #### Credits
 
-This is a fork of the [react-clean-select](https://github.com/sanusart/react-clean-select) package by Sasha Khamkov.
+This is a fork of the [react-dropdown-select](https://github.com/sanusart/react-dropdown-select) package by Sasha Khamkov.
 
 ### Usage
 
