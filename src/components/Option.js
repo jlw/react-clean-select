@@ -50,7 +50,7 @@ class Option extends Component {
           option.disabled ? ` ${LIB_NAME}-option-disabled` : ''
         }`}
         onClick={option.disabled ? undefined : () => methods.addOption(option)}
-        onKeyPress={option.disabled ? undefined : () => methods.addOption(option)}
+        onKeyDown={option.disabled ? undefined : () => methods.addOption(option)}
       >
         {getByPath(option, props.labelField)} {option.disabled && <ins>{props.disabledLabel}</ins>}
       </span>

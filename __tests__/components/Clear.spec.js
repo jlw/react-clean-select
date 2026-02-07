@@ -42,10 +42,10 @@ describe('<Clear /> component', () => {
     expect(spy).toHaveBeenCalled()
   })
 
-  xit('onKeyPress clears all', () => {
-    TestRenderer.create(<Clear {...props({ parentOption: options[0] })} onKeyPress={spy} />)
+  xit('onKeyDown clears all', () => {
+    TestRenderer.create(<Clear {...props({ parentOption: options[0] })} onKeyDown={spy} />)
       .root.findByProps({ className: 'react-clean-select-clear' })
-      .props.onKeyPress()
+      .props.onKeyDown()
 
     expect(spy).toHaveBeenCalled()
   })

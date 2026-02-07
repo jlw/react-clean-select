@@ -44,10 +44,10 @@ describe('<DropdownHandle /> component', () => {
     expect(spy).toHaveBeenCalled()
   })
 
-  xit('onKeyPress toggles dropdown', () => {
-    TestRenderer.create(<DropdownHandle {...props()} onKeyPress={spy} />)
+  xit('onKeyDown toggles dropdown', () => {
+    TestRenderer.create(<DropdownHandle {...props()} onKeyDown={spy} />)
       .root.findByProps({ className: 'react-clean-select-dropdown-handle' })
-      .props.onKeyPress()
+      .props.onKeyDown()
 
     expect(spy).toHaveBeenCalled()
   })

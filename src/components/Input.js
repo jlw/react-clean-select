@@ -77,7 +77,7 @@ class Input extends Component {
         className={`${LIB_NAME}-input${props.searchable ? '' : ` ${LIB_NAME}-input-readonly`}`}
         value={state.search}
         onClick={() => methods.dropDown('open')}
-        onKeyPress={this.handleKeyPress}
+        onKeyDown={this.handleKeyPress}
         onChange={methods.setSearch}
         onBlur={this.onBlur}
         placeholder={handlePlaceHolder(props, state)}

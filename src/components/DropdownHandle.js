@@ -5,7 +5,6 @@ const DropdownHandle = ({ props, state, methods }) => (
   <div
     tabIndex='-1'
     onClick={(event) => methods.dropDown(state.dropdown ? 'close' : 'open', event)}
-    onKeyPress={(event) => methods.dropDown('toggle', event)}
     onKeyDown={(event) => methods.dropDown('toggle', event)}
     className={
       `${LIB_NAME}-dropdown-handle ${LIB_NAME}-dropdown-handle-${state.dropdown ? 'open' : 'closed'}${

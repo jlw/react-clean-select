@@ -11,7 +11,7 @@ const Clear = ({ props, state, methods }) =>
         className={`${LIB_NAME}-clear`}
         tabIndex='-1'
         onClick={() => methods.clearAll()}
-        onKeyPress={() => methods.clearAll()}
+        onKeyDown={() => methods.clearAll()}
       >
         &times;
       </div>

@@ -4,7 +4,7 @@ exports[`<Clear /> component renders correctly 1`] = `
 <div
   className="react-clean-select-clear"
   onClick={[Function]}
-  onKeyPress={[Function]}
+  onKeyDown={[Function]}
   tabIndex="-1"
 >
   ×
@@ -15,7 +15,7 @@ exports[`<Clear /> renders correctly 1`] = `
 <div
   className="react-clean-select-clear"
   onClick={[Function]}
-  onKeyPress={[Function]}
+  onKeyDown={[Function]}
   tabIndex="-1"
 >
   ×

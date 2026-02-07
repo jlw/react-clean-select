@@ -23,7 +23,7 @@ exports[`<Select /> component <Select /> is disabled 1`] = `
         onChange={[Function]}
         onClick={[Function]}
         onFocus={[Function]}
-        onKeyPress={[Function]}
+        onKeyDown={[Function]}
         placeholder="Select..."
         tabIndex="-1"
         value=""
@@ -33,7 +33,6 @@ exports[`<Select /> component <Select /> is disabled 1`] = `
       className="react-clean-select-dropdown-handle react-clean-select-dropdown-handle-closed react-clean-select-dropdown-handle-rotate"
       onClick={[Function]}
       onKeyDown={[Function]}
-      onKeyPress={[Function]}
       tabIndex="-1"
     >
       <svg
@@ -72,7 +71,7 @@ exports[`<Select /> component <Select /> renders correctly 1`] = `
         onChange={[Function]}
         onClick={[Function]}
         onFocus={[Function]}
-        onKeyPress={[Function]}
+        onKeyDown={[Function]}
         placeholder="Select..."
         tabIndex="-1"
         value=""
@@ -82,7 +81,6 @@ exports[`<Select /> component <Select /> renders correctly 1`] = `
       className="react-clean-select-dropdown-handle react-clean-select-dropdown-handle-closed react-clean-select-dropdown-handle-rotate"
       onClick={[Function]}
       onKeyDown={[Function]}
-      onKeyPress={[Function]}
       tabIndex="-1"
     >
       <svg
@@ -121,7 +119,7 @@ exports[`<Select /> component <Select /> renders with clearable 1`] = `
         onChange={[Function]}
         onClick={[Function]}
         onFocus={[Function]}
-        onKeyPress={[Function]}
+        onKeyDown={[Function]}
         placeholder="Select..."
         tabIndex="-1"
         value=""
@@ -130,7 +128,7 @@ exports[`<Select /> component <Select /> renders with clearable 1`] = `
     <div
       className="react-clean-select-clear"
       onClick={[Function]}
-      onKeyPress={[Function]}
+      onKeyDown={[Function]}
       tabIndex="-1"
     >
       ×
@@ -139,7 +137,6 @@ exports[`<Select /> component <Select /> renders with clearable 1`] = `
       className="react-clean-select-dropdown-handle react-clean-select-dropdown-handle-closed react-clean-select-dropdown-handle-rotate"
       onClick={[Function]}
       onKeyDown={[Function]}
-      onKeyPress={[Function]}
       tabIndex="-1"
     >
       <svg
@@ -178,7 +175,7 @@ exports[`<Select /> component <Select /> renders with custom search function 1`]
         onChange={[Function]}
         onClick={[Function]}
         onFocus={[Function]}
-        onKeyPress={[Function]}
+        onKeyDown={[Function]}
         placeholder="Select..."
         tabIndex="-1"
         value="Zer"
@@ -188,7 +185,6 @@ exports[`<Select /> component <Select /> renders with custom search function 1`]
       className="react-clean-select-dropdown-handle react-clean-select-dropdown-handle-closed react-clean-select-dropdown-handle-rotate"
       onClick={[Function]}
       onKeyDown={[Function]}
-      onKeyPress={[Function]}
       tabIndex="-1"
     >
       <svg
@@ -227,7 +223,7 @@ exports[`<Select /> component <Select /> renders with loading 1`] = `
         onChange={[Function]}
         onClick={[Function]}
         onFocus={[Function]}
-        onKeyPress={[Function]}
+        onKeyDown={[Function]}
         placeholder="Select..."
         tabIndex="-1"
         value=""
@@ -240,7 +236,6 @@ exports[`<Select /> component <Select /> renders with loading 1`] = `
       className="react-clean-select-dropdown-handle react-clean-select-dropdown-handle-closed react-clean-select-dropdown-handle-rotate"
       onClick={[Function]}
       onKeyDown={[Function]}
-      onKeyPress={[Function]}
       tabIndex="-1"
     >
       <svg
@@ -279,7 +274,7 @@ exports[`<Select /> component <Select /> renders with name 1`] = `
         onChange={[Function]}
         onClick={[Function]}
         onFocus={[Function]}
-        onKeyPress={[Function]}
+        onKeyDown={[Function]}
         placeholder="Select..."
         tabIndex="-1"
         value=""
@@ -297,7 +292,6 @@ exports[`<Select /> component <Select /> renders with name 1`] = `
       className="react-clean-select-dropdown-handle react-clean-select-dropdown-handle-closed react-clean-select-dropdown-handle-rotate"
       onClick={[Function]}
       onKeyDown={[Function]}
-      onKeyPress={[Function]}
       tabIndex="-1"
     >
       <svg
@@ -336,7 +330,7 @@ exports[`<Select /> component <Select /> renders with separator 1`] = `
         onChange={[Function]}
         onClick={[Function]}
         onFocus={[Function]}
-        onKeyPress={[Function]}
+        onKeyDown={[Function]}
         placeholder="Select..."
         tabIndex="-1"
         value=""
@@ -349,7 +343,6 @@ exports[`<Select /> component <Select /> renders with separator 1`] = `
       className="react-clean-select-dropdown-handle react-clean-select-dropdown-handle-closed react-clean-select-dropdown-handle-rotate"
       onClick={[Function]}
       onKeyDown={[Function]}
-      onKeyPress={[Function]}
       tabIndex="-1"
     >
       <svg
@@ -388,7 +381,7 @@ exports[`<Select /> component <Select /> renders with short color 1`] = `
         onChange={[Function]}
         onClick={[Function]}
         onFocus={[Function]}
-        onKeyPress={[Function]}
+        onKeyDown={[Function]}
         placeholder="Select..."
         tabIndex="-1"
         value=""
@@ -398,7 +391,6 @@ exports[`<Select /> component <Select /> renders with short color 1`] = `
       className="react-clean-select-dropdown-handle react-clean-select-dropdown-handle-closed react-clean-select-dropdown-handle-rotate"
       onClick={[Function]}
       onKeyDown={[Function]}
-      onKeyPress={[Function]}
       tabIndex="-1"
     >
       <svg
@@ -437,7 +429,7 @@ exports[`<Select /> is disabled 1`] = `
         onChange={[Function]}
         onClick={[Function]}
         onFocus={[Function]}
-        onKeyPress={[Function]}
+        onKeyDown={[Function]}
         placeholder="Select..."
         tabIndex="-1"
         value=""
@@ -447,7 +439,6 @@ exports[`<Select /> is disabled 1`] = `
       className="react-clean-select-dropdown-handle react-clean-select-dropdown-handle-closed react-clean-select-dropdown-handle-rotate"
       onClick={[Function]}
       onKeyDown={[Function]}
-      onKeyPress={[Function]}
       tabIndex="-1"
     >
       <svg
@@ -486,7 +477,7 @@ exports[`<Select /> renders correctly 1`] = `
         onChange={[Function]}
         onClick={[Function]}
         onFocus={[Function]}
-        onKeyPress={[Function]}
+        onKeyDown={[Function]}
         placeholder="Select..."
         tabIndex="-1"
         value=""
@@ -496,7 +487,6 @@ exports[`<Select /> renders correctly 1`] = `
       className="react-clean-select-dropdown-handle react-clean-select-dropdown-handle-closed react-clean-select-dropdown-handle-rotate"
       onClick={[Function]}
       onKeyDown={[Function]}
-      onKeyPress={[Function]}
       tabIndex="-1"
     >
       <svg
@@ -535,7 +525,7 @@ exports[`<Select /> renders with clearable 1`] = `
         onChange={[Function]}
         onClick={[Function]}
         onFocus={[Function]}
-        onKeyPress={[Function]}
+        onKeyDown={[Function]}
         placeholder="Select..."
         tabIndex="-1"
         value=""
@@ -544,7 +534,7 @@ exports[`<Select /> renders with clearable 1`] = `
     <div
       className="react-clean-select-clear"
       onClick={[Function]}
-      onKeyPress={[Function]}
+      onKeyDown={[Function]}
       tabIndex="-1"
     >
       ×
@@ -553,7 +543,6 @@ exports[`<Select /> renders with clearable 1`] = `
       className="react-clean-select-dropdown-handle react-clean-select-dropdown-handle-closed react-clean-select-dropdown-handle-rotate"
       onClick={[Function]}
       onKeyDown={[Function]}
-      onKeyPress={[Function]}
       tabIndex="-1"
     >
       <svg
@@ -592,7 +581,7 @@ exports[`<Select /> renders with custom search function 1`] = `
         onChange={[Function]}
         onClick={[Function]}
         onFocus={[Function]}
-        onKeyPress={[Function]}
+        onKeyDown={[Function]}
         placeholder="Select..."
         tabIndex="-1"
         value="Zer"
@@ -602,7 +591,6 @@ exports[`<Select /> renders with custom search function 1`] = `
       className="react-clean-select-dropdown-handle react-clean-select-dropdown-handle-closed react-clean-select-dropdown-handle-rotate"
       onClick={[Function]}
       onKeyDown={[Function]}
-      onKeyPress={[Function]}
       tabIndex="-1"
     >
       <svg
@@ -641,7 +629,7 @@ exports[`<Select /> renders with loading 1`] = `
         onChange={[Function]}
         onClick={[Function]}
         onFocus={[Function]}
-        onKeyPress={[Function]}
+        onKeyDown={[Function]}
         placeholder="Select..."
         tabIndex="-1"
         value=""
@@ -654,7 +642,6 @@ exports[`<Select /> renders with loading 1`] = `
       className="react-clean-select-dropdown-handle react-clean-select-dropdown-handle-closed react-clean-select-dropdown-handle-rotate"
       onClick={[Function]}
       onKeyDown={[Function]}
-      onKeyPress={[Function]}
       tabIndex="-1"
     >
       <svg
@@ -693,7 +680,7 @@ exports[`<Select /> renders with name 1`] = `
         onChange={[Function]}
         onClick={[Function]}
         onFocus={[Function]}
-        onKeyPress={[Function]}
+        onKeyDown={[Function]}
         placeholder="Select..."
         tabIndex="-1"
         value=""
@@ -711,7 +698,6 @@ exports[`<Select /> renders with name 1`] = `
       className="react-clean-select-dropdown-handle react-clean-select-dropdown-handle-closed react-clean-select-dropdown-handle-rotate"
       onClick={[Function]}
       onKeyDown={[Function]}
-      onKeyPress={[Function]}
       tabIndex="-1"
     >
       <svg
@@ -750,7 +736,7 @@ exports[`<Select /> renders with separator 1`] = `
         onChange={[Function]}
         onClick={[Function]}
         onFocus={[Function]}
-        onKeyPress={[Function]}
+        onKeyDown={[Function]}
         placeholder="Select..."
         tabIndex="-1"
         value=""
@@ -763,7 +749,6 @@ exports[`<Select /> renders with separator 1`] = `
       className="react-clean-select-dropdown-handle react-clean-select-dropdown-handle-closed react-clean-select-dropdown-handle-rotate"
       onClick={[Function]}
       onKeyDown={[Function]}
-      onKeyPress={[Function]}
       tabIndex="-1"
     >
       <svg
@@ -802,7 +787,7 @@ exports[`<Select /> renders with short color 1`] = `
         onChange={[Function]}
         onClick={[Function]}
         onFocus={[Function]}
-        onKeyPress={[Function]}
+        onKeyDown={[Function]}
         placeholder="Select..."
         tabIndex="-1"
         value=""
@@ -812,7 +797,6 @@ exports[`<Select /> renders with short color 1`] = `
       className="react-clean-select-dropdown-handle react-clean-select-dropdown-handle-closed react-clean-select-dropdown-handle-rotate"
       onClick={[Function]}
       onKeyDown={[Function]}
-      onKeyPress={[Function]}
       tabIndex="-1"
     >
       <svg

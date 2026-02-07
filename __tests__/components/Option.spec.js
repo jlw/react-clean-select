@@ -42,9 +42,9 @@ describe('<Option /> component', () => {
   })
 
   xit('onChange with key press', () => {
-    TestRenderer.create(<Option {...props({ option: options[0] })} ononKeyPress={spy} />)
+    TestRenderer.create(<Option {...props({ option: options[0] })} ononKeyDown={spy} />)
       .root.findByType('span')
-      .props.onKeyPress()
+      .props.onKeyDown()
 
     expect(spy).toHaveBeenCalled()
   })

@@ -5,7 +5,6 @@ exports[`<DropdownHandle /> component renders correctly 1`] = `
   className="react-clean-select-dropdown-handle react-clean-select-dropdown-handle-closed react-clean-select-dropdown-handle-rotate"
   onClick={[Function]}
   onKeyDown={[Function]}
-  onKeyPress={[Function]}
   tabIndex="-1"
 >
   <svg
@@ -24,7 +23,6 @@ exports[`<DropdownHandle /> renders correctly 1`] = `
   className="react-clean-select-dropdown-handle react-clean-select-dropdown-handle-closed react-clean-select-dropdown-handle-rotate"
   onClick={[Function]}
   onKeyDown={[Function]}
-  onKeyPress={[Function]}
   tabIndex="-1"
 >
   <svg

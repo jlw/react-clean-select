@@ -4,7 +4,7 @@ exports[`<Option /> component pass option renderer 1`] = `
 <span
   className="react-clean-select-option"
   onClick={[Function]}
-  onKeyPress={[Function]}
+  onKeyDown={[Function]}
   role="option"
   tabIndex="-1"
 >
@@ -16,7 +16,7 @@ exports[`<Option /> component renders correctly 1`] = `
 <span
   className="react-clean-select-option"
   onClick={[Function]}
-  onKeyPress={[Function]}
+  onKeyDown={[Function]}
   role="option"
   tabIndex="-1"
 >
