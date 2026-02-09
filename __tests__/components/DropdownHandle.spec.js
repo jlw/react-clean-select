@@ -2,61 +2,61 @@
  * @jest-environment jsdom
  */
 import React from 'react'
-import TestRenderer from 'react-test-renderer'
+import '@testing-library/jest-dom'
+import { fireEvent, render, screen } from '@testing-library/react'
 
-import DropdownHandle from '../../src/components/DropdownHandle'
+import DropdownHandle from 'components/DropdownHandle'
 
-let spy
+const defaultProps = {
+  dropdownHandleRenderer: null,
+  name: 'something'
+}
+const defaultState = {
+  dropdown: false
+}
+const defaultMethods = {
+  dropDown: jest.fn()
+}
 
-const props = (props = {}) => ({
-  props: {
-    dropdownHandleRenderer: null
-  },
-  state: {
-    dropdown: false
-  },
-  methods: {
-    dropDown: () => undefined
-  },
-  ...props
-})
+const compileProps = ({ props = {}, state = {}, methods = {} }) => {
+  return {
+    props: { ...defaultProps, ...props },
+    state: { ...defaultState, ...state },
+    methods: { ...defaultMethods, ...methods }
+  }
+}
 
-describe('<DropdownHandle /> component', () => {
-  beforeEach(() => {
-    spy = jest.fn()
+describe('<DropdownHandle />', () => {
+  const renderComponent = (opts = {}) => render(<DropdownHandle {...compileProps(opts)} />)
+
+  it('opens dropdown on click', async () => {
+    renderComponent()
+
+    await fireEvent.click(screen.getByTestId('react-clean-select-something-DropdownHandle'))
+
+    expect(defaultMethods.dropDown).toHaveBeenCalledWith('open', expect.anything())
   })
 
-  afterEach(() => {
-    spy = null
+  it('closes dropdown on click when already open', async () => {
+    renderComponent({ state: { dropdown: true } })
+
+    await fireEvent.click(screen.getByTestId('react-clean-select-something-DropdownHandle'))
+
+    expect(defaultMethods.dropDown).toHaveBeenCalledWith('close', expect.anything())
   })
 
-  it('renders correctly', () => {
-    const tree = TestRenderer.create(<DropdownHandle {...props()} />).toJSON()
+  it('toggles dropdown on keyDown', async () => {
+    renderComponent()
 
-    expect(tree).toMatchSnapshot()
+    await fireEvent.keyDown(screen.getByTestId('react-clean-select-something-DropdownHandle'))
+
+    expect(defaultMethods.dropDown).toHaveBeenCalledWith('toggle', expect.anything())
   })
 
-  xit('onClick toggles dropdown', () => {
-    TestRenderer.create(<DropdownHandle {...props()} onClick={spy} />)
-      .root.findByProps({ className: 'react-clean-select-dropdown-handle' })
-      .props.onClick()
+  it('supports a custom renderer (inside the component wrapper)', () => {
+    renderComponent({ props: { dropdownHandleRenderer: () => (<div data-testid='foo'>-</div>) } })
 
-    expect(spy).toHaveBeenCalled()
-  })
-
-  xit('onKeyDown toggles dropdown', () => {
-    TestRenderer.create(<DropdownHandle {...props()} onKeyDown={spy} />)
-      .root.findByProps({ className: 'react-clean-select-dropdown-handle' })
-      .props.onKeyDown()
-
-    expect(spy).toHaveBeenCalled()
-  })
-
-  xit('onKeyDown toggles dropdown', () => {
-    TestRenderer.create(<DropdownHandle {...props()} onKeyDown={spy} />)
-      .root.findByProps({ className: 'react-clean-select-dropdown-handle' })
-      .props.onKeyDown()
-
-    expect(spy).toHaveBeenCalled()
+    expect(screen.getByTestId('foo')).toBeInTheDocument()
+    expect(screen.getByTestId('react-clean-select-something-DropdownHandle')).toBeInTheDocument()
   })
 })

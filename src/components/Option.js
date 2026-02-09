@@ -1,7 +1,8 @@
 import React, { Component } from 'react'
-import { getByPath } from '../util'
 import * as PropTypes from 'prop-types'
+
 import { LIB_NAME } from '../constants'
+import { getByPath, getOptionSlug } from '../util'
 
 class Option extends Component {
   option = React.createRef()
@@ -49,6 +50,7 @@ class Option extends Component {
         }${state.cursor === optionIndex ? ` ${LIB_NAME}-option-active` : ''}${
           option.disabled ? ` ${LIB_NAME}-option-disabled` : ''
         }`}
+        data-testid={`${LIB_NAME}-${props.name}-Option-${getOptionSlug(option, props)}`}
         onClick={option.disabled ? undefined : () => methods.addOption(option)}
         onKeyDown={option.disabled ? undefined : () => methods.addOption(option)}
       >

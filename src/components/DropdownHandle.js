@@ -1,16 +1,18 @@
 import React from 'react'
+
 import { LIB_NAME } from '../constants'
 
 const DropdownHandle = ({ props, state, methods }) => (
   <div
-    tabIndex='-1'
-    onClick={(event) => methods.dropDown(state.dropdown ? 'close' : 'open', event)}
-    onKeyDown={(event) => methods.dropDown('toggle', event)}
     className={
       `${LIB_NAME}-dropdown-handle ${LIB_NAME}-dropdown-handle-${state.dropdown ? 'open' : 'closed'}${
       props.dropdownHandleRenderer ? '' : ` ${LIB_NAME}-dropdown-handle-rotate`
       }`
     }
+    data-testid={`${LIB_NAME}-${props.name}-DropdownHandle`}
+    onClick={(event) => methods.dropDown(state.dropdown ? 'close' : 'open', event)}
+    onKeyDown={(event) => methods.dropDown('toggle', event)}
+    tabIndex='-1'
   >
     {props.dropdownHandleRenderer
       ? (

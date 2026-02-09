@@ -2,66 +2,64 @@
  * @jest-environment jsdom
  */
 import React from 'react'
-import TestRenderer from 'react-test-renderer'
-import { unmountComponentAtNode, render } from 'react-dom'
-import { act } from 'react-dom/test-utils'
+import '@testing-library/jest-dom'
+import { fireEvent, render, screen } from '@testing-library/react'
 
-import Content from '../../src/components/Content'
-import { options } from '../options'
+import Content from 'components/Content'
 
-let container = null
+const defaultOption = {
+  value: 'foo',
+  label: 'Foo'
+}
+const defaultProps = {
+  contentRenderer: null,
+  multi: true,
+  name: 'something',
+  labelField: 'name'
+}
+const defaultState = {
+  dropdown: false,
+  search: '',
+  values: [defaultOption]
+}
+const defaultMethods = {
+  dropDown: jest.fn(),
+  getInputSize: () => undefined
+}
 
-const props = (props = {}) => ({
-  props: {
-    contentRenderer: null,
-    multi: true,
-    labelField: 'name'
-  },
-  state: {
-    search: '',
-    values: [options[0]]
-  },
-  methods: {
-    dropDown: jest.fn(),
-    getInputSize: () => undefined
-  },
-  ...props
-})
+const compileProps = ({ props = {}, state = {}, methods = {}, option = {} }) => {
+  return {
+    props: { ...defaultProps, ...props },
+    state: { ...defaultState, ...state },
+    methods: { ...defaultMethods, ...methods },
+    option: { ...defaultOption, ...option }
+  }
+}
 
-describe('<Content /> component', () => {
-  beforeEach(() => {
-    container = document.createElement('div')
-    document.body.appendChild(container)
+describe('<Content />', () => {
+  const renderComponent = (opts = {}) => render(<Content {...compileProps(opts)} />)
+
+  it('opens dropdown on click if closeOnClickInput set', async () => {
+    renderComponent({ props: { closeOnClickInput: true } })
+
+    await fireEvent.click(screen.getByTestId('react-clean-select-something-Content'))
+
+    // TODO: find out why DropDownHandle passes the event to this function and Content does not
+    expect(defaultMethods.dropDown).toHaveBeenCalledWith('open')
   })
 
-  afterEach(() => {
-    unmountComponentAtNode(container)
-    container.remove()
-    container = null
+  it('closes dropdown on click when already open', async () => {
+    renderComponent({ props: { closeOnClickInput: true }, state: { dropdown: true } })
+
+    await fireEvent.click(screen.getByTestId('react-clean-select-something-Content'))
+
+    expect(defaultMethods.dropDown).toHaveBeenCalledWith('close')
   })
 
-  it('renders correctly', () => {
-    const tree = TestRenderer.create(<Content {...props()} />).toJSON()
+  it('supports a custom renderer (inside the component wrapper)', () => {
+    renderComponent({ props: { contentRenderer: () => (<div data-testid='foo' />) } })
 
-    expect(tree).toMatchSnapshot()
-  })
-
-  it('onClick opens dropdown', () => {
-    const componentProps = props()
-
-    act(() => {
-      render(<Content {...componentProps} />, container)
-    })
-
-    const content = document.querySelector('.react-clean-select-content')
-
-    expect(componentProps.methods.dropDown).toHaveBeenCalledTimes(0)
-
-    act(() => {
-      // eslint-disable-next-line no-undef
-      content.dispatchEvent(new MouseEvent('click', { bubbles: true }))
-    })
-
-    expect(componentProps.methods.dropDown).toHaveBeenCalledTimes(1)
+    expect(screen.getByTestId('foo')).toBeInTheDocument()
+    expect(screen.getByTestId('react-clean-select-something-Content')).toBeInTheDocument()
   })
 })

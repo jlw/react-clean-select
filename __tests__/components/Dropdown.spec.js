@@ -2,31 +2,50 @@
  * @jest-environment jsdom
  */
 import React from 'react'
-import renderer from 'react-test-renderer'
+import '@testing-library/jest-dom'
+import { render, screen } from '@testing-library/react'
 
-import Dropdown from '../../src/components/Dropdown'
+import Dropdown from 'components/Dropdown'
 
-const props = {
-  props: {
-    dropdownRenderer: null,
-    dropdownGap: 5,
-    dropdownHeight: '300px'
-  },
-  state: {
-    selectBounds: {},
-    searchResults: []
-  },
-  methods: {
-    searchResults: () => [],
-    getSelectRef: () => ({
-      blur: () => {},
-      getBoundingClientRect: () => ({ top: 100, bottom: 100 })
-    })
+const defaultProps = {
+  dropdownRenderer: null,
+  dropdownGap: 5,
+  dropdownHeight: '300px',
+  name: 'something'
+}
+const defaultState = {
+  selectBounds: {},
+  searchResults: []
+}
+const defaultMethods = {
+  searchResults: () => [],
+  getSelectRef: () => ({
+    blur: () => {},
+    getBoundingClientRect: () => ({ top: 100, bottom: 100 })
+  })
+}
+
+const compileProps = ({ props = {}, state = {}, methods = {} }) => {
+  return {
+    props: { ...defaultProps, ...props },
+    state: { ...defaultState, ...state },
+    methods: { ...defaultMethods, ...methods }
   }
 }
 
-it('<Dropdown /> renders correctly', () => {
-  const tree = renderer.create(<Dropdown {...props} />).toJSON()
+describe('<Dropdown />', () => {
+  const renderComponent = (opts = {}) => render(<Dropdown {...compileProps(opts)} />)
 
-  expect(tree).toMatchSnapshot()
+  it('TODO: build sufficient tests', () => {
+    renderComponent()
+
+    expect(screen.getByTestId('react-clean-select-something-Dropdown')).toBeInTheDocument()
+  })
+
+  it('supports a custom renderer (inside the component wrapper)', () => {
+    renderComponent({ props: { dropdownRenderer: () => (<div data-testid='foo' />) } })
+
+    expect(screen.getByTestId('foo')).toBeInTheDocument()
+    expect(screen.getByTestId('react-clean-select-something-Dropdown')).toBeInTheDocument()
+  })
 })

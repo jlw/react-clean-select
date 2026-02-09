@@ -16,6 +16,7 @@ const Content = ({ props, state, methods }) => {
       className={`${LIB_NAME}-content ${
         props.multi ? `${LIB_NAME}-type-multi` : `${LIB_NAME}-type-single`
       }`}
+      data-testid={`${LIB_NAME}-${props.name}-Content`}
       onClick={(event) => {
         event.stopPropagation()
         if (state.dropdown === true && props.closeOnClickInput && !state.search) {

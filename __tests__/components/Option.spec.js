@@ -2,76 +2,94 @@
  * @jest-environment jsdom
  */
 import React from 'react'
-import TestRenderer from 'react-test-renderer'
-import Option from '../../src/components/Option'
-import { options } from '../options'
+import '@testing-library/jest-dom'
+import { fireEvent, render, screen } from '@testing-library/react'
 
-let spy
+import Option from 'components/Option'
 
-const props = (props = {}) => ({
-  props: {
-    optionRenderer: null
-  },
-  state: {
-    cursor: 0
-  },
-  methods: {
-    isSelected: () => undefined,
-    addOption: () => undefined
-  },
-  ...props
-})
+const defaultOption = {
+  value: 'foo',
+  label: 'Foo'
+}
+const defaultProps = {
+  keepSelectedInList: true,
+  name: 'something',
+  optionRenderer: null,
+  valueField: 'value'
+}
+const defaultState = {
+  cursor: 0
+}
+const defaultMethods = {
+  isSelected: () => false,
+  addOption: () => {}
+}
 
-describe('<Option /> component', () => {
-  beforeEach(() => {
-    spy = jest.fn()
+const compileProps = ({ props = {}, state = {}, methods = {}, option = {}, optionIndex = 0 }) => {
+  return {
+    props: { ...defaultProps, ...props },
+    state: { ...defaultState, ...state },
+    methods: { ...defaultMethods, ...methods },
+    option: { ...defaultOption, ...option },
+    optionIndex
+  }
+}
+
+describe('<Option />', () => {
+  const renderComponent = (opts = {}) => render(<Option {...compileProps(opts)} />)
+
+  it('uses a safe version of the option value for data-testid', () => {
+    renderComponent({ option: { value: "I haven't decided" } })
+
+    expect(screen.queryAllByTestId('react-clean-select-something-Option-I-haven-t-decided')).toHaveLength(1)
   })
 
-  xit('renders correctly', () => {
-    const tree = TestRenderer.create(<Option {...props({ option: options[0] })} />).toJSON()
+  it('adds the option on click', async () => {
+    const addOption = jest.fn()
+    renderComponent({ methods: { addOption } })
 
-    expect(tree).toMatchSnapshot()
+    await fireEvent.click(screen.getByTestId('react-clean-select-something-Option-foo'))
+
+    expect(addOption).toHaveBeenCalledWith(defaultOption)
   })
 
-  xit('onChange with click', () => {
-    TestRenderer.create(<Option {...props({ option: options[0] })} onClick={spy} />)
-      .root.findByType('span')
-      .props.onClick()
+  it('does not add the option on click when disabled', async () => {
+    const addOption = jest.fn()
+    renderComponent({ methods: { addOption }, option: { disabled: true } })
 
-    expect(spy).toHaveBeenCalled()
+    await fireEvent.click(screen.getByTestId('react-clean-select-something-Option-foo'))
+
+    expect(addOption).not.toHaveBeenCalled()
   })
 
-  xit('onChange with key press', () => {
-    TestRenderer.create(<Option {...props({ option: options[0] })} ononKeyDown={spy} />)
-      .root.findByType('span')
-      .props.onKeyDown()
+  it('adds the option on keydown', async () => {
+    const addOption = jest.fn()
+    renderComponent({ methods: { addOption } })
 
-    expect(spy).toHaveBeenCalled()
+    await fireEvent.keyDown(screen.getByTestId('react-clean-select-something-Option-foo'))
+
+    expect(addOption).toHaveBeenCalledWith(defaultOption)
   })
 
-  // no assertions - check snapshots?
-  // test('keepSelectedInList: false', () => {
-  //   const tree = TestRenderer.create(
-  //     <Option
-  //       {...props({
-  //         option: options[0],
-  //         parentProps: {
-  //           optionRenderer: null,
-  //           keepSelectedInList: false
-  //         },
-  //         parentMethods: {
-  //           isSelected: () => true
-  //         }
-  //       })}
-  //     />
-  //   ).toJSON()
-  // })
+  it('does not add the option on keydown when disabled', async () => {
+    const addOption = jest.fn()
+    renderComponent({ methods: { addOption }, option: { disabled: true } })
 
-  xit('pass option renderer', () => {
-    const tree = TestRenderer.create(
-      <Option {...props({ option: options[0], optionRenderer: () => <div>option</div> })} />
-    ).toJSON()
+    await fireEvent.keyDown(screen.getByTestId('react-clean-select-something-Option-foo'))
 
-    expect(tree).toMatchSnapshot()
+    expect(addOption).not.toHaveBeenCalled()
+  })
+
+  it('does not render the option when selected and keepSelectedInList is false', () => {
+    renderComponent({ props: { keepSelectedInList: false }, methods: { isSelected: () => true } })
+
+    expect(screen.queryAllByTestId('react-clean-select-something-Option-foo')).toHaveLength(0)
+  })
+
+  it('supports a custom renderer', () => {
+    renderComponent({ props: { optionRenderer: () => (<div data-testid='foo' />) } })
+
+    expect(screen.getByTestId('foo')).toBeInTheDocument()
+    expect(screen.queryAllByTestId('react-clean-select-something-Option-foo')).toHaveLength(0)
   })
 })

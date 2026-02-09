@@ -1,4 +1,5 @@
 import React from 'react'
+
 import { LIB_NAME } from '../constants'
 
 const Clear = ({ props, state, methods }) =>
@@ -9,6 +10,7 @@ const Clear = ({ props, state, methods }) =>
     : (
       <div
         className={`${LIB_NAME}-clear`}
+        data-testid={`${LIB_NAME}-${props.name}-Clear`}
         tabIndex='-1'
         onClick={() => methods.clearAll()}
         onKeyDown={() => methods.clearAll()}

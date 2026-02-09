@@ -7,7 +7,7 @@ const Separator = ({ props, state, methods }) =>
         props.separatorRenderer({ props, state, methods })
       )
     : (
-      <div className={`${LIB_NAME}-separator`} />
+      <div className={`${LIB_NAME}-separator`} data-testid={`${LIB_NAME}-${props.name}-Separator`} />
       )
 
 export default Separator

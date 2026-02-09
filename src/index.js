@@ -23,6 +23,9 @@ export class Select extends Component {
   static propTypes = SelectPropsModel
 
   constructor (props) {
+    if (!{}.hasOwnProperty.call(props, 'name')) {
+      props.name = `field${Math.floor(Math.random() * 1000)}`
+    }
     super(props)
 
     this.state = {
@@ -464,6 +467,7 @@ export class Select extends Component {
             <input
               tabIndex={-1}
               className={`${LIB_NAME}-input-zero`}
+              data-testid={`${LIB_NAME}-${this.props.name}-input-zero`}
               name={this.props.name}
               required={this.props.required}
               pattern={this.props.pattern}
@@ -501,21 +505,22 @@ export class Select extends Component {
 }
 
 Select.defaultProps = {
-  addPlaceholder: '',
   additionalProps: null,
+  addPlaceholder: '',
   autoFocus: false,
   backspaceDelete: true,
+  clearable: false,
   clearAllLabel: 'Clear all',
   clearOnBlur: true,
   clearOnSelect: true,
-  clearable: false,
+  closeOnClickInput: false,
   closeOnScroll: false,
   closeOnSelect: false,
-  closeOnClickInput: false,
   compareValuesFunc: isEqual,
   create: false,
   createNewLabel: 'add {search}',
   debounceDelay: 0,
+  defaultMenuIsOpen: false,
   direction: 'ltr',
   disabled: false,
   disabledLabel: 'disabled',
@@ -532,28 +537,27 @@ Select.defaultProps = {
   name: null,
   noDataLabel: 'No data',
   onChange: () => undefined,
-  onSelect: () => undefined,
-  onDeselect: () => undefined,
   onClearAll: () => undefined,
   onCreateNew: () => undefined,
+  onDeselect: () => undefined,
   onDropdownClose: () => undefined,
   onDropdownCloseRequest: undefined,
   onDropdownOpen: () => undefined,
+  onSelect: () => undefined,
   onSelectAll: () => undefined,
   options: [],
   pattern: undefined,
   placeholder: 'Select...',
   required: false,
+  searchable: true,
   searchBy: 'label',
   searchFn: () => undefined,
-  searchable: true,
   selectAll: false,
   selectAllLabel: 'Select all',
   separator: false,
   sortBy: null,
   valueField: 'value',
-  values: [],
-  defaultMenuIsOpen: false
+  values: []
 }
 
 export default Select

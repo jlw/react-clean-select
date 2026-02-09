@@ -1,8 +1,9 @@
 /* eslint-disable react/jsx-handler-names */
 import React, { Component } from 'react'
-import { valueExistInSelected } from '../util'
 import * as PropTypes from 'prop-types'
+
 import { LIB_NAME } from '../constants'
+import { valueExistInSelected } from '../util'
 
 const handlePlaceHolder = (props, state) => {
   const { addPlaceholder, searchable, placeholder } = props
@@ -75,6 +76,7 @@ class Input extends Component {
         tabIndex='-1'
         onFocus={(event) => event.stopPropagation()}
         className={`${LIB_NAME}-input${props.searchable ? '' : ` ${LIB_NAME}-input-readonly`}`}
+        data-testid={`${LIB_NAME}-${props.name}-Input`}
         value={state.search}
         onClick={() => methods.dropDown('open')}
         onKeyDown={this.handleKeyPress}

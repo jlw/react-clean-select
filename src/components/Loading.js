@@ -1,4 +1,5 @@
 import React from 'react'
+
 import { LIB_NAME } from '../constants'
 
 const Loading = ({ props }) =>
@@ -7,7 +8,7 @@ const Loading = ({ props }) =>
         props.loadingRenderer({ props })
       )
     : (
-      <div className={`${LIB_NAME}-loading`} />
+      <div className={`${LIB_NAME}-loading`} data-testid={`${LIB_NAME}-${props.name}-Loading`} />
       )
 
 export default Loading

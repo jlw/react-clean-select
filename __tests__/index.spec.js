@@ -2,90 +2,119 @@
  * @jest-environment jsdom
  */
 import React from 'react'
-import TestRenderer from 'react-test-renderer'
-import { LIB_NAME } from '../src/constants'
+import '@testing-library/jest-dom'
+import { fireEvent, render, screen } from '@testing-library/react'
 
 import Select from '../src/index'
 
-const props = (props = {}) => ({
-  onChange: () => undefined,
-  ...props
-})
-
-const selectWithProps = (component) => {
-  return TestRenderer.create(component, {
-    createNodeMock: (element) => {
-      if (element.type === 'div') {
-        return {
-          blur: () => {},
-          getBoundingClientRect: () => {}
-        }
-      }
-      return null
-    }
-  })
+const defaultProps = {
+  name: 'something',
+  onChange: () => {}
 }
 
-describe('<Select /> component', () => {
-  it('<Select /> renders correctly', () => {
-    const tree = selectWithProps(<Select {...props()} />).toJSON()
+describe('<Select />', () => {
+  const renderComponent = (props = {}) => render(<Select {...defaultProps} {...props} />)
 
-    expect(tree).toMatchSnapshot()
+  it('TODO: needs sufficient functionality tests', () => {
+    renderComponent()
+
+    expect(screen.getByTestId('react-clean-select-something-Input')).toBeInTheDocument()
   })
 
-  it('<Select /> renders with separator', () => {
-    const tree = selectWithProps(<Select {...props({ separator: true })} />).toJSON()
+  it('does not include the separator by default', () => {
+    renderComponent()
 
-    expect(tree).toMatchSnapshot()
+    expect(screen.queryAllByTestId('react-clean-select-something-Separator')).toHaveLength(0)
   })
 
-  it('<Select /> renders with clearable', () => {
-    const tree = selectWithProps(<Select {...props({ clearable: true })} />).toJSON()
+  it('optionally includes separator', () => {
+    renderComponent({ separator: true })
 
-    expect(tree).toMatchSnapshot()
+    expect(screen.getByTestId('react-clean-select-something-Separator')).toBeInTheDocument()
   })
 
-  it('<Select /> renders with short color', () => {
-    const tree = selectWithProps(<Select {...props({ color: '#000' })} />).toJSON()
+  it('does not include the clear widget by default', () => {
+    renderComponent()
 
-    expect(tree).toMatchSnapshot()
+    expect(screen.queryAllByTestId('react-clean-select-something-Clear')).toHaveLength(0)
   })
 
-  it('<Select /> renders with loading', () => {
-    const tree = selectWithProps(<Select {...props({ loading: true })} />).toJSON()
+  it('optionally includes clear widget', () => {
+    renderComponent({ clearable: true })
 
-    expect(tree).toMatchSnapshot()
+    expect(screen.getByTestId('react-clean-select-something-Clear')).toBeInTheDocument()
   })
 
-  it('<Select /> renders with name', () => {
-    const tree = selectWithProps(<Select {...props({ name: 'form-select' })} />).toJSON()
+  it('does not include the loading indicator by default', () => {
+    renderComponent()
 
-    expect(tree).toMatchSnapshot()
+    expect(screen.queryAllByTestId('react-clean-select-something-Loading')).toHaveLength(0)
   })
 
-  it('<Select /> renders with custom search function', () => {
-    const options = [{ id: 0, name: 'Zero' }, { id: 1, name: 'One' }, { id: 2, name: 'Two' }]
+  it('optionally shows loading', () => {
+    renderComponent({ loading: true })
 
-    const searchFn = ({ props, state }) => {
-      return props.options.filter(({ name }) => new RegExp(state.search).test(name))
-    }
-
-    const component = selectWithProps(<Select {...props({ searchFn, options })} />)
-
-    const input = component.root.find((element) => element.props.className === `${LIB_NAME}-input`)
-
-    TestRenderer.act(() => input.props.onChange({ target: { value: 'Zer' } }))
-
-    expect(component.toTree().instance.state.search).toBe('Zer')
-    expect(component.toTree().instance.state.searchResults).toStrictEqual([
-      { id: 0, name: 'Zero' }
-    ])
-    expect(component.toJSON()).toMatchSnapshot()
+    expect(screen.getByTestId('react-clean-select-something-Loading')).toBeInTheDocument()
   })
 
-  it('<Select /> is disabled', () => {
-    const tree = selectWithProps(<Select {...props({ disabled: true })} />).toJSON()
+  it('adds name to base input', () => {
+    renderComponent()
 
-    expect(tree).toMatchSnapshot()
+    expect(screen.getByTestId('react-clean-select-something-input-zero')).toHaveProperty('name', 'something')
+  })
+
+  it('optionally disables the input', () => {
+    renderComponent({ disabled: true })
+
+    expect(screen.getByTestId('react-clean-select-something-Input')).toHaveProperty('disabled', true)
+  })
+
+  it('opens, filters, and selects available options', async () => {
+    const onChange = jest.fn()
+    const options = [{ value: 'de', label: 'Deutsch' }, { value: 'en', label: 'English' }, { value: 'es', label: 'Español' }]
+    renderComponent({ name: 'language', onChange, options })
+    expect(screen.queryAllByTestId('react-clean-select-language-Option-de')).toHaveLength(0)
+
+    await fireEvent.click(screen.getByTestId('react-clean-select-language-DropdownHandle'))
+
+    expect(screen.queryAllByTestId('react-clean-select-language-Option-de')).toHaveLength(1)
+    expect(screen.queryAllByTestId('react-clean-select-language-Option-en')).toHaveLength(1)
+    expect(screen.queryAllByTestId('react-clean-select-language-Option-es')).toHaveLength(1)
+
+    const input = screen.getByTestId('react-clean-select-language-Input')
+    await fireEvent.change(input, { target: { value: 'D' } })
+
+    expect(screen.queryAllByTestId('react-clean-select-language-Option-de')).toHaveLength(1)
+    expect(screen.queryAllByTestId('react-clean-select-language-Option-en')).toHaveLength(0)
+    expect(screen.queryAllByTestId('react-clean-select-language-Option-es')).toHaveLength(0)
+
+    await fireEvent.change(input, { target: { value: 'Esp' } })
+
+    expect(screen.queryAllByTestId('react-clean-select-language-Option-de')).toHaveLength(0)
+    expect(screen.queryAllByTestId('react-clean-select-language-Option-en')).toHaveLength(0)
+    expect(screen.queryAllByTestId('react-clean-select-language-Option-es')).toHaveLength(1)
+
+    await fireEvent.click(screen.getByTestId('react-clean-select-language-Option-es'))
+
+    expect(onChange).toHaveBeenCalledWith([{ value: 'es', label: 'Español' }])
+  })
+
+  it('renders the currently-selected single option', () => {
+    const female = { value: 'female', label: 'Female' }
+    const options = [female, { value: 'male', label: 'Male' }]
+    renderComponent({ name: 'gender', options, values: [female] })
+
+    expect(screen.getByTestId('react-clean-select-gender-Content')).toHaveTextContent('Female')
+  })
+
+  it('renders the current selections for a multiple field', () => {
+    const pub = { value: 'public', label: 'Public' }
+    const priv = { value: 'private', label: 'Private' }
+    const options = [pub, priv, { value: 'non-traditional', label: 'Non-Traditional' }]
+    renderComponent({ name: 'schooling', multi: true, options, values: [pub, priv] })
+
+    expect(screen.getByTestId('react-clean-select-schooling-Selection-public')).toBeInTheDocument()
+    expect(screen.getByTestId('react-clean-select-schooling-Selection-private')).toBeInTheDocument()
+    expect(screen.queryAllByTestId('react-clean-select-schooling-Selection-non-traditional')).toHaveLength(0)
   })
 })

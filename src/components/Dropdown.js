@@ -1,9 +1,9 @@
 import React from 'react'
 
-import { LIB_NAME } from '../constants'
 import NoData from '../components/NoData'
 import Option from '../components/Option'
 
+import { LIB_NAME } from '../constants'
 import { valueExistInSelected, isomorphicWindow } from '../util'
 
 const dropdownPosition = (props, methods) => {
@@ -36,6 +36,7 @@ const Dropdown = ({ props, state, methods }) => (
       props,
       methods
     )}`}
+    data-testid={`${LIB_NAME}-${props.name}-Dropdown`}
   >
     {props.dropdownRenderer
       ? (

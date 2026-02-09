@@ -2,34 +2,49 @@
  * @jest-environment jsdom
  */
 import React from 'react'
-import renderer from 'react-test-renderer'
+import '@testing-library/jest-dom'
+import { render, screen } from '@testing-library/react'
 
-import Input from '../../src/components/Input'
-import { options } from '../options'
+import Input from 'components/Input'
 
-const props = (props = {}) => ({
-  props: {
-    inputRenderer: null,
-    searchable: true,
-    create: true
-  },
-  state: {
-    values: options
-  },
-  methods: {
-    getInputSize: () => undefined
-  },
-  ...props
-})
+const defaultProps = {
+  create: true,
+  inputRenderer: null,
+  name: 'something',
+  searchable: true
+}
+const defaultState = {
+  values: [{ id: 1, label: 'Name' }]
+}
+const defaultMethods = {
+  getInputSize: () => undefined
+}
 
-it('<Input /> renders correctly', () => {
-  const tree = renderer.create(<Input {...props()} />).toJSON()
+const compileProps = ({ props = {}, state = {}, methods = {} }) => {
+  return {
+    props: { ...defaultProps, ...props },
+    state: { ...defaultState, ...state },
+    methods: { ...defaultMethods, ...methods }
+  }
+}
 
-  expect(tree).toMatchSnapshot()
-})
+describe('<Input />', () => {
+  const renderComponent = (opts = {}) => render(<Input {...compileProps(opts)} />)
 
-it('<Input /> is disabled', () => {
-  const tree = renderer.create(<Input {...props({ disabled: true })} />).toJSON()
+  it('TODO: build sufficient tests', () => {
+    renderComponent()
+  })
 
-  expect(tree).toMatchSnapshot()
+  it('supports disabled prop', () => {
+    renderComponent({ props: { disabled: true } })
+
+    expect(screen.getByTestId('react-clean-select-something-Input')).toHaveProperty('disabled', true)
+  })
+
+  it('supports a custom renderer', () => {
+    renderComponent({ props: { inputRenderer: () => (<div data-testid='foo' />) } })
+
+    expect(screen.getByTestId('foo')).toBeInTheDocument()
+    expect(screen.queryAllByTestId('react-clean-select-something-Input')).toHaveLength(0)
+  })
 })

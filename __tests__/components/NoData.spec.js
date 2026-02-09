@@ -2,18 +2,39 @@
  * @jest-environment jsdom
  */
 import React from 'react'
-import renderer from 'react-test-renderer'
+import '@testing-library/jest-dom'
+import { render, screen } from '@testing-library/react'
 
-import NoData from '../../src/components/NoData'
+import NoData from 'components/NoData'
 
-const props = {
-  props: {
-    noDataRenderer: null
+const defaultProps = {
+  name: 'something',
+  noDataRenderer: null
+}
+const defaultState = {}
+const defaultMethods = {}
+
+const compileProps = ({ props = {}, state = {}, methods = {} }) => {
+  return {
+    props: { ...defaultProps, ...props },
+    state: { ...defaultState, ...state },
+    methods: { ...defaultMethods, ...methods }
   }
 }
 
-it('<NoData /> renders correctly', () => {
-  const tree = renderer.create(<NoData {...props} />).toJSON()
+describe('<NoData />', () => {
+  const renderComponent = (opts = {}) => render(<NoData {...compileProps(opts)} />)
 
-  expect(tree).toMatchSnapshot()
+  it('renders the default component', () => {
+    renderComponent()
+
+    expect(screen.getByTestId('react-clean-select-something-NoData')).toBeInTheDocument()
+  })
+
+  it('supports a custom renderer', () => {
+    renderComponent({ props: { noDataRenderer: () => (<div data-testid='foo' />) } })
+
+    expect(screen.getByTestId('foo')).toBeInTheDocument()
+    expect(screen.queryAllByTestId('react-clean-select-something-NoData')).toHaveLength(0)
+  })
 })

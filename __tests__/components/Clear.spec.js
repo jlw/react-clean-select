@@ -2,51 +2,46 @@
  * @jest-environment jsdom
  */
 import React from 'react'
-import TestRenderer from 'react-test-renderer'
+import '@testing-library/jest-dom'
+import { fireEvent, render, screen } from '@testing-library/react'
 
-import Clear from '../../src/components/Clear'
-import { options } from '../options'
+import Clear from 'components/Clear'
 
-let spy
-
-const props = (props = {}) => ({
+const defaultProps = {
   props: {
-    clearRenderer: null
+    clearRenderer: null,
+    name: 'something'
   },
   methods: {
-    clearAll: () => undefined
-  },
-  ...props
-})
+    clearAll: jest.fn()
+  }
+}
 
-describe('<Clear /> component', () => {
-  beforeEach(() => {
-    spy = jest.fn()
+describe('<Clear />', () => {
+  const renderComponent = (props = {}) => render(
+    <Clear {...defaultProps} {...props} />
+  )
+
+  it('clears all on click', async () => {
+    renderComponent()
+
+    await fireEvent.click(screen.getByTestId('react-clean-select-something-Clear'))
+
+    expect(defaultProps.methods.clearAll).toHaveBeenCalled()
   })
 
-  afterEach(() => {
-    spy = null
+  it('clears all on keyDown', async () => {
+    renderComponent()
+
+    await fireEvent.keyDown(screen.getByTestId('react-clean-select-something-Clear'))
+
+    expect(defaultProps.methods.clearAll).toHaveBeenCalled()
   })
 
-  it('renders correctly', () => {
-    const tree = TestRenderer.create(<Clear {...props()} />).toJSON()
+  it('supports a custom renderer', () => {
+    renderComponent({ props: { clearRenderer: () => (<div data-testid='foo'>x</div>) } })
 
-    expect(tree).toMatchSnapshot()
-  })
-
-  xit('onClick clears all', () => {
-    TestRenderer.create(<Clear {...props({ parentOption: options[0] })} onClick={spy} />)
-      .root.findByProps({ className: 'react-clean-select-clear' })
-      .props.onClick()
-
-    expect(spy).toHaveBeenCalled()
-  })
-
-  xit('onKeyDown clears all', () => {
-    TestRenderer.create(<Clear {...props({ parentOption: options[0] })} onKeyDown={spy} />)
-      .root.findByProps({ className: 'react-clean-select-clear' })
-      .props.onKeyDown()
-
-    expect(spy).toHaveBeenCalled()
+    expect(screen.getByTestId('foo')).toBeInTheDocument()
+    expect(screen.queryAllByTestId('react-clean-select-something-Clear')).toHaveLength(0)
   })
 })

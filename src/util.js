@@ -1,6 +1,3 @@
-export const valueExistInSelected = (value, values, props) =>
-  !!values.find((val) => getByPath(val, props.valueField) === value || getByPath(val, props.labelField) === value)
-
 export const debounce = (fn, delay = 0) => {
   let timerId
 
@@ -15,14 +12,18 @@ export const debounce = (fn, delay = 0) => {
   }
 }
 
-export const isEqual = (a, b) => JSON.stringify(a) === JSON.stringify(b)
-
 export const getByPath = (object, path) => {
   if (!path) {
     return
   }
 
   return path.split('.').reduce((acc, value) => acc[value], object)
+}
+
+export const getOptionSlug = (option, props) => {
+  const value = getByPath(option, props.valueField)
+
+  return String(value).replaceAll(/[^a-zA-Z0-9]/g, '-')
 }
 
 export const getProp = (object, path, defaultValue) => {
@@ -39,6 +40,8 @@ export const getProp = (object, path, defaultValue) => {
   return getProp(object[normalizedPath.shift()], normalizedPath, defaultValue)
 }
 
+export const isEqual = (a, b) => JSON.stringify(a) === JSON.stringify(b)
+
 export const isomorphicWindow = () => {
   if (typeof window === 'undefined') {
     global.window = {}
@@ -46,3 +49,6 @@ export const isomorphicWindow = () => {
 
   return window
 }
+
+export const valueExistInSelected = (value, values, props) =>
+  !!values.find((val) => getByPath(val, props.valueField) === value || getByPath(val, props.labelField) === value)
