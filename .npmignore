@@ -8,6 +8,8 @@ coverage
 docs
 LICENSE
 node_modules
+package-lock.json
 README.md
 styles.css
 webpack.config.js
+yarn.lock
