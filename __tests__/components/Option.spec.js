@@ -4,6 +4,7 @@
 import React from 'react'
 import '@testing-library/jest-dom'
 import { fireEvent, render, screen } from '@testing-library/react'
+import userEvent from '@testing-library/user-event'
 
 import Option from 'components/Option'
 
@@ -45,19 +46,21 @@ describe('<Option />', () => {
   })
 
   it('adds the option on click', async () => {
+    const user = userEvent.setup()
     const addOption = jest.fn()
     renderComponent({ methods: { addOption } })
 
-    await fireEvent.click(screen.getByTestId('react-clean-select-something-Option-foo'))
+    await user.click(screen.getByTestId('react-clean-select-something-Option-foo'))
 
     expect(addOption).toHaveBeenCalledWith(defaultOption)
   })
 
   it('does not add the option on click when disabled', async () => {
+    const user = userEvent.setup()
     const addOption = jest.fn()
     renderComponent({ methods: { addOption }, option: { disabled: true } })
 
-    await fireEvent.click(screen.getByTestId('react-clean-select-something-Option-foo'))
+    await user.click(screen.getByTestId('react-clean-select-something-Option-foo'))
 
     expect(addOption).not.toHaveBeenCalled()
   })

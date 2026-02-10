@@ -3,7 +3,8 @@
  */
 import React from 'react'
 import '@testing-library/jest-dom'
-import { fireEvent, render, screen } from '@testing-library/react'
+import { render, screen } from '@testing-library/react'
+import userEvent from '@testing-library/user-event'
 
 import Selection from 'components/Selection'
 
@@ -50,19 +51,21 @@ describe('<Selection />', () => {
   })
 
   it('removes the option on click', async () => {
+    const user = userEvent.setup()
     const removeOption = jest.fn()
     renderComponent({ methods: { removeOption } })
 
-    await fireEvent.click(screen.getByTestId('react-clean-select-something-Selection-remove-foo'))
+    await user.click(screen.getByTestId('react-clean-select-something-Selection-remove-foo'))
 
     expect(removeOption).toHaveBeenCalledWith(expect.anything(), defaultOption, false)
   })
 
   it('sends closeOnSelect with the removal', async () => {
+    const user = userEvent.setup()
     const removeOption = jest.fn()
     renderComponent({ props: { closeOnSelect: true }, methods: { removeOption } })
 
-    await fireEvent.click(screen.getByTestId('react-clean-select-something-Selection-remove-foo'))
+    await user.click(screen.getByTestId('react-clean-select-something-Selection-remove-foo'))
 
     expect(removeOption).toHaveBeenCalledWith(expect.anything(), defaultOption, true)
   })

@@ -3,7 +3,8 @@
  */
 import React from 'react'
 import '@testing-library/jest-dom'
-import { fireEvent, render, screen } from '@testing-library/react'
+import { render, screen } from '@testing-library/react'
+import userEvent from '@testing-library/user-event'
 
 import Select from '../src/index'
 
@@ -75,18 +76,19 @@ describe('<Select />', () => {
 
   describe('with a single select', () => {
     it('opens and closes', async () => {
+      const user = userEvent.setup()
       renderComponent({ name: 'language', options: languages })
       const select = screen.getByTestId('react-clean-select-language')
       expect(select).not.toHaveTextContent('Deutsch')
       expect(screen.queryAllByTestId('react-clean-select-language-Option-de')).toHaveLength(0)
 
-      await fireEvent.click(screen.getByTestId('react-clean-select-language-DropdownHandle'))
+      await user.click(screen.getByTestId('react-clean-select-language-DropdownHandle'))
 
       expect(screen.queryAllByTestId('react-clean-select-language-Option-de')).toHaveLength(1)
       expect(screen.queryAllByTestId('react-clean-select-language-Option-en')).toHaveLength(1)
       expect(screen.queryAllByTestId('react-clean-select-language-Option-es')).toHaveLength(1)
 
-      await fireEvent.click(screen.getByTestId('react-clean-select-language-DropdownHandle'))
+      await user.click(screen.getByTestId('react-clean-select-language-DropdownHandle'))
 
       expect(screen.queryAllByTestId('react-clean-select-language-Option-de')).toHaveLength(0)
       expect(screen.queryAllByTestId('react-clean-select-language-Option-en')).toHaveLength(0)
@@ -94,41 +96,54 @@ describe('<Select />', () => {
     })
 
     it('opens, filters, and closes when selecting an available option', async () => {
+      const user = userEvent.setup()
       const onChange = jest.fn()
       renderComponent({ name: 'language', onChange, options: languages })
       expect(screen.queryAllByTestId('react-clean-select-language-Option-de')).toHaveLength(0)
 
-      await fireEvent.click(screen.getByTestId('react-clean-select-language-DropdownHandle'))
+      await user.click(screen.getByTestId('react-clean-select-language-DropdownHandle'))
 
       expect(screen.queryAllByTestId('react-clean-select-language-Option-de')).toHaveLength(1)
       expect(screen.queryAllByTestId('react-clean-select-language-Option-en')).toHaveLength(1)
       expect(screen.queryAllByTestId('react-clean-select-language-Option-es')).toHaveLength(1)
 
-      const input = screen.getByTestId('react-clean-select-language-Input')
-      await fireEvent.change(input, { target: { value: 'D' } })
+      await user.keyboard('D')
 
       expect(screen.queryAllByTestId('react-clean-select-language-Option-de')).toHaveLength(1)
       expect(screen.queryAllByTestId('react-clean-select-language-Option-en')).toHaveLength(0)
       expect(screen.queryAllByTestId('react-clean-select-language-Option-es')).toHaveLength(0)
 
-      await fireEvent.change(input, { target: { value: 'Esp' } })
+      await user.keyboard('[BackSpace]Esp')
 
       expect(screen.queryAllByTestId('react-clean-select-language-Option-de')).toHaveLength(0)
       expect(screen.queryAllByTestId('react-clean-select-language-Option-en')).toHaveLength(0)
       expect(screen.queryAllByTestId('react-clean-select-language-Option-es')).toHaveLength(1)
 
-      await fireEvent.change(input, { target: { value: '' } })
-      await fireEvent.click(screen.getByTestId('react-clean-select-language-Option-es'))
+      await user.keyboard('[BackSpace][BackSpace][BackSpace]')
+      await user.click(screen.getByTestId('react-clean-select-language-Option-es'))
 
       expect(onChange).toHaveBeenCalledWith([spanish])
       expect(screen.getByTestId('react-clean-select-language')).toHaveAttribute('aria-expanded', 'false')
     })
 
+    it('supports keyboard navigation and selection', async () => {
+      const user = userEvent.setup()
+      const onChange = jest.fn()
+      renderComponent({ name: 'language', onChange, options: languages })
+
+      await user.click(screen.getByTestId('react-clean-select-language-DropdownHandle'))
+      await user.keyboard('[ArrowDown]')
+      await user.keyboard('[Enter]')
+
+      expect(onChange).toHaveBeenCalledWith([german])
+    })
+
     it('IGNORES closeOnSelect', async () => {
+      const user = userEvent.setup()
       renderComponent({ closeOnSelect: false, name: 'language', options: languages })
 
-      await fireEvent.click(screen.getByTestId('react-clean-select-language-DropdownHandle'))
-      await fireEvent.click(screen.getByTestId('react-clean-select-language-Option-es'))
+      await user.click(screen.getByTestId('react-clean-select-language-DropdownHandle'))
+      await user.click(screen.getByTestId('react-clean-select-language-Option-es'))
 
       expect(screen.getByTestId('react-clean-select-language')).toHaveAttribute('aria-expanded', 'false')
     })
@@ -152,18 +167,19 @@ describe('<Select />', () => {
 
   describe('with a multiple select', () => {
     it('opens and closes', async () => {
+      const user = userEvent.setup()
       renderComponent({ name: 'language', multi: true, options: languages })
       const select = screen.getByTestId('react-clean-select-language')
       expect(select).not.toHaveTextContent('Deutsch')
       expect(screen.queryAllByTestId('react-clean-select-language-Option-de')).toHaveLength(0)
 
-      await fireEvent.click(screen.getByTestId('react-clean-select-language-DropdownHandle'))
+      await user.click(screen.getByTestId('react-clean-select-language-DropdownHandle'))
 
       expect(screen.queryAllByTestId('react-clean-select-language-Option-de')).toHaveLength(1)
       expect(screen.queryAllByTestId('react-clean-select-language-Option-en')).toHaveLength(1)
       expect(screen.queryAllByTestId('react-clean-select-language-Option-es')).toHaveLength(1)
 
-      await fireEvent.click(screen.getByTestId('react-clean-select-language-DropdownHandle'))
+      await user.click(screen.getByTestId('react-clean-select-language-DropdownHandle'))
 
       expect(screen.queryAllByTestId('react-clean-select-language-Option-de')).toHaveLength(0)
       expect(screen.queryAllByTestId('react-clean-select-language-Option-en')).toHaveLength(0)
@@ -171,47 +187,60 @@ describe('<Select />', () => {
     })
 
     it('opens, filters, and stays open when selecting an available option', async () => {
+      const user = userEvent.setup()
       const onChange = jest.fn()
       renderComponent({ name: 'language', multi: true, onChange, options: languages })
       expect(screen.queryAllByTestId('react-clean-select-language-Option-de')).toHaveLength(0)
 
-      await fireEvent.click(screen.getByTestId('react-clean-select-language-DropdownHandle'))
+      await user.click(screen.getByTestId('react-clean-select-language-DropdownHandle'))
 
       expect(screen.queryAllByTestId('react-clean-select-language-Option-de')).toHaveLength(1)
       expect(screen.queryAllByTestId('react-clean-select-language-Option-en')).toHaveLength(1)
       expect(screen.queryAllByTestId('react-clean-select-language-Option-es')).toHaveLength(1)
 
-      const input = screen.getByTestId('react-clean-select-language-Input')
-      await fireEvent.change(input, { target: { value: 'D' } })
+      await user.keyboard('D')
 
       expect(screen.queryAllByTestId('react-clean-select-language-Option-de')).toHaveLength(1)
       expect(screen.queryAllByTestId('react-clean-select-language-Option-en')).toHaveLength(0)
       expect(screen.queryAllByTestId('react-clean-select-language-Option-es')).toHaveLength(0)
 
-      await fireEvent.change(input, { target: { value: 'Esp' } })
+      await user.keyboard('[BackSpace]Esp')
 
       expect(screen.queryAllByTestId('react-clean-select-language-Option-de')).toHaveLength(0)
       expect(screen.queryAllByTestId('react-clean-select-language-Option-en')).toHaveLength(0)
       expect(screen.queryAllByTestId('react-clean-select-language-Option-es')).toHaveLength(1)
 
-      await fireEvent.change(input, { target: { value: '' } })
-      await fireEvent.click(screen.getByTestId('react-clean-select-language-Option-es'))
+      await user.keyboard('[BackSpace][BackSpace][BackSpace]')
+      await user.click(screen.getByTestId('react-clean-select-language-Option-es'))
 
       expect(onChange).toHaveBeenCalledWith([spanish])
       expect(screen.getByTestId('react-clean-select-language')).toHaveAttribute('aria-expanded', 'true')
     })
 
+    it('supports keyboard navigation and selection', async () => {
+      const user = userEvent.setup()
+      const onChange = jest.fn()
+      renderComponent({ name: 'language', multi: true, onChange, options: languages })
+
+      await user.click(screen.getByTestId('react-clean-select-language-DropdownHandle'))
+      await user.keyboard('[ArrowDown]')
+      await user.keyboard('[Enter]')
+
+      expect(onChange).toHaveBeenCalledWith([german])
+    })
+
     it('optionally closes when selecting an option', async () => {
+      const user = userEvent.setup()
       renderComponent({ closeOnSelect: true, name: 'language', multi: true, options: languages })
       expect(screen.queryAllByTestId('react-clean-select-language-Option-de')).toHaveLength(0)
 
-      await fireEvent.click(screen.getByTestId('react-clean-select-language-DropdownHandle'))
+      await user.click(screen.getByTestId('react-clean-select-language-DropdownHandle'))
 
       expect(screen.queryAllByTestId('react-clean-select-language-Option-de')).toHaveLength(1)
       expect(screen.queryAllByTestId('react-clean-select-language-Option-en')).toHaveLength(1)
       expect(screen.queryAllByTestId('react-clean-select-language-Option-es')).toHaveLength(1)
 
-      await fireEvent.click(screen.getByTestId('react-clean-select-language-Option-es'))
+      await user.click(screen.getByTestId('react-clean-select-language-Option-es'))
 
       expect(screen.getByTestId('react-clean-select-language')).toHaveAttribute('aria-expanded', 'false')
       expect(screen.getByTestId('react-clean-select-language-Content')).toHaveTextContent('Español')
@@ -226,6 +255,7 @@ describe('<Select />', () => {
     })
 
     it('renders the current selections and optionally allows clearing', async () => {
+      const user = userEvent.setup()
       const pub = { value: 'public', label: 'Public' }
       const priv = { value: 'private', label: 'Private' }
       const options = [pub, priv, { value: 'non-traditional', label: 'Non-Traditional' }]
@@ -236,7 +266,7 @@ describe('<Select />', () => {
       expect(screen.getByTestId('react-clean-select-schooling-Selection-private')).toBeInTheDocument()
       expect(screen.queryAllByTestId('react-clean-select-schooling-Selection-non-traditional')).toHaveLength(0)
 
-      await fireEvent.click(screen.getByTestId('react-clean-select-schooling-Selection-remove-public'))
+      await user.click(screen.getByTestId('react-clean-select-schooling-Selection-remove-public'))
 
       expect(onChange).toHaveBeenCalledWith([priv])
     })

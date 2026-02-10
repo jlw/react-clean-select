@@ -12,6 +12,7 @@ class Option extends Component {
 
     if (
       this.option.current &&
+      this.option.current.scrollIntoView &&
       !props.multi &&
       props.keepSelectedInList &&
       methods.isSelected(this.props.option)
@@ -21,6 +22,7 @@ class Option extends Component {
   componentDidUpdate () {
     if (this.props.state.cursor === this.props.optionIndex) {
       this.option.current &&
+      this.option.current.scrollIntoView &&
         this.option.current.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'start' })
     }
   }

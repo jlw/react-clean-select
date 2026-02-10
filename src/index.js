@@ -155,8 +155,6 @@ export class Select extends Component {
   getSelectBounds = () => this.state.selectBounds
 
   dropDown = (action = 'toggle', event, force = false) => {
-    // const target = (event && event.target) || (event && event.srcElement)
-
     if (
       this.props.onDropdownCloseRequest !== undefined &&
       this.state.dropdown &&

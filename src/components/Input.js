@@ -50,17 +50,20 @@ class Input extends Component {
     return this.input.current.focus()
   }
 
-  handleKeyPress = (event) => {
+  handleKeyDown = (event) => {
     const { props, state, methods } = this.props
 
-    return (
+    if (
       props.create &&
       event.key === 'Enter' &&
       !valueExistInSelected(state.search, [...state.values, ...props.options], this.props) &&
       state.search &&
-      state.cursor === null &&
+      state.cursor === null
+    ) {
       methods.createNew(state.search)
-    )
+    } else {
+      methods.handleKeyDown(event)
+    }
   }
 
   render () {
@@ -79,7 +82,7 @@ class Input extends Component {
         data-testid={`${LIB_NAME}-${props.name}-Input`}
         value={state.search}
         onClick={() => methods.dropDown('open')}
-        onKeyDown={this.handleKeyPress}
+        onKeyDown={this.handleKeyDown}
         onChange={methods.setSearch}
         onBlur={this.onBlur}
         placeholder={handlePlaceHolder(props, state)}

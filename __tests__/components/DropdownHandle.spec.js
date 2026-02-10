@@ -4,6 +4,7 @@
 import React from 'react'
 import '@testing-library/jest-dom'
 import { fireEvent, render, screen } from '@testing-library/react'
+import userEvent from '@testing-library/user-event'
 
 import DropdownHandle from 'components/DropdownHandle'
 
@@ -30,17 +31,19 @@ describe('<DropdownHandle />', () => {
   const renderComponent = (opts = {}) => render(<DropdownHandle {...compileProps(opts)} />)
 
   it('opens dropdown on click', async () => {
+    const user = userEvent.setup()
     renderComponent()
 
-    await fireEvent.click(screen.getByTestId('react-clean-select-something-DropdownHandle'))
+    await user.click(screen.getByTestId('react-clean-select-something-DropdownHandle'))
 
     expect(defaultMethods.dropDown).toHaveBeenCalledWith('open', expect.anything())
   })
 
   it('closes dropdown on click when already open', async () => {
+    const user = userEvent.setup()
     renderComponent({ state: { dropdown: true } })
 
-    await fireEvent.click(screen.getByTestId('react-clean-select-something-DropdownHandle'))
+    await user.click(screen.getByTestId('react-clean-select-something-DropdownHandle'))
 
     expect(defaultMethods.dropDown).toHaveBeenCalledWith('close', expect.anything())
   })

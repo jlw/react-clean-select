@@ -4,6 +4,7 @@
 import React from 'react'
 import '@testing-library/jest-dom'
 import { fireEvent, render, screen } from '@testing-library/react'
+import userEvent from '@testing-library/user-event'
 
 import Clear from 'components/Clear'
 
@@ -23,9 +24,10 @@ describe('<Clear />', () => {
   )
 
   it('clears all on click', async () => {
+    const user = userEvent.setup()
     renderComponent()
 
-    await fireEvent.click(screen.getByTestId('react-clean-select-something-Clear'))
+    await user.click(screen.getByTestId('react-clean-select-something-Clear'))
 
     expect(defaultProps.methods.clearAll).toHaveBeenCalled()
   })
