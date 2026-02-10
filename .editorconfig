@@ -8,9 +8,6 @@ trim_trailing_whitespace = true
 insert_final_newline = true
 max_line_length = 233
 
-[.prettierrc]
-indent_style = space
-
 [*.{yml,yaml,json,js}]
 indent_style = space
 

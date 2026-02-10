@@ -2,7 +2,6 @@ __tests__
 .babelrc
 .editorconfig
 .gitignore
-.prettierrc
 .travis.yml
 coverage
 docs
@@ -10,6 +9,7 @@ LICENSE
 node_modules
 package-lock.json
 README.md
+storybook-static
 styles.css
 webpack.config.js
 yarn.lock
