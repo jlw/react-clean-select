@@ -452,29 +452,28 @@ export class Select extends Component {
     return (
       <ClickOutside onClickOutside={(event) => this.dropDown('close', event)}>
         <div
-          onKeyDown={this.handleKeyDown}
-          aria-label='Dropdown select'
           aria-expanded={this.state.dropdown}
-          onClick={(event) => this.dropDown('open', event)}
-          tabIndex={this.props.disabled ? '-1' : '0'}
-          ref={this.select}
+          aria-label='Dropdown select'
           className={classNames.join(' ')}
+          data-testid={`${LIB_NAME}-${this.props.name}`}
+          onClick={(event) => this.dropDown('open', event)}
+          onKeyDown={this.handleKeyDown}
+          ref={this.select}
+          tabIndex={this.props.disabled ? '-1' : '0'}
           {...this.props.additionalProps}
         >
           <Content props={this.props} state={this.state} methods={this.methods} />
 
           {(this.props.name || this.props.required) && (
             <input
-              tabIndex={-1}
               className={`${LIB_NAME}-input-zero`}
               data-testid={`${LIB_NAME}-${this.props.name}-input-zero`}
-              name={this.props.name}
-              required={this.props.required}
-              pattern={this.props.pattern}
-              defaultValue={
-                this.state.values.map((value) => value[this.props.labelField]).toString() || []
-              }
+              defaultValue={this.state.values.map((value) => value[this.props.labelField]).toString() || []}
               disabled={this.props.disabled}
+              name={this.props.name}
+              pattern={this.props.pattern}
+              required={this.props.required}
+              tabIndex={-1}
             />
           )}
 
