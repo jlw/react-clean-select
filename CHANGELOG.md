@@ -1,5 +1,10 @@
 # Change Log
 
+## [0.0.5 (2026-02-10)](https://github.com/jlw/react-clean-select/compare/v0.0.4...v0.0.5)
+
+- Fix keyboard navigation
+
+
 ## [0.0.4 (2026-02-09)](https://github.com/jlw/react-clean-select/compare/v0.0.3...v0.0.4)
 
 - Fix link to forked react-dropdown-select
