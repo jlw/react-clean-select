@@ -1,5 +1,16 @@
 # Change Log
 
+## [0.0.4 (2026-02-09)](https://github.com/jlw/react-clean-select/compare/v0.0.3...v0.0.4)
+
+- Fix link to forked react-dropdown-select
+- Switch to JavaScript Standard Style
+- Remove outdated docs
+- Replace deprecated keypress event handling with keydown
+- Replace low-value snapshots with meaningful tests
+- Clarify how/when closeOnSelect works
+- Remove px for zero CSS lengths
+
+
 ## [0.0.3 (2025-11-30)](https://github.com/jlw/react-clean-select/compare/v0.0.2...v0.0.3)
 
 - Rename Option -> Selection and Item -> Option
