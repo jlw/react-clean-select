@@ -1,5 +1,11 @@
 # Change Log
 
+## [0.0.6 (2026-02-11)](https://github.com/jlw/react-clean-select/compare/v0.0.5...v0.0.6)
+
+- Fix keyboard navigation for more scenarios
+- Support non-selectable instructions option
+
+
 ## [0.0.5 (2026-02-10)](https://github.com/jlw/react-clean-select/compare/v0.0.4...v0.0.5)
 
 - Fix keyboard navigation
