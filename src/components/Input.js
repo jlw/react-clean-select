@@ -76,17 +76,17 @@ class Input extends Component {
     return (
       <input
         ref={this.input}
-        tabIndex='-1'
-        onFocus={(event) => event.stopPropagation()}
         className={`${LIB_NAME}-input${props.searchable ? '' : ` ${LIB_NAME}-input-readonly`}`}
         data-testid={`${LIB_NAME}-${props.name}-Input`}
-        value={state.search}
-        onClick={() => methods.dropDown('open')}
-        onKeyDown={this.handleKeyDown}
-        onChange={methods.setSearch}
-        onBlur={this.onBlur}
-        placeholder={handlePlaceHolder(props, state)}
         disabled={props.disabled}
+        onBlur={this.onBlur}
+        onChange={methods.setSearch}
+        onClick={() => methods.dropDown('open')}
+        onFocus={(event) => event.stopPropagation()}
+        onKeyDown={this.handleKeyDown}
+        placeholder={handlePlaceHolder(props, state)}
+        tabIndex='-1'
+        value={state.search}
       />
     )
   }

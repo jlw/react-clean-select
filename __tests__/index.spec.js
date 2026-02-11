@@ -163,6 +163,25 @@ describe('<Select />', () => {
       expect(onChange).toHaveBeenCalledWith([spanish])
     })
 
+    it('supports non-selectable instructions option', async () => {
+      const user = userEvent.setup()
+      const onChange = jest.fn()
+      renderComponent({ instructionsOption: 'Type to search…', name: 'language', onChange, options: languages })
+
+      await user.click(screen.getByTestId('react-clean-select-language-DropdownHandle'))
+
+      expect(screen.getByTestId('react-clean-select-language-OptionInstructions')).toBeInTheDocument()
+
+      await user.keyboard('En')
+
+      expect(screen.queryAllByTestId('react-clean-select-language-OptionInstructions')).toHaveLength(0)
+
+      await user.keyboard('[ArrowDown]')
+      await user.keyboard('[Enter]')
+
+      expect(onChange).toHaveBeenCalledWith([english])
+    })
+
     it('IGNORES closeOnSelect', async () => {
       const user = userEvent.setup()
       renderComponent({ closeOnSelect: false, name: 'language', options: languages })
@@ -317,6 +336,25 @@ describe('<Select />', () => {
       await user.keyboard('[Enter]')
 
       expect(onChange).toHaveBeenCalledWith([spanish, english])
+    })
+
+    it('supports non-selectable instructions option', async () => {
+      const user = userEvent.setup()
+      const onChange = jest.fn()
+      renderComponent({ instructionsOption: 'Type to search…', name: 'language', multi: true, onChange, options: languages })
+
+      await user.click(screen.getByTestId('react-clean-select-language-DropdownHandle'))
+
+      expect(screen.getByTestId('react-clean-select-language-OptionInstructions')).toBeInTheDocument()
+
+      await user.keyboard('En')
+
+      expect(screen.queryAllByTestId('react-clean-select-language-OptionInstructions')).toHaveLength(0)
+
+      await user.keyboard('[ArrowDown]')
+      await user.keyboard('[Enter]')
+
+      expect(onChange).toHaveBeenCalledWith([english])
     })
 
     it('optionally closes when selecting an option', async () => {

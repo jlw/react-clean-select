@@ -28,14 +28,19 @@ class Option extends Component {
   }
 
   render () {
-    const { props, state, methods, option, optionIndex } = this.props
+    const { props, state, methods, nonSelectable, option, optionIndex } = this.props
 
     if (props.optionRenderer) {
-      return props.optionRenderer({ option, optionIndex, props, state, methods })
+      return props.optionRenderer(this.props)
     }
 
     if (!props.keepSelectedInList && methods.isSelected(option)) {
       return null
+    }
+
+    let dataTestId = `${LIB_NAME}-${props.name}-Option-${getOptionSlug(option, props)}`
+    if (nonSelectable) {
+      dataTestId = `${LIB_NAME}-${props.name}-OptionInstructions`
     }
 
     return (
@@ -52,9 +57,10 @@ class Option extends Component {
         }${state.cursor === optionIndex ? ` ${LIB_NAME}-option-active` : ''}${
           option.disabled ? ` ${LIB_NAME}-option-disabled` : ''
         }`}
-        data-testid={`${LIB_NAME}-${props.name}-Option-${getOptionSlug(option, props)}`}
-        onClick={option.disabled ? undefined : () => methods.addOption(option)}
-        onKeyDown={option.disabled ? undefined : () => methods.addOption(option)}
+        data-testid={dataTestId}
+        data-non-selectable={nonSelectable ? 'true' : null}
+        onClick={option.disabled || nonSelectable ? undefined : () => methods.addOption(option)}
+        onKeyDown={option.disabled || nonSelectable ? undefined : () => methods.addOption(option)}
       >
         {getByPath(option, props.labelField)} {option.disabled && <ins>{props.disabledLabel}</ins>}
       </span>

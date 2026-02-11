@@ -10,135 +10,103 @@ declare module 'react-clean-select' {
   } from 'react';
 
   export interface SetStateFnArgs<T> {
+    activeCursorOption?: any;
+    cursor?: number | null;
     dropdown?: boolean;
-    values?: T[];
     search?: string;
     selectBounds?: DOMRect | {};
-    cursor?: number | null;
-    activeCursorOption?: any;
+    values?: T[];
   }
 
   export interface SelectState<T> {
+    cursor: number;
     dropdown: boolean;
-    values: T[];
     search: string;
     selectBounds: object;
-    cursor: number;
+    values: T[];
   }
 
   export interface SelectMethods<T> {
-    removeOption: (event: MouseEvent<HTMLElement> | null, option: T, close: boolean) => void;
-    dropDown: (action: string, event?: MouseEvent<HTMLElement> | null) => void;
-    addOption: (option: T) => void;
-    setSearch: (event: ChangeEvent<HTMLInputElement>) => void;
-    getInputSize: () => number;
-    toggleSelectAll: () => void;
-    clearAll: () => void;
-    selectAll: (options?: T[]) => void;
-    searchResults: () => T[];
-    getSelectRef: () => HTMLDivElement;
-    isSelected: (option: T) => boolean;
-    getSelectBounds: () => {} | DOMRect;
-    areAllSelected: () => boolean;
-    handleKeyDown: (event: KeyboardEvent) => void;
     activeCursorOption: (activeCursorOption: any) => void;
+    addOption: (option: T) => void;
+    areAllSelected: () => boolean;
+    clearAll: () => void;
     createNew: (searchText: string) => void;
-    sortBy: () => T[];
+    dropDown: (action: string, event?: MouseEvent<HTMLElement> | null) => void;
+    getInputSize: () => number;
+    getSelectBounds: () => {} | DOMRect;
+    getSelectRef: () => HTMLDivElement;
+    handleKeyDown: (event: KeyboardEvent) => void;
+    isSelected: (option: T) => boolean;
+    removeOption: (event: MouseEvent<HTMLElement> | null, option: T, close: boolean) => void;
     safeString: (input: string) => string;
+    searchResults: () => T[];
+    selectAll: (options?: T[]) => void;
+    setSearch: (event: ChangeEvent<HTMLInputElement>) => void;
+    sortBy: () => T[];
+    toggleSelectAll: () => void;
   }
 
   export interface SelectRenderer<T> {
+    methods: SelectMethods<T>;
     props: SelectProps<T>;
     state: SelectState<T>;
-    methods: SelectMethods<T>;
   }
 
   export interface SelectOnDropdownCloseRequest<T> {
+    close: () => void;
+    methods: SelectMethods<T>;
     props: SelectProps<T>;
     state: SelectState<T>;
-    methods: SelectMethods<T>;
-    close: () => void;
   }
 
   export interface SelectKeyDown<T> {
     event: KeyboardEvent;
-    props: SelectProps<T>;
-    state: SelectState<T>;
     methods: SelectMethods<T>;
+    props: SelectProps<T>;
     setState: (
       setter: ((args: SetStateFnArgs<T>) => SetStateFnArgs<T>) | SetStateFnArgs<T>
     ) => void;
+    state: SelectState<T>;
   }
 
   export interface SelectOptionRenderer<T> {
+    methods: SelectMethods<T>;
     option: T;
     optionIndex?: number;
     props: SelectProps<T>;
     state: SelectState<T>;
-    methods: SelectMethods<T>;
   }
 
   export interface SelectProps<T> {
+    additionalProps?: HTMLAttributes<HTMLDivElement>;
+    addPlaceholder?: string;
+    autoFocus?: boolean;
     backspaceDelete?: boolean;
     className?: string;
-    addPlaceholder?: string;
-    placeholder?: string;
-    loading?: boolean;
-    values: T[];
-    options: T[];
-    multi?: boolean;
-    disabled?: boolean;
-    searchBy?: string;
-    sortBy?: string;
     clearable?: boolean;
-    searchable?: boolean;
-    dropdownHandle?: boolean;
-    separator?: boolean;
-    keepOpen?: boolean;
-    noDataLabel?: string;
-    createNewLabel?: string;
-    disabledLabel?: string;
-    dropdownGap?: number;
-    closeOnScroll?: boolean;
-    debounceDelay?: number;
-    labelField?: string;
-    valueField?: string;
-    color?: string;
-    keepSelectedInList?: boolean;
-    closeOnSelect?: boolean;
-    closeOnClickInput?: boolean;
+    clearAllLabel?: string;
     clearOnBlur?: boolean;
     clearOnSelect?: boolean;
-    dropdownPosition?: 'top' | 'bottom' | 'auto';
-    dropdownHeight?: string;
-    autoFocus?: boolean;
-    create?: boolean;
-    direction?: 'ltr' | 'rtl';
-    name?: string;
-    required?: boolean;
-    pattern?: string;
-    defaultMenuIsOpen?: boolean;
-    onChange: (value: T[]) => void;
-    onSelect?: (value: T[]) => void;
-    onDeselect?: (value: T[]) => void;
-    onDropdownOpen?: () => void;
-    onDropdownClose?: () => void;
-    onClearAll?: () => void;
-    clearAllLabel?: string;
-    onSelectAll?: () => void;
-    onCreateNew?: (option: T) => void;
-    onDropdownCloseRequest?: ({
-      props,
-      state,
-      methods,
-      close
-    }: SelectOnDropdownCloseRequest<T>) => T[];
-    searchFn?: ({ props, state, methods }: SelectRenderer<T>) => T[];
-    handleKeyDownFn?: ({ event, props, state, methods, setState }: SelectKeyDown<T>) => void;
     clearRenderer?: ({ props, state, methods }: SelectRenderer<T>) => JSX.Element;
+    closeOnClickInput?: boolean;
+    closeOnScroll?: boolean;
+    closeOnSelect?: boolean;
     contentRenderer?: ({ props, state, methods }: SelectRenderer<T>) => JSX.Element;
-    dropdownRenderer?: ({ props, state, methods }: SelectRenderer<T>) => JSX.Element;
+    create?: boolean;
+    createNewLabel?: string;
+    debounceDelay?: number;
+    defaultMenuIsOpen?: boolean;
+    direction?: 'ltr' | 'rtl';
+    disabled?: boolean;
+    disabledLabel?: string;
+    dropdownGap?: number;
+    dropdownHandle?: boolean;
     dropdownHandleRenderer?: ({ props, state, methods }: SelectRenderer<T>) => JSX.Element;
+    dropdownHeight?: string;
+    dropdownPosition?: 'top' | 'bottom' | 'auto';
+    dropdownRenderer?: ({ props, state, methods }: SelectRenderer<T>) => JSX.Element;
+    handleKeyDownFn?: ({ event, props, state, methods, setState }: SelectKeyDown<T>) => void;
     inputRenderer?: ({
       props,
       state,
@@ -147,6 +115,30 @@ declare module 'react-clean-select' {
     }: SelectRenderer<T> & {
       inputRef: RefObject<HTMLInputElement>;
     }) => JSX.Element;
+    instructionsOption?: string;
+    keepOpen?: boolean;
+    keepSelectedInList?: boolean;
+    labelField?: string;
+    loading?: boolean;
+    loadingRenderer?: ({ props }: SelectOptionRenderer<T>) => JSX.Element;
+    multi?: boolean;
+    name?: string;
+    noDataLabel?: string;
+    noDataRenderer?: ({ props, state, methods }: SelectRenderer<T>) => JSX.Element;
+    onChange: (value: T[]) => void;
+    onClearAll?: () => void;
+    onCreateNew?: (option: T) => void;
+    onDeselect?: (value: T[]) => void;
+    onDropdownClose?: () => void;
+    onDropdownCloseRequest?: ({
+      props,
+      state,
+      methods,
+      close
+    }: SelectOnDropdownCloseRequest<T>) => T[];
+    onDropdownOpen?: () => void;
+    onSelect?: (value: T[]) => void;
+    onSelectAll?: () => void;
     optionRenderer?: ({
       option,
       optionIndex,
@@ -154,21 +146,29 @@ declare module 'react-clean-select' {
       state,
       methods
     }: SelectOptionRenderer<T>) => JSX.Element;
-    loadingRenderer?: ({ props }: SelectOptionRenderer<T>) => JSX.Element;
-    noDataRenderer?: ({ props, state, methods }: SelectRenderer<T>) => JSX.Element;
-    selectionRenderer?: ({ option, props, state, methods }: SelectOptionRenderer<T>) => JSX.Element;
-    separatorRenderer?: ({ props, state, methods }: SelectRenderer<T>) => JSX.Element;
-    additionalProps?: HTMLAttributes<HTMLDivElement>;
-    wrapperClassName?: string;
+    options: T[];
+    pattern?: string;
+    placeholder?: string;
+    required?: boolean;
+    searchable?: boolean;
+    searchBy?: string;
+    searchFn?: ({ props, state, methods }: SelectRenderer<T>) => T[];
     selectAll?: boolean;
     selectAllLabel?: string;
+    selectionRenderer?: ({ option, props, state, methods }: SelectOptionRenderer<T>) => JSX.Element;
+    separator?: boolean;
+    separatorRenderer?: ({ props, state, methods }: SelectRenderer<T>) => JSX.Element;
+    sortBy?: string;
+    valueField?: string;
+    values: T[];
+    wrapperClassName?: string;
   }
 
   export interface DropDownProps {
-    selectBounds: DOMRect;
     dropdownGap: number;
     dropdownHeight: string;
     dropdownPosition: 'auto' | 'top' | 'bottom';
+    selectBounds: DOMRect;
   }
 
   const Select: <T extends object | string = {}>(

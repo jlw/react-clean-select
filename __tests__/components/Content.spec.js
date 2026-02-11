@@ -25,7 +25,8 @@ const defaultState = {
 }
 const defaultMethods = {
   dropDown: jest.fn(),
-  getInputSize: () => undefined
+  getInputSize: () => undefined,
+  setSearch: () => {}
 }
 
 const compileProps = ({ props = {}, state = {}, methods = {}, option = {} }) => {

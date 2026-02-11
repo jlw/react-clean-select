@@ -54,10 +54,6 @@ const SelectPropsModel = Object.freeze({
    */
   closeOnClickInput: PropTypes.bool,
   /**
-   * Base color (any CSS compatible) to use in component, also can be overwritten via CSS
-   */
-  color: PropTypes.string,
-  /**
    * Compare values override function
    */
   compareValuesFunc: PropTypes.func,
@@ -78,6 +74,10 @@ const SelectPropsModel = Object.freeze({
    * Debounce Delay for updates upon component interactions
    */
   debounceDelay: PropTypes.number,
+  /**
+    * If true, dropdown will be open by default
+    */
+  defaultMenuIsOpen: PropTypes.bool,
   /**
    * Direction of a dropdown "ltr", "rtl" or "auto"
    */
@@ -123,6 +123,10 @@ const SelectPropsModel = Object.freeze({
    * Overrides internal input text
    */
   inputRenderer: PropTypes.func,
+  /**
+   * Adds a first, non-selectable option with instructions (hidden after search is entered)
+   */
+  instructionsOption: PropTypes.string,
   /**
    * Overrides internal option in a dropdown
    */
@@ -252,11 +256,7 @@ const SelectPropsModel = Object.freeze({
   /**
    * Selected values
    */
-  values: PropTypes.array,
-  /**
-    * If true, dropdown will be open by default
-    */
-  defaultMenuIsOpen: PropTypes.bool
+  values: PropTypes.array
 })
 
 export default SelectPropsModel
