@@ -36,7 +36,7 @@ const Dropdown = ({ props, state, methods }) => {
         <div
           role='button'
           className={`${LIB_NAME}-dropdown-add-new`}
-          onClick={() => methods.createNew(state.search)}
+          onClick={(event) => { event.stopPropagation(); methods.createNew(state.search) }}
         >
           {props.createNewLabel.replace('{search}', `"${state.search}"`)}
         </div>
@@ -50,7 +50,10 @@ const Dropdown = ({ props, state, methods }) => {
         <div
           role='button'
           className={`${LIB_NAME}-dropdown-select-all`}
-          onClick={() => (methods.areAllSelected() ? methods.clearAll() : methods.selectAll())}
+          onClick={(event) => {
+            event.stopPropagation()
+            methods.areAllSelected() ? methods.clearAll() : methods.selectAll()
+          }}
         >
           {methods.areAllSelected() ? props.clearAllLabel : props.selectAllLabel}
         </div>

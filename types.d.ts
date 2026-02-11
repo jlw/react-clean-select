@@ -41,7 +41,7 @@ declare module 'react-clean-select' {
     removeOption: (event: MouseEvent<HTMLElement> | null, option: T, close: boolean) => void;
     safeString: (input: string) => string;
     searchResults: () => T[];
-    selectAll: (options?: T[]) => void;
+    selectAll: () => void;
     setSearch: (event: ChangeEvent<HTMLInputElement>) => void;
     sortBy: () => T[];
     toggleSelectAll: () => void;

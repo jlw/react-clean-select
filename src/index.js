@@ -66,13 +66,13 @@ export class Select extends Component {
     isomorphicWindow().addEventListener('resize', debounce(this.updateSelectBounds))
     isomorphicWindow().addEventListener('scroll', debounce(this.onScroll))
 
-    this.dropDown('close')
-
     if (this.select) {
       this.updateSelectBounds()
     }
     if (this.props.defaultMenuIsOpen) {
       this.dropDown('open')
+    } else {
+      this.dropDown('close')
     }
     this.setState({ searchResults: this.searchResults() })
   }
@@ -196,6 +196,7 @@ export class Select extends Component {
   getSelectRef = () => this.select.current
 
   addOption = (option) => {
+    const pendingState = {}
     if (this.props.multi) {
       if (
         valueExistInSelected(getByPath(option, this.props.valueField), this.state.values, this.props)
@@ -203,29 +204,29 @@ export class Select extends Component {
         return this.removeOption(null, option, false)
       }
 
-      this.setState({
-        values: [...this.state.values, option]
-      })
+      pendingState.values = [...this.state.values, option]
       this.props.onSelect([...this.state.values, option])
     } else {
-      this.setState({
-        values: [option],
-        dropdown: false
-      })
+      pendingState.values = [option]
       this.props.onSelect([option])
     }
 
-    this.props.clearOnSelect && this.setSearchState('')
-    this.props.closeOnSelect && this.dropDown('close')
+    if (this.props.clearOnSelect) {
+      pendingState.search = ''
+    }
+    if (this.props.closeOnSelect || !this.props.multi) {
+      pendingState.cursor = null
+      pendingState.dropdown = false
+    }
+    this.setState(pendingState)
 
     return true
   }
 
   removeOption = (event, option, close = false) => {
-    if (event && close) {
+    if (event) {
       event.preventDefault()
       event.stopPropagation()
-      this.dropDown('close')
     }
 
     const values = this.state.values.filter(
@@ -233,6 +234,7 @@ export class Select extends Component {
         getByPath(values, this.props.valueField) !== getByPath(option, this.props.valueField)
     )
     this.setState({
+      dropdown: !close,
       values
     })
     this.props.onDeselect(values)
@@ -243,11 +245,8 @@ export class Select extends Component {
   }
 
   setSearchState = (searchValue) => {
-    this.setState({
-      cursor: null
-    })
     this.setState(
-      { search: searchValue },
+      { cursor: null, search: searchValue },
       () => this.setState({ searchResults: this.searchResults() })
     )
   }
@@ -277,12 +276,9 @@ export class Select extends Component {
     })
   }
 
-  selectAll = (valuesList = []) => {
+  selectAll = () => {
     this.props.onSelectAll()
-    const values =
-      valuesList.length > 0 ? valuesList : this.props.options.filter((option) => !option.disabled)
-
-    this.setState({ values })
+    this.setState({ values: this.props.options.filter((option) => !option.disabled) })
   }
 
   isSelected = (option) =>
@@ -442,7 +438,7 @@ export class Select extends Component {
           aria-label='Dropdown select'
           className={classNames.join(' ')}
           data-testid={`${LIB_NAME}-${this.props.name}`}
-          onClick={() => this.dropDown('open')}
+          onClick={(event) => { event.stopPropagation(); this.dropDown('open') }}
           onKeyDown={this.handleKeyDown}
           ref={this.select}
           tabIndex={this.props.disabled ? '-1' : '0'}
@@ -462,7 +458,6 @@ export class Select extends Component {
 
           {this.props.dropdownHandle && (
             <DropdownHandle
-              onClick={() => this.select.current.focus()}
               props={this.props}
               state={this.state}
               methods={this.methods}

@@ -81,7 +81,7 @@ class Input extends Component {
         disabled={props.disabled}
         onBlur={this.onBlur}
         onChange={methods.setSearch}
-        onClick={() => methods.dropDown('open')}
+        onClick={(event) => { event.stopPropagation(); methods.dropDown('open') }}
         onFocus={(event) => event.stopPropagation()}
         onKeyDown={this.handleKeyDown}
         placeholder={handlePlaceHolder(props, state)}

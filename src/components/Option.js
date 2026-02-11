@@ -27,6 +27,15 @@ class Option extends Component {
     }
   }
 
+  addOption (event) {
+    event.preventDefault()
+    event.stopPropagation()
+    const { methods, nonSelectable, option } = this.props
+    if (option.disabled || nonSelectable) { return }
+
+    methods.addOption(option)
+  }
+
   render () {
     const { props, state, methods, nonSelectable, option, optionIndex } = this.props
 
@@ -59,8 +68,8 @@ class Option extends Component {
         }`}
         data-testid={dataTestId}
         data-non-selectable={nonSelectable ? 'true' : null}
-        onClick={option.disabled || nonSelectable ? undefined : () => methods.addOption(option)}
-        onKeyDown={option.disabled || nonSelectable ? undefined : () => methods.addOption(option)}
+        onClick={this.addOption.bind(this)}
+        onKeyDown={this.addOption.bind(this)}
       >
         {getByPath(option, props.labelField)} {option.disabled && <ins>{props.disabledLabel}</ins>}
       </span>

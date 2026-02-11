@@ -36,7 +36,7 @@ describe('<DropdownHandle />', () => {
 
     await user.click(screen.getByTestId('react-clean-select-something-DropdownHandle'))
 
-    expect(defaultMethods.dropDown).toHaveBeenCalledWith('open')
+    expect(defaultMethods.dropDown).toHaveBeenCalledWith('toggle')
   })
 
   it('closes dropdown on click when already open', async () => {
@@ -45,7 +45,7 @@ describe('<DropdownHandle />', () => {
 
     await user.click(screen.getByTestId('react-clean-select-something-DropdownHandle'))
 
-    expect(defaultMethods.dropDown).toHaveBeenCalledWith('close')
+    expect(defaultMethods.dropDown).toHaveBeenCalledWith('toggle')
   })
 
   it('toggles dropdown on keyDown', async () => {
