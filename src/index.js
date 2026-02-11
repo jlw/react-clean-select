@@ -74,6 +74,7 @@ export class Select extends Component {
     if (this.props.defaultMenuIsOpen) {
       this.dropDown('open')
     }
+    this.setState({ searchResults: this.searchResults() })
   }
 
   componentDidUpdate (prevProps, prevState) {
@@ -176,11 +177,11 @@ export class Select extends Component {
     if (action === 'close' && this.state.dropdown) {
       this.select.current.blur()
 
-      return this.setState({
+      this.setState({
         dropdown: false,
-        search: this.props.clearOnBlur ? '' : this.state.search,
-        searchResults: this.props.options
+        search: this.props.clearOnBlur ? '' : this.state.search
       })
+      return this.setState({ searchResults: this.searchResults() })
     }
 
     if (action === 'open' && !this.state.dropdown) {
@@ -217,10 +218,7 @@ export class Select extends Component {
       this.props.onSelect([option])
     }
 
-    this.props.clearOnSelect &&
-      this.setState({ search: '' }, () => {
-        this.setState({ searchResults: this.searchResults() })
-      })
+    this.props.clearOnSelect && this.setSearchState('')
 
     return true
   }
@@ -243,17 +241,16 @@ export class Select extends Component {
   }
 
   setSearch = (event) => {
+    this.setSearchState(event.target.value)
+  }
+
+  setSearchState = (searchValue) => {
     this.setState({
       cursor: null
     })
-
     this.setState(
-      {
-        search: event.target.value
-      },
-      () => {
-        this.setState({ searchResults: this.searchResults() })
-      }
+      { search: searchValue },
+      () => this.setState({ searchResults: this.searchResults() })
     )
   }
 
@@ -333,8 +330,13 @@ export class Select extends Component {
 
   searchResults = () => {
     const args = { state: this.state, props: this.props, methods: this.methods }
+    const rawSearchResults = this.props.searchFn(args) || this.searchFn(args)
 
-    return this.props.searchFn(args) || this.searchFn(args)
+    if (this.props.multi && !this.props.keepSelectedInList) {
+      return rawSearchResults.filter((option) => !this.methods.isSelected(option))
+    }
+
+    return rawSearchResults
   }
 
   activeCursorOption = (activeCursorOption) =>
@@ -364,26 +366,8 @@ export class Select extends Component {
     const tab = event.key === 'Tab' && !event.shiftKey
     const shiftTab = event.shiftKey && event.key === 'Tab'
 
-    if (arrowDown && !state.dropdown) {
-      event.preventDefault()
-      this.dropDown('open')
-      return setState({
-        cursor: 0
-      })
-    }
-
-    if ((arrowDown || (tab && state.dropdown)) && cursor === null) {
-      return setState({
-        cursor: 0
-      })
-    }
-
-    if (arrowUp || arrowDown || (shiftTab && state.dropdown) || (tab && state.dropdown)) {
-      event.preventDefault()
-    }
-
     if (escape) {
-      this.dropDown('close')
+      return this.dropDown('close')
     }
 
     if (enter) {
@@ -393,36 +377,42 @@ export class Select extends Component {
           return null
         }
 
-        methods.addOption(currentOption)
+        if (props.multi && !props.keepSelectedInList && cursor > 0) {
+          setState({ cursor: cursor - 1 })
+        }
+        return methods.addOption(currentOption)
       }
     }
 
-    if ((arrowDown || (tab && state.dropdown)) && searchResults.length === cursor) {
+    if (arrowUp || arrowDown || (shiftTab && state.dropdown) || (tab && state.dropdown)) {
+      event.preventDefault()
+    }
+
+    if ((arrowDown || arrowUp) && !state.dropdown) {
+      this.dropDown('open')
       return setState({
+        cursor: arrowDown ? 0 : searchResults.length - 1
+      })
+    }
+
+    if ((arrowDown || (tab && state.dropdown)) && (cursor === null || searchResults.length - 1 === cursor)) {
+      setState({
         cursor: 0
       })
-    }
-
-    if (arrowDown || (tab && state.dropdown)) {
-      setState((prevState) => ({
-        cursor: prevState.cursor + 1
-      }))
-    }
-
-    if ((arrowUp || (shiftTab && state.dropdown)) && cursor > 0) {
-      setState((prevState) => ({
-        cursor: prevState.cursor - 1
-      }))
-    }
-
-    if ((arrowUp || (shiftTab && state.dropdown)) && cursor === 0) {
+    } else if (arrowDown || (tab && state.dropdown)) {
       setState({
-        cursor: searchResults.length
+        cursor: cursor + 1
       })
-    }
-
-    if (backspace && props.backspaceDelete && this.getInputSize() === 0) {
-      this.setState({
+    } else if ((arrowUp || (shiftTab && state.dropdown)) && (cursor === null || cursor === 0)) {
+      setState({
+        cursor: searchResults.length - 1
+      })
+    } else if ((arrowUp || (shiftTab && state.dropdown)) && cursor > 0) {
+      setState({
+        cursor: cursor - 1
+      })
+    } else if (backspace && props.backspaceDelete && this.getInputSize() === 0) {
+      setState({
         values: this.state.values.slice(0, -1)
       })
     }

@@ -138,6 +138,31 @@ describe('<Select />', () => {
       expect(onChange).toHaveBeenCalledWith([german])
     })
 
+    it('handles keyboard cursor manipulation correctly', async () => {
+      const user = userEvent.setup()
+      const onChange = jest.fn()
+      renderComponent({ name: 'language', onChange, options: languages })
+
+      await user.click(screen.getByTestId('react-clean-select-language-DropdownHandle'))
+      await user.keyboard('[ArrowDown]')
+      await user.keyboard('[ArrowDown]')
+      await user.keyboard('[Enter]')
+
+      expect(onChange).toHaveBeenCalledWith([english])
+    })
+
+    it('handles initial ArrowUp', async () => {
+      const user = userEvent.setup()
+      const onChange = jest.fn()
+      renderComponent({ name: 'language', onChange, options: languages })
+
+      await user.click(screen.getByTestId('react-clean-select-language-DropdownHandle'))
+      await user.keyboard('[ArrowUp]')
+      await user.keyboard('[Enter]')
+
+      expect(onChange).toHaveBeenCalledWith([spanish])
+    })
+
     it('IGNORES closeOnSelect', async () => {
       const user = userEvent.setup()
       renderComponent({ closeOnSelect: false, name: 'language', options: languages })
@@ -227,6 +252,71 @@ describe('<Select />', () => {
       await user.keyboard('[Enter]')
 
       expect(onChange).toHaveBeenCalledWith([german])
+    })
+
+    it('handles keyboard cursor manipulation correctly', async () => {
+      const user = userEvent.setup()
+      const onChange = jest.fn()
+      renderComponent({ name: 'language', multi: true, onChange, options: languages })
+
+      await user.click(screen.getByTestId('react-clean-select-language-DropdownHandle'))
+      await user.keyboard('[ArrowDown]')
+      await user.keyboard('[ArrowDown]')
+      await user.keyboard('[ArrowUp]')
+      await user.keyboard('[ArrowDown]')
+      await user.keyboard('[Enter]')
+
+      expect(onChange).toHaveBeenCalledWith([english])
+    })
+
+    it('handles initial ArrowUp', async () => {
+      const user = userEvent.setup()
+      const onChange = jest.fn()
+      renderComponent({ name: 'language', multi: true, onChange, options: languages })
+
+      await user.click(screen.getByTestId('react-clean-select-language-DropdownHandle'))
+      await user.keyboard('[ArrowUp]')
+      await user.keyboard('[Enter]')
+
+      expect(onChange).toHaveBeenCalledWith([spanish])
+    })
+
+    it('ArrowDown skips over already-selected options when not kept in list', async () => {
+      const user = userEvent.setup()
+      const onChange = jest.fn()
+      renderComponent({
+        keepSelectedInList: false,
+        name: 'language',
+        multi: true,
+        onChange,
+        options: languages,
+        values: [german]
+      })
+
+      await user.click(screen.getByTestId('react-clean-select-language-DropdownHandle'))
+      await user.keyboard('[ArrowDown]')
+      await user.keyboard('[Enter]')
+
+      expect(onChange).toHaveBeenCalledWith([german, english])
+    })
+
+    it('ArrowUp skips over already-selected options when not kept in list', async () => {
+      const user = userEvent.setup()
+      const onChange = jest.fn()
+      renderComponent({
+        keepSelectedInList: false,
+        name: 'language',
+        multi: true,
+        onChange,
+        options: languages,
+        values: [spanish]
+      })
+
+      await user.click(screen.getByTestId('react-clean-select-language-DropdownHandle'))
+      await user.keyboard('[ArrowUp]')
+      await user.keyboard('[Enter]')
+
+      expect(onChange).toHaveBeenCalledWith([spanish, english])
     })
 
     it('optionally closes when selecting an option', async () => {
