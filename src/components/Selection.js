@@ -20,7 +20,7 @@ const Selection = ({ option, props, state, methods }) => {
         {getByPath(option, props.labelField)}
       </span>
       <span
-        className={`${LIB_NAME}-selection-remove-${slug}`}
+        className={`${LIB_NAME}-selection-remove`}
         data-testid={`${LIB_NAME}-${props.name}-Selection-remove-${slug}`}
         onClick={(event) => methods.removeOption(event, option, props.closeOnSelect)}
       >
