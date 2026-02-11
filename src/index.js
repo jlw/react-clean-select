@@ -452,19 +452,6 @@ export class Select extends Component {
         >
           <Content props={this.props} state={this.state} methods={this.methods} />
 
-          {(this.props.name || this.props.required) && (
-            <input
-              className={`${LIB_NAME}-input-zero`}
-              data-testid={`${LIB_NAME}-${this.props.name}-input-zero`}
-              defaultValue={this.state.values.map((value) => value[this.props.labelField]).toString() || []}
-              disabled={this.props.disabled}
-              name={this.props.name}
-              pattern={this.props.pattern}
-              required={this.props.required}
-              tabIndex={-1}
-            />
-          )}
-
           {this.props.loading && <Loading props={this.props} />}
 
           {this.props.clearable && (

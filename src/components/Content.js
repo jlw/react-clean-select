@@ -11,6 +11,35 @@ import SelectPropsModel from '../models/SelectPropsModel'
 import SelectStateModel from '../models/SelectStateModel'
 
 const Content = ({ props, state, methods }) => {
+  const renderSelection = () => {
+    if (props.multi && state.values) {
+      return state.values.map((option) => (
+        <Selection
+          key={`${getByPath(option, props.valueField)}${getByPath(option, props.labelField)}`}
+          option={option}
+          state={state}
+          props={props}
+          methods={methods}
+        />
+      ))
+    } else if (!props.multi && state.values && state.values.length > 0) {
+      return (<span>{getByPath(state.values[0], props.labelField)}</span>)
+    }
+  }
+
+  const renderContent = () => {
+    if (props.contentRenderer) {
+      return props.contentRenderer({ props, state, methods })
+    }
+
+    return (
+      <>
+        {renderSelection()}
+        <Input props={props} methods={methods} state={state} />
+      </>
+    )
+  }
+
   return (
     <div
       className={`${LIB_NAME}-content ${
@@ -26,28 +55,19 @@ const Content = ({ props, state, methods }) => {
         }
       }}
     >
-      {props.contentRenderer
-        ? (
-            props.contentRenderer({ props, state, methods })
-          )
-        : (
-          <>
-            {props.multi
-              ? state.values &&
-              state.values.map((option) => (
-                <Selection
-                  key={`${getByPath(option, props.valueField)}${getByPath(option, props.labelField)}`}
-                  option={option}
-                  state={state}
-                  props={props}
-                  methods={methods}
-                />
-              ))
-              : state.values &&
-              state.values.length > 0 && <span>{getByPath(state.values[0], props.labelField)}</span>}
-            <Input props={props} methods={methods} state={state} />
-          </>
-          )}
+      {renderContent()}
+      {(props.name || props.required) && (
+        <input
+          className={`${LIB_NAME}-input-zero`}
+          data-testid={`${LIB_NAME}-${props.name}-input-zero`}
+          defaultValue={state.values.map((value) => value[props.valueField]).toString() || []}
+          disabled={props.disabled}
+          name={props.name}
+          pattern={props.pattern}
+          required={props.required}
+          tabIndex={-1}
+        />
+      )}
     </div>
   )
 }
