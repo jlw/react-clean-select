@@ -36,7 +36,7 @@ describe('<DropdownHandle />', () => {
 
     await user.click(screen.getByTestId('react-clean-select-something-DropdownHandle'))
 
-    expect(defaultMethods.dropDown).toHaveBeenCalledWith('open', expect.anything())
+    expect(defaultMethods.dropDown).toHaveBeenCalledWith('open')
   })
 
   it('closes dropdown on click when already open', async () => {
@@ -45,7 +45,7 @@ describe('<DropdownHandle />', () => {
 
     await user.click(screen.getByTestId('react-clean-select-something-DropdownHandle'))
 
-    expect(defaultMethods.dropDown).toHaveBeenCalledWith('close', expect.anything())
+    expect(defaultMethods.dropDown).toHaveBeenCalledWith('close')
   })
 
   it('toggles dropdown on keyDown', async () => {
@@ -53,7 +53,7 @@ describe('<DropdownHandle />', () => {
 
     await fireEvent.keyDown(screen.getByTestId('react-clean-select-something-DropdownHandle'))
 
-    expect(defaultMethods.dropDown).toHaveBeenCalledWith('toggle', expect.anything())
+    expect(defaultMethods.dropDown).toHaveBeenCalledWith('toggle')
   })
 
   it('supports a custom renderer (inside the component wrapper)', () => {

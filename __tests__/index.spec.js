@@ -182,7 +182,7 @@ describe('<Select />', () => {
       expect(onChange).toHaveBeenCalledWith([english])
     })
 
-    it('IGNORES closeOnSelect', async () => {
+    it('IGNORES closeOnSelect and ALWAYS closes', async () => {
       const user = userEvent.setup()
       renderComponent({ closeOnSelect: false, name: 'language', options: languages })
 
@@ -190,6 +190,26 @@ describe('<Select />', () => {
       await user.click(screen.getByTestId('react-clean-select-language-Option-es'))
 
       expect(screen.getByTestId('react-clean-select-language')).toHaveAttribute('aria-expanded', 'false')
+    })
+
+    it('closes when selecting with the keyboard', async () => {
+      const user = userEvent.setup()
+      renderComponent({ closeOnSelect: false, name: 'language', options: languages })
+      expect(screen.queryAllByTestId('react-clean-select-language-Option-de')).toHaveLength(0)
+
+      await user.click(screen.getByTestId('react-clean-select-language-DropdownHandle'))
+
+      expect(screen.queryAllByTestId('react-clean-select-language-Option-de')).toHaveLength(1)
+      expect(screen.queryAllByTestId('react-clean-select-language-Option-en')).toHaveLength(1)
+      expect(screen.queryAllByTestId('react-clean-select-language-Option-es')).toHaveLength(1)
+
+      await user.keyboard('[ArrowDown]')
+      await user.keyboard('[Enter]')
+
+      expect(screen.getByTestId('react-clean-select-language')).toHaveAttribute('aria-expanded', 'false')
+      expect(screen.getByTestId('react-clean-select-language-Content')).toHaveTextContent('Deutsch')
+      expect(screen.queryAllByTestId('react-clean-select-language-Option-de')).toHaveLength(0)
+      expect(screen.queryAllByTestId('react-clean-select-language-Option-en')).toHaveLength(0)
     })
 
     it('optionally renders open for debugging', () => {
@@ -372,6 +392,27 @@ describe('<Select />', () => {
 
       expect(screen.getByTestId('react-clean-select-language')).toHaveAttribute('aria-expanded', 'false')
       expect(screen.getByTestId('react-clean-select-language-Content')).toHaveTextContent('Español')
+      expect(screen.queryAllByTestId('react-clean-select-language-Option-de')).toHaveLength(0)
+    })
+
+    it('optionally closes when selecting with the keyboard', async () => {
+      const user = userEvent.setup()
+      renderComponent({ closeOnSelect: true, name: 'language', multi: true, options: languages })
+      expect(screen.queryAllByTestId('react-clean-select-language-Option-de')).toHaveLength(0)
+
+      await user.click(screen.getByTestId('react-clean-select-language-DropdownHandle'))
+
+      expect(screen.queryAllByTestId('react-clean-select-language-Option-de')).toHaveLength(1)
+      expect(screen.queryAllByTestId('react-clean-select-language-Option-en')).toHaveLength(1)
+      expect(screen.queryAllByTestId('react-clean-select-language-Option-es')).toHaveLength(1)
+
+      await user.keyboard('[ArrowDown]')
+      await user.keyboard('[Enter]')
+
+      expect(screen.getByTestId('react-clean-select-language')).toHaveAttribute('aria-expanded', 'false')
+      expect(screen.getByTestId('react-clean-select-language-Content')).toHaveTextContent('Deutsch')
+      expect(screen.queryAllByTestId('react-clean-select-language-Option-de')).toHaveLength(0)
+      expect(screen.queryAllByTestId('react-clean-select-language-Option-en')).toHaveLength(0)
     })
 
     it('optionally renders open for debugging', () => {

@@ -106,10 +106,6 @@ export class Select extends Component {
       this.updateSelectBounds()
     }
 
-    if (prevState.values !== this.state.values && this.props.closeOnSelect) {
-      this.dropDown('close')
-    }
-
     if (prevProps.multi !== this.props.multi) {
       this.updateSelectBounds()
     }
@@ -155,7 +151,12 @@ export class Select extends Component {
 
   getSelectBounds = () => this.state.selectBounds
 
-  dropDown = (action = 'toggle', event, force = false) => {
+  dropDown = (action = 'toggle', force = false) => {
+    if (this.props.keepOpen) {
+      if (this.state.dropdown !== true) { this.setState({ dropdown: true }) }
+      return
+    }
+
     if (
       this.props.onDropdownCloseRequest !== undefined &&
       this.state.dropdown &&
@@ -166,12 +167,8 @@ export class Select extends Component {
         props: this.props,
         methods: this.methods,
         state: this.state,
-        close: () => this.dropDown('close', null, true)
+        close: () => this.dropDown('close', true)
       })
-    }
-
-    if (this.props.keepOpen) {
-      return this.setState({ dropdown: true })
     }
 
     if (action === 'close' && this.state.dropdown) {
@@ -219,6 +216,7 @@ export class Select extends Component {
     }
 
     this.props.clearOnSelect && this.setSearchState('')
+    this.props.closeOnSelect && this.dropDown('close')
 
     return true
   }
@@ -438,13 +436,13 @@ export class Select extends Component {
     if (this.props.className !== undefined) { classNames.push(this.props.className) }
 
     return (
-      <ClickOutside onClickOutside={(event) => this.dropDown('close', event)}>
+      <ClickOutside onClickOutside={() => this.dropDown('close')}>
         <div
           aria-expanded={this.state.dropdown}
           aria-label='Dropdown select'
           className={classNames.join(' ')}
           data-testid={`${LIB_NAME}-${this.props.name}`}
-          onClick={(event) => this.dropDown('open', event)}
+          onClick={() => this.dropDown('open')}
           onKeyDown={this.handleKeyDown}
           ref={this.select}
           tabIndex={this.props.disabled ? '-1' : '0'}
