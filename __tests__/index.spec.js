@@ -23,6 +23,7 @@ describe('<Select />', () => {
   it('TODO: needs sufficient functionality tests', () => {
     renderComponent()
 
+    expect(screen.getByTestId('react-clean-select-something-Container')).toBeInTheDocument()
     expect(screen.getByTestId('react-clean-select-something-Input')).toBeInTheDocument()
   })
 

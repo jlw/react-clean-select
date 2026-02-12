@@ -25,10 +25,10 @@ class ClickOutside extends React.Component {
   }
 
   render () {
-    const { children } = this.props
+    const { children, props } = this.props
 
     return (
-      <div className={`${LIB_NAME}-container`} ref={this.container}>
+      <div className={`${LIB_NAME}-container`} data-testid={`${LIB_NAME}-${props.name}-Container`} ref={this.container}>
         {children}
       </div>
     )

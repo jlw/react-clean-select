@@ -415,7 +415,7 @@ export class Select extends Component {
     if (this.props.className !== undefined) { classNames.push(this.props.className) }
 
     return (
-      <ClickOutside onClickOutside={() => this.dropDown('close')}>
+      <ClickOutside props={this.props} onClickOutside={() => this.dropDown('close')}>
         <div
           aria-expanded={this.state.dropdown}
           aria-label='Dropdown select'
