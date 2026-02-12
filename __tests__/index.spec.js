@@ -122,7 +122,7 @@ describe('<Select />', () => {
       await user.keyboard('[BackSpace][BackSpace][BackSpace]')
       await user.click(screen.getByTestId('react-clean-select-language-Option-es'))
 
-      expect(onChange).toHaveBeenCalledWith([spanish])
+      expect(onChange).toHaveBeenCalledWith(['es'])
       expect(screen.getByTestId('react-clean-select-language')).toHaveAttribute('aria-expanded', 'false')
     })
 
@@ -135,7 +135,7 @@ describe('<Select />', () => {
       await user.keyboard('[ArrowDown]')
       await user.keyboard('[Enter]')
 
-      expect(onChange).toHaveBeenCalledWith([german])
+      expect(onChange).toHaveBeenCalledWith(['de'])
     })
 
     it('handles keyboard cursor manipulation correctly', async () => {
@@ -148,7 +148,7 @@ describe('<Select />', () => {
       await user.keyboard('[ArrowDown]')
       await user.keyboard('[Enter]')
 
-      expect(onChange).toHaveBeenCalledWith([english])
+      expect(onChange).toHaveBeenCalledWith(['en'])
     })
 
     it('handles initial ArrowUp', async () => {
@@ -160,7 +160,7 @@ describe('<Select />', () => {
       await user.keyboard('[ArrowUp]')
       await user.keyboard('[Enter]')
 
-      expect(onChange).toHaveBeenCalledWith([spanish])
+      expect(onChange).toHaveBeenCalledWith(['es'])
     })
 
     it('supports non-selectable instructions option', async () => {
@@ -179,7 +179,7 @@ describe('<Select />', () => {
       await user.keyboard('[ArrowDown]')
       await user.keyboard('[Enter]')
 
-      expect(onChange).toHaveBeenCalledWith([english])
+      expect(onChange).toHaveBeenCalledWith(['en'])
     })
 
     it('IGNORES closeOnSelect and ALWAYS closes', async () => {
@@ -223,7 +223,7 @@ describe('<Select />', () => {
     it('renders the currently-selected option', () => {
       const female = { value: 'female', label: 'Female' }
       const options = [female, { value: 'male', label: 'Male' }]
-      renderComponent({ name: 'gender', options, values: [female] })
+      renderComponent({ name: 'gender', options, values: ['female'] })
 
       expect(screen.getByTestId('react-clean-select-gender-Content')).toHaveTextContent('Female')
     })
@@ -277,8 +277,27 @@ describe('<Select />', () => {
       await user.keyboard('[BackSpace][BackSpace][BackSpace]')
       await user.click(screen.getByTestId('react-clean-select-language-Option-es'))
 
-      expect(onChange).toHaveBeenCalledWith([spanish])
+      expect(onChange).toHaveBeenCalledWith(['es'])
       expect(screen.getByTestId('react-clean-select-language')).toHaveAttribute('aria-expanded', 'true')
+    })
+
+    it('supports custom searchBy option property', async () => {
+      const user = userEvent.setup()
+      const onChange = jest.fn()
+      const searchAbleLanguages = [
+        { value: 'de', label: 'Deutsch', searchMe: 'german' },
+        { value: 'en', label: 'English', searchMe: 'english' }
+      ]
+      renderComponent({ name: 'language', multi: true, onChange, options: searchAbleLanguages, searchBy: 'searchMe' })
+
+      await user.click(screen.getByTestId('react-clean-select-language-DropdownHandle'))
+      expect(screen.queryAllByTestId('react-clean-select-language-Option-de')).toHaveLength(1)
+      expect(screen.queryAllByTestId('react-clean-select-language-Option-en')).toHaveLength(1)
+
+      await user.keyboard('german')
+
+      expect(screen.queryAllByTestId('react-clean-select-language-Option-de')).toHaveLength(1)
+      expect(screen.queryAllByTestId('react-clean-select-language-Option-en')).toHaveLength(0)
     })
 
     it('supports keyboard navigation and selection', async () => {
@@ -290,7 +309,7 @@ describe('<Select />', () => {
       await user.keyboard('[ArrowDown]')
       await user.keyboard('[Enter]')
 
-      expect(onChange).toHaveBeenCalledWith([german])
+      expect(onChange).toHaveBeenCalledWith(['de'])
     })
 
     it('handles keyboard cursor manipulation correctly', async () => {
@@ -305,7 +324,7 @@ describe('<Select />', () => {
       await user.keyboard('[ArrowDown]')
       await user.keyboard('[Enter]')
 
-      expect(onChange).toHaveBeenCalledWith([english])
+      expect(onChange).toHaveBeenCalledWith(['en'])
     })
 
     it('handles initial ArrowUp', async () => {
@@ -317,7 +336,7 @@ describe('<Select />', () => {
       await user.keyboard('[ArrowUp]')
       await user.keyboard('[Enter]')
 
-      expect(onChange).toHaveBeenCalledWith([spanish])
+      expect(onChange).toHaveBeenCalledWith(['es'])
     })
 
     it('ArrowDown skips over already-selected options when not kept in list', async () => {
@@ -329,14 +348,14 @@ describe('<Select />', () => {
         multi: true,
         onChange,
         options: languages,
-        values: [german]
+        values: ['de']
       })
 
       await user.click(screen.getByTestId('react-clean-select-language-DropdownHandle'))
       await user.keyboard('[ArrowDown]')
       await user.keyboard('[Enter]')
 
-      expect(onChange).toHaveBeenCalledWith([german, english])
+      expect(onChange).toHaveBeenCalledWith(['de', 'en'])
     })
 
     it('ArrowUp skips over already-selected options when not kept in list', async () => {
@@ -348,14 +367,14 @@ describe('<Select />', () => {
         multi: true,
         onChange,
         options: languages,
-        values: [spanish]
+        values: ['es']
       })
 
       await user.click(screen.getByTestId('react-clean-select-language-DropdownHandle'))
       await user.keyboard('[ArrowUp]')
       await user.keyboard('[Enter]')
 
-      expect(onChange).toHaveBeenCalledWith([spanish, english])
+      expect(onChange).toHaveBeenCalledWith(['es', 'en'])
     })
 
     it('supports non-selectable instructions option', async () => {
@@ -367,14 +386,14 @@ describe('<Select />', () => {
 
       expect(screen.getByTestId('react-clean-select-language-OptionInstructions')).toBeInTheDocument()
 
-      await user.keyboard('En')
+      await user.keyboard('Eng')
 
       expect(screen.queryAllByTestId('react-clean-select-language-OptionInstructions')).toHaveLength(0)
 
       await user.keyboard('[ArrowDown]')
       await user.keyboard('[Enter]')
 
-      expect(onChange).toHaveBeenCalledWith([english])
+      expect(onChange).toHaveBeenCalledWith(['en'])
     })
 
     it('optionally closes when selecting an option', async () => {
@@ -423,21 +442,26 @@ describe('<Select />', () => {
       expect(screen.queryAllByTestId('react-clean-select-language-Option-es')).toHaveLength(1)
     })
 
-    it('renders the current selections and optionally allows clearing', async () => {
+    it('renders the current selections and optionally allows clearing (and works with numerical values)', async () => {
       const user = userEvent.setup()
-      const pub = { value: 'public', label: 'Public' }
-      const priv = { value: 'private', label: 'Private' }
-      const options = [pub, priv, { value: 'non-traditional', label: 'Non-Traditional' }]
       const onChange = jest.fn()
-      renderComponent({ clearable: true, name: 'schooling', multi: true, onChange, options, values: [pub, priv] })
+      renderComponent({
+        clearable: true,
+        name: 'schools',
+        multi: true,
+        onChange,
+        options: [{ id: 1, label: 'Public' }, { id: 2, label: 'Private' }, { id: 3, label: 'Non-Traditional' }],
+        valueField: 'id',
+        values: [1, 2]
+      })
 
-      expect(screen.getByTestId('react-clean-select-schooling-Selection-public')).toBeInTheDocument()
-      expect(screen.getByTestId('react-clean-select-schooling-Selection-private')).toBeInTheDocument()
-      expect(screen.queryAllByTestId('react-clean-select-schooling-Selection-non-traditional')).toHaveLength(0)
+      expect(screen.getByTestId('react-clean-select-schools-Selection-1')).toBeInTheDocument()
+      expect(screen.getByTestId('react-clean-select-schools-Selection-2')).toBeInTheDocument()
+      expect(screen.queryAllByTestId('react-clean-select-schools-Selection-3')).toHaveLength(0)
 
-      await user.click(screen.getByTestId('react-clean-select-schooling-Selection-remove-public'))
+      await user.click(screen.getByTestId('react-clean-select-schools-Selection-remove-1'))
 
-      expect(onChange).toHaveBeenCalledWith([priv])
+      expect(onChange).toHaveBeenCalledWith([2])
     })
   })
 })

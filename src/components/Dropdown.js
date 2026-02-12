@@ -4,7 +4,7 @@ import NoData from '../components/NoData'
 import Option from '../components/Option'
 
 import { LIB_NAME } from '../constants'
-import { valueExistInSelected, isomorphicWindow } from '../util'
+import { isomorphicWindow } from '../util'
 
 const dropdownPosition = (props, methods) => {
   const DropdownBoundingClientRect = methods.getSelectRef().getBoundingClientRect()
@@ -28,22 +28,6 @@ const dropdownPosition = (props, methods) => {
 }
 
 const Dropdown = ({ props, state, methods }) => {
-  const renderAddButton = () => {
-    if (props.create &&
-        state.search &&
-        !valueExistInSelected(state.search, [...state.values, ...props.options], props)) {
-      return (
-        <div
-          role='button'
-          className={`${LIB_NAME}-dropdown-add-new`}
-          onClick={(event) => { event.stopPropagation(); methods.createNew(state.search) }}
-        >
-          {props.createNewLabel.replace('{search}', `"${state.search}"`)}
-        </div>
-      )
-    }
-  }
-
   const renderClearAll = () => {
     if (props.selectAll && props.options && props.multi) {
       return (
@@ -103,7 +87,6 @@ const Dropdown = ({ props, state, methods }) => {
 
     return (
       <>
-        {renderAddButton()}
         {renderInstructionsOption()}
         {renderSearchResults()}
         {renderClearAll()}

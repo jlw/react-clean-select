@@ -8,13 +8,12 @@ import { render, screen } from '@testing-library/react'
 import Input from 'components/Input'
 
 const defaultProps = {
-  create: true,
   inputRenderer: null,
   name: 'something',
   searchable: true
 }
 const defaultState = {
-  values: [{ id: 1, label: 'Name' }]
+  values: []
 }
 const defaultMethods = {
   getInputSize: () => undefined

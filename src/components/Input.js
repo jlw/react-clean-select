@@ -3,7 +3,6 @@ import React, { Component } from 'react'
 import * as PropTypes from 'prop-types'
 
 import { LIB_NAME } from '../constants'
-import { valueExistInSelected } from '../util'
 
 const handlePlaceHolder = (props, state) => {
   const { addPlaceholder, searchable, placeholder } = props
@@ -50,22 +49,6 @@ class Input extends Component {
     return this.input.current.focus()
   }
 
-  handleKeyDown = (event) => {
-    const { props, state, methods } = this.props
-
-    if (
-      props.create &&
-      event.key === 'Enter' &&
-      !valueExistInSelected(state.search, [...state.values, ...props.options], this.props) &&
-      state.search &&
-      state.cursor === null
-    ) {
-      methods.createNew(state.search)
-    } else {
-      methods.handleKeyDown(event)
-    }
-  }
-
   render () {
     const { props, state, methods } = this.props
 
@@ -83,7 +66,7 @@ class Input extends Component {
         onChange={methods.setSearch}
         onClick={(event) => { event.stopPropagation(); methods.dropDown('open') }}
         onFocus={(event) => event.stopPropagation()}
-        onKeyDown={this.handleKeyDown}
+        onKeyDown={methods.handleKeyDown}
         placeholder={handlePlaceHolder(props, state)}
         tabIndex='-1'
         value={state.search}

@@ -11,9 +11,7 @@ import DropdownHandle from './components/DropdownHandle'
 import {
   debounce,
   isEqual,
-  getByPath,
   getProp,
-  valueExistInSelected,
   isomorphicWindow
 } from './util'
 import { LIB_NAME } from './constants'
@@ -42,17 +40,19 @@ export class Select extends Component {
       addOption: this.addOption,
       areAllSelected: this.areAllSelected,
       clearAll: this.clearAll,
-      createNew: this.createNew,
       dropDown: this.dropDown,
       getInputSize: this.getInputSize,
       getSelectBounds: this.getSelectBounds,
       getSelectRef: this.getSelectRef,
+      getValue: this.getValue,
       handleKeyDown: this.handleKeyDown,
       isSelected: this.isSelected,
       removeOption: this.removeOption,
       safeString: this.safeString,
+      searchExistsInOptions: this.searchExistsInOptions,
       searchResults: this.searchResults,
       selectAll: this.selectAll,
+      selectedOptions: this.selectedOptions,
       setSearch: this.setSearch,
       sortBy: this.sortBy,
       toggleSelectAll: this.toggleSelectAll
@@ -195,20 +195,23 @@ export class Select extends Component {
 
   getSelectRef = () => this.select.current
 
+  getValue = (option) => option[this.props.valueField]
+
+  searchExistsInOptions = () => !!this.props.options.find((option) => this.state.search === this.getValue(option))
+
   addOption = (option) => {
     const pendingState = {}
+    const addValue = this.getValue(option)
     if (this.props.multi) {
-      if (
-        valueExistInSelected(getByPath(option, this.props.valueField), this.state.values, this.props)
-      ) {
+      if (this.state.values.includes(addValue)) {
         return this.removeOption(null, option, false)
       }
 
-      pendingState.values = [...this.state.values, option]
-      this.props.onSelect([...this.state.values, option])
+      pendingState.values = [...this.state.values, addValue]
+      this.props.onSelect([...this.state.values, addValue])
     } else {
-      pendingState.values = [option]
-      this.props.onSelect([option])
+      pendingState.values = [addValue]
+      this.props.onSelect([addValue])
     }
 
     if (this.props.clearOnSelect) {
@@ -228,11 +231,8 @@ export class Select extends Component {
       event.preventDefault()
       event.stopPropagation()
     }
-
-    const values = this.state.values.filter(
-      (values) =>
-        getByPath(values, this.props.valueField) !== getByPath(option, this.props.valueField)
-    )
+    const removeValue = this.getValue(option)
+    const values = this.state.values.filter((value) => value !== removeValue)
     this.setState({
       dropdown: !close,
       values
@@ -278,17 +278,15 @@ export class Select extends Component {
 
   selectAll = () => {
     this.props.onSelectAll()
-    this.setState({ values: this.props.options.filter((option) => !option.disabled) })
+    this.setState({ values: this.props.options.filter((option) => !option.disabled).map((option) => this.getValue(option)) })
   }
 
-  isSelected = (option) =>
-    !!this.state.values.find(
-      (value) =>
-        getByPath(value, this.props.valueField) === getByPath(option, this.props.valueField)
-    )
+  isSelected = (option) => this.state.values.includes(this.getValue(option))
 
   areAllSelected = () =>
     this.state.values.length === this.props.options.filter((option) => !option.disabled).length
+
+  selectedOptions = () => this.props.options.filter((option) => this.isSelected(option))
 
   safeString = (string) => string.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')
 
@@ -318,7 +316,7 @@ export class Select extends Component {
     return methods
       .sortBy()
       .filter((option) =>
-        regexp.test(getByPath(option, this.props.searchBy) || getByPath(option, this.props.valueField))
+        regexp.test(option[this.props.searchBy] || option[this.props.labelField])
       )
   }
 
@@ -367,10 +365,6 @@ export class Select extends Component {
     if (enter) {
       const currentOption = searchResults[cursor]
       if (currentOption && !currentOption.disabled) {
-        if (props.create && valueExistInSelected(state.search, state.values, props)) {
-          return null
-        }
-
         if (props.multi && !props.keepSelectedInList && cursor > 0) {
           setState({ cursor: cursor - 1 })
         }
@@ -413,17 +407,6 @@ export class Select extends Component {
   }
 
   renderDropdown = () => (<Dropdown props={this.props} state={this.state} methods={this.methods} />)
-
-  createNew = (option) => {
-    const newValue = {
-      [this.props.labelField]: option,
-      [this.props.valueField]: option
-    }
-
-    this.addOption(newValue)
-    this.props.onCreateNew(newValue)
-    this.setState({ search: '' })
-  }
 
   render () {
     const classNames = [LIB_NAME]
@@ -484,8 +467,6 @@ Select.defaultProps = {
   closeOnScroll: false,
   closeOnSelect: false,
   compareValuesFunc: isEqual,
-  create: false,
-  createNewLabel: 'add {search}',
   debounceDelay: 0,
   defaultMenuIsOpen: false,
   direction: 'ltr',
@@ -505,7 +486,6 @@ Select.defaultProps = {
   noDataLabel: 'No data',
   onChange: () => undefined,
   onClearAll: () => undefined,
-  onCreateNew: () => undefined,
   onDeselect: () => undefined,
   onDropdownClose: () => undefined,
   onDropdownCloseRequest: undefined,

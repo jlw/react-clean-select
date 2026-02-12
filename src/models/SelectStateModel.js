@@ -24,7 +24,7 @@ const SelectStateModel = Object.freeze({
   /**
    * Array of selected values
    */
-  values: PropTypes.arrayOf(PropTypes.shape({}))
+  values: PropTypes.arrayOf(PropTypes.string)
 })
 
 export default SelectStateModel

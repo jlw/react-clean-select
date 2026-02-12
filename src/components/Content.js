@@ -2,7 +2,6 @@ import React from 'react'
 import PropTypes from 'prop-types'
 
 import { LIB_NAME } from '../constants'
-import { getByPath } from '../util'
 
 import Input from './Input'
 import Selection from './Selection'
@@ -12,18 +11,21 @@ import SelectStateModel from '../models/SelectStateModel'
 
 const Content = ({ props, state, methods }) => {
   const renderSelection = () => {
-    if (props.multi && state.values) {
-      return state.values.map((option) => (
-        <Selection
-          key={`${getByPath(option, props.valueField)}${getByPath(option, props.labelField)}`}
-          option={option}
-          state={state}
-          props={props}
-          methods={methods}
-        />
-      ))
-    } else if (!props.multi && state.values && state.values.length > 0) {
-      return (<span>{getByPath(state.values[0], props.labelField)}</span>)
+    if (state.values && state.values.length > 0) {
+      const selections = methods.selectedOptions()
+      if (props.multi) {
+        return selections.map((option) => (
+          <Selection
+            key={`${option[props.valueField]}${option[props.labelField]}`}
+            option={option}
+            state={state}
+            props={props}
+            methods={methods}
+          />
+        ))
+      } else {
+        return (<span>{selections[0][props.labelField]}</span>)
+      }
     }
   }
 
@@ -60,7 +62,7 @@ const Content = ({ props, state, methods }) => {
         <input
           className={`${LIB_NAME}-input-zero`}
           data-testid={`${LIB_NAME}-${props.name}-input-zero`}
-          defaultValue={state.values.map((value) => value[props.valueField]).toString() || []}
+          defaultValue={state.values}
           disabled={props.disabled}
           name={props.name}
           pattern={props.pattern}

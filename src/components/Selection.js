@@ -1,7 +1,7 @@
 import React from 'react'
 
 import { LIB_NAME } from '../constants'
-import { getByPath, getOptionSlug } from '../util'
+import { getOptionSlug } from '../util'
 
 const Selection = ({ option, props, state, methods }) => {
   if (option && props.selectionRenderer) {
@@ -17,7 +17,7 @@ const Selection = ({ option, props, state, methods }) => {
       data-testid={`${LIB_NAME}-${props.name}-Selection-${slug}`}
     >
       <span className={`${LIB_NAME}-selection-label`} data-testid={`${LIB_NAME}-${props.name}-Selection-label-${slug}`}>
-        {getByPath(option, props.labelField)}
+        {option[props.labelField]}
       </span>
       <span
         className={`${LIB_NAME}-selection-remove`}

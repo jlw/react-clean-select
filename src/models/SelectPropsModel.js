@@ -63,14 +63,6 @@ const SelectPropsModel = Object.freeze({
    */
   contentRenderer: PropTypes.func,
   /**
-   * If true, select will create value from search string and fire onCreateNew callback prop
-   */
-  create: PropTypes.bool,
-  /**
-   * If create set to true, this will be the label of the "add new" component. {search} will be replaced by search value
-   */
-  createNewLabel: PropTypes.string,
-  /**
    * Debounce Delay for updates upon component interactions
    */
   debounceDelay: PropTypes.number,
@@ -176,10 +168,6 @@ const SelectPropsModel = Object.freeze({
    * Fires upon clearing all values (via custom renderers)
    */
   onClearAll: PropTypes.func,
-  /**
-   * Fires upon creation of new option if create prop set to true
-   */
-  onCreateNew: PropTypes.func,
   /**
    * Fires upon dropdown close
    */

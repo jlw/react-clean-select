@@ -12,17 +12,8 @@ export const debounce = (fn, delay = 0) => {
   }
 }
 
-export const getByPath = (object, path) => {
-  if (!path) {
-    return
-  }
-
-  return path.split('.').reduce((acc, value) => acc[value], object)
-}
-
 export const getOptionSlug = (option, props) => {
-  const value = getByPath(option, props.valueField)
-
+  const value = option[props.valueField]
   return String(value).replaceAll(/[^a-zA-Z0-9]/g, '-')
 }
 
@@ -32,7 +23,6 @@ export const getProp = (object, path, defaultValue) => {
   }
 
   const normalizedPath = Array.isArray(path) ? path : path.split('.').filter((option) => option.length)
-
   if (!normalizedPath.length) {
     return object === undefined ? defaultValue : object
   }
@@ -49,6 +39,3 @@ export const isomorphicWindow = () => {
 
   return window
 }
-
-export const valueExistInSelected = (value, values, props) =>
-  !!values.find((val) => getByPath(val, props.valueField) === value || getByPath(val, props.labelField) === value)

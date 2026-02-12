@@ -13,33 +13,55 @@ const defaultOption = {
   label: 'Foo'
 }
 const defaultProps = {
+  clearable: true,
   contentRenderer: null,
   multi: true,
   name: 'something',
-  labelField: 'name'
+  labelField: 'label',
+  valueField: 'value'
 }
 const defaultState = {
   dropdown: false,
   search: '',
-  values: [defaultOption]
+  values: ['foo']
 }
 const defaultMethods = {
   dropDown: jest.fn(),
   getInputSize: () => undefined,
+  selectedOptions: () => [defaultOption],
   setSearch: () => {}
 }
 
-const compileProps = ({ props = {}, state = {}, methods = {}, option = {} }) => {
+const compileProps = ({ props = {}, state = {}, methods = {} }) => {
   return {
     props: { ...defaultProps, ...props },
     state: { ...defaultState, ...state },
-    methods: { ...defaultMethods, ...methods },
-    option: { ...defaultOption, ...option }
+    methods: { ...defaultMethods, ...methods }
   }
 }
 
 describe('<Content />', () => {
   const renderComponent = (opts = {}) => render(<Content {...compileProps(opts)} />)
+
+  it('renders selected options', () => {
+    renderComponent({ props: { options: [defaultOption], values: ['foo'] } })
+
+    expect(screen.getByTestId('react-clean-select-something-Selection-label-foo')).toHaveTextContent('Foo')
+    expect(screen.getByTestId('react-clean-select-something-Selection-foo')).toBeInTheDocument()
+    expect(screen.getByTestId('react-clean-select-something-Selection-remove-foo')).toBeInTheDocument()
+  })
+
+  it('renders selected options with customized object keys', () => {
+    const option = { id: 3, name: 'Foo' }
+    renderComponent({
+      methods: { selectedOptions: () => [option] },
+      props: { labelField: 'name', options: [option], valueField: 'id', values: [3] }
+    })
+
+    expect(screen.getByTestId('react-clean-select-something-Selection-label-3')).toHaveTextContent('Foo')
+    expect(screen.getByTestId('react-clean-select-something-Selection-3')).toBeInTheDocument()
+    expect(screen.getByTestId('react-clean-select-something-Selection-remove-3')).toBeInTheDocument()
+  })
 
   it('opens dropdown on click if closeOnClickInput set', async () => {
     const user = userEvent.setup()

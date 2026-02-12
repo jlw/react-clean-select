@@ -15,10 +15,6 @@ const SelectMethodsModel = Object.freeze({
    */
   clearAll: PropTypes.func.isRequired,
   /**
-   * Create a new option
-   */
-  createNew: PropTypes.func.isRequired,
-  /**
    * Close/Toggle/Open
    */
   dropDown: PropTypes.func.isRequired,
@@ -34,6 +30,10 @@ const SelectMethodsModel = Object.freeze({
    * Get the reference to the select component
    */
   getSelectRef: PropTypes.func.isRequired,
+  /**
+   * Get the correct value property from an option
+   */
+  getValue: PropTypes.func.isRequired,
   /**
    * Handle key down event
    */
@@ -51,6 +51,10 @@ const SelectMethodsModel = Object.freeze({
    */
   safeString: PropTypes.func.isRequired,
   /**
+   * Check if an option exists with the current search label
+   */
+  searchExistsInOptions: PropTypes.func.isRequired,
+  /**
    * Get search results
    */
   searchResults: PropTypes.func.isRequired,
@@ -58,6 +62,10 @@ const SelectMethodsModel = Object.freeze({
    * Select all options
    */
   selectAll: PropTypes.func.isRequired,
+  /**
+   * Return all currently-selected options
+   */
+  selectedOptions: PropTypes.func.isRequired,
   /**
    * Set the search string
    */

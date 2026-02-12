@@ -31,7 +31,6 @@ declare module 'react-clean-select' {
     addOption: (option: T) => void;
     areAllSelected: () => boolean;
     clearAll: () => void;
-    createNew: (searchText: string) => void;
     dropDown: (action: string, event?: MouseEvent<HTMLElement> | null) => void;
     getInputSize: () => number;
     getSelectBounds: () => {} | DOMRect;
@@ -93,8 +92,6 @@ declare module 'react-clean-select' {
     closeOnScroll?: boolean;
     closeOnSelect?: boolean;
     contentRenderer?: ({ props, state, methods }: SelectRenderer<T>) => JSX.Element;
-    create?: boolean;
-    createNewLabel?: string;
     debounceDelay?: number;
     defaultMenuIsOpen?: boolean;
     direction?: 'ltr' | 'rtl';
@@ -127,7 +124,6 @@ declare module 'react-clean-select' {
     noDataRenderer?: ({ props, state, methods }: SelectRenderer<T>) => JSX.Element;
     onChange: (value: T[]) => void;
     onClearAll?: () => void;
-    onCreateNew?: (option: T) => void;
     onDeselect?: (value: T[]) => void;
     onDropdownClose?: () => void;
     onDropdownCloseRequest?: ({

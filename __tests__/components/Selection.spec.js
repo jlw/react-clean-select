@@ -44,7 +44,7 @@ describe('<Selection />', () => {
     expect(screen.getByTestId('react-clean-select-something-Selection-label-foo')).toHaveTextContent('Foo')
   })
 
-  it.only('uses a safe version of the option value for data-testid', () => {
+  it('uses a safe version of the option value for data-testid', () => {
     renderComponent({ option: { value: "I haven't decided" } })
 
     expect(screen.queryAllByTestId('react-clean-select-something-Selection-I-haven-t-decided')).toHaveLength(1)

@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import * as PropTypes from 'prop-types'
 
 import { LIB_NAME } from '../constants'
-import { getByPath, getOptionSlug } from '../util'
+import { getOptionSlug } from '../util'
 
 class Option extends Component {
   option = React.createRef()
@@ -58,8 +58,8 @@ class Option extends Component {
         ref={this.option}
         aria-selected={methods.isSelected(option)}
         aria-disabled={option.disabled}
-        aria-label={getByPath(option, props.labelField)}
-        key={`${getByPath(option, props.valueField)}${getByPath(option, props.labelField)}`}
+        aria-label={option[props.labelField]}
+        key={`${option[props.valueField]}${option[props.labelField]}`}
         tabIndex='-1'
         className={`${LIB_NAME}-option${
           methods.isSelected(option) ? ` ${LIB_NAME}-option-selected` : ''
@@ -71,7 +71,7 @@ class Option extends Component {
         onClick={this.addOption.bind(this)}
         onKeyDown={this.addOption.bind(this)}
       >
-        {getByPath(option, props.labelField)} {option.disabled && <ins>{props.disabledLabel}</ins>}
+        {option[props.labelField]}{option.disabled && <ins>{props.disabledLabel}</ins>}
       </span>
     )
   }
