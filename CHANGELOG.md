@@ -7,11 +7,11 @@
 - Improve closing handling
 - Remove battling open/close propogations
 - Refactor values and fix bugs
-    - convert `values` from `options` objects to value scalars
-    - remove `getPath()` expecting un-nested option objects
-    - fix search to match labels instead of values
-    - test custom search property
-    - remove un-tested code for creating new options
+  - convert `values` from `options` objects to value scalars
+  - remove `getPath()` expecting un-nested option objects
+  - fix search to match labels instead of values
+  - test custom search property
+  - remove un-tested code for creating new options
 
 
 ## [0.0.6 (2026-02-11)](https://github.com/jlw/react-clean-select/compare/v0.0.5...v0.0.6)
