@@ -453,11 +453,41 @@ describe('<Select />', () => {
       expect(screen.queryAllByTestId('react-clean-select-language-Option-es')).toHaveLength(1)
     })
 
-    it('renders the current selections and optionally allows clearing (and works with numerical values)', async () => {
+    it('allows clearing individual selections', async () => {
+      const user = userEvent.setup()
+      const onChange = jest.fn()
+      renderComponent({ name: 'language', multi: true, onChange, options: languages, values: ['en', 'es'] })
+
+      expect(screen.getByTestId('react-clean-select-language-Selection-en')).toBeInTheDocument()
+      expect(screen.getByTestId('react-clean-select-language-Selection-es')).toBeInTheDocument()
+      expect(screen.queryAllByTestId('react-clean-select-language-Selection-de')).toHaveLength(0)
+
+      await user.click(screen.getByTestId('react-clean-select-language-Selection-remove-en'))
+
+      expect(onChange).toHaveBeenCalledWith(['es'])
+    })
+
+    it('optionally allows clearing all selections', async () => {
       const user = userEvent.setup()
       const onChange = jest.fn()
       renderComponent({
         clearable: true,
+        name: 'language',
+        multi: true,
+        onChange,
+        options: languages,
+        values: ['en', 'es']
+      })
+
+      await user.click(screen.getByTestId('react-clean-select-language-Clear'))
+
+      expect(onChange).toHaveBeenCalledWith([])
+    })
+
+    it('supports custom fields and numerical values', async () => {
+      const user = userEvent.setup()
+      const onChange = jest.fn()
+      renderComponent({
         name: 'schools',
         multi: true,
         onChange,
