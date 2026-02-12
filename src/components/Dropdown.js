@@ -65,7 +65,7 @@ const Dropdown = ({ props, state, methods }) => {
 
   const renderSearchResults = () => {
     if (state.searchResults.length === 0) {
-      <NoData className={`${LIB_NAME}-no-data`} state={state} props={props} methods={methods} />
+      return (<NoData props={props} state={state} methods={methods} />)
     } else {
       return state.searchResults.map((option, optionIndex) => (
         <Option

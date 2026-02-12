@@ -103,18 +103,28 @@ describe('<Select />', () => {
 
       await user.click(screen.getByTestId('react-clean-select-language-DropdownHandle'))
 
+      expect(screen.queryAllByTestId('react-clean-select-language-NoData')).toHaveLength(0)
       expect(screen.queryAllByTestId('react-clean-select-language-Option-de')).toHaveLength(1)
       expect(screen.queryAllByTestId('react-clean-select-language-Option-en')).toHaveLength(1)
       expect(screen.queryAllByTestId('react-clean-select-language-Option-es')).toHaveLength(1)
 
       await user.keyboard('D')
 
+      expect(screen.queryAllByTestId('react-clean-select-language-NoData')).toHaveLength(0)
       expect(screen.queryAllByTestId('react-clean-select-language-Option-de')).toHaveLength(1)
+      expect(screen.queryAllByTestId('react-clean-select-language-Option-en')).toHaveLength(0)
+      expect(screen.queryAllByTestId('react-clean-select-language-Option-es')).toHaveLength(0)
+
+      await user.keyboard('[BackSpace]Q')
+
+      expect(screen.queryAllByTestId('react-clean-select-language-NoData')).toHaveLength(1)
+      expect(screen.queryAllByTestId('react-clean-select-language-Option-de')).toHaveLength(0)
       expect(screen.queryAllByTestId('react-clean-select-language-Option-en')).toHaveLength(0)
       expect(screen.queryAllByTestId('react-clean-select-language-Option-es')).toHaveLength(0)
 
       await user.keyboard('[BackSpace]Esp')
 
+      expect(screen.queryAllByTestId('react-clean-select-language-NoData')).toHaveLength(0)
       expect(screen.queryAllByTestId('react-clean-select-language-Option-de')).toHaveLength(0)
       expect(screen.queryAllByTestId('react-clean-select-language-Option-en')).toHaveLength(0)
       expect(screen.queryAllByTestId('react-clean-select-language-Option-es')).toHaveLength(1)

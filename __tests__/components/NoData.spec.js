@@ -9,6 +9,7 @@ import NoData from 'components/NoData'
 
 const defaultProps = {
   name: 'something',
+  noDataLabel: 'No data',
   noDataRenderer: null
 }
 const defaultState = {}
@@ -28,7 +29,13 @@ describe('<NoData />', () => {
   it('renders the default component', () => {
     renderComponent()
 
-    expect(screen.getByTestId('react-clean-select-something-NoData')).toBeInTheDocument()
+    expect(screen.getByTestId('react-clean-select-something-NoData')).toHaveTextContent('No data')
+  })
+
+  it('supports custom content', () => {
+    renderComponent({ props: { noDataLabel: '¡Nada aquî!' } })
+
+    expect(screen.getByTestId('react-clean-select-something-NoData')).toHaveTextContent('¡Nada aquî!')
   })
 
   it('supports a custom renderer', () => {

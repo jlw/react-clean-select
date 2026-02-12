@@ -14,6 +14,7 @@ const defaultProps = {
   dropdownHeight: '300px',
   labelField: 'label',
   name: 'something',
+  noDataLabel: 'No data',
   valueField: 'value'
 }
 const defaultState = {
@@ -47,6 +48,12 @@ describe('<Dropdown />', () => {
     expect(screen.getByTestId('react-clean-select-something-Option-de')).toHaveTextContent('Deutsch')
     expect(screen.getByTestId('react-clean-select-something-Option-en')).toHaveTextContent('English')
     expect(screen.getByTestId('react-clean-select-something-Option-es')).toHaveTextContent('Español')
+  })
+
+  it('shows no data when search results are empty', () => {
+    renderComponent({ state: { searchResults: [] } })
+
+    expect(screen.queryByTestId('react-clean-select-something-NoData')).toHaveTextContent('No data')
   })
 
   it('optionally adds a non-selectable instructions option', async () => {
