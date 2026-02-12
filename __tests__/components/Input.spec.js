@@ -3,7 +3,7 @@
  */
 import React from 'react'
 import '@testing-library/jest-dom'
-import { render, screen } from '@testing-library/react'
+import { fireEvent, render, screen } from '@testing-library/react'
 
 import Input from 'components/Input'
 
@@ -38,6 +38,16 @@ describe('<Input />', () => {
     renderComponent({ props: { disabled: true } })
 
     expect(screen.getByTestId('react-clean-select-something-Input')).toHaveProperty('disabled', true)
+  })
+
+  it('optionally triggers onBlur', async () => {
+    const onBlur = jest.fn()
+    renderComponent({ props: { onBlur } })
+
+    await fireEvent.focus(screen.getByTestId('react-clean-select-something-Input'))
+    await fireEvent.blur(screen.getByTestId('react-clean-select-something-Input'))
+
+    expect(onBlur).toHaveBeenCalled()
   })
 
   it('supports a custom renderer', () => {

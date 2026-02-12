@@ -139,6 +139,7 @@ const options = [
 
 | Prop                                                                                                     | Type | Default   | Description                                                                                    |
 |----------------------------------------------------------------------------------------------------------| ---- | --------- |------------------------------------------------------------------------------------------------|
+| onBlur                                                                                          | func |           | Fires upon input blur                                                                      |
 | onChange                                                                                                 | func |           | On values change **(user and internally triggered)** callback, returns array of values  |
 | onSelect                                                                                                 | func |           | On values change (user triggered) callback, returns array of values                     |
 | onDeselect                                                                                               | func |           | On values change (user triggered) callback, returns array of values                     |

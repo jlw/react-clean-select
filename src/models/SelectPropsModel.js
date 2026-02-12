@@ -161,6 +161,10 @@ const SelectPropsModel = Object.freeze({
    */
   noDataRenderer: PropTypes.func,
   /**
+   * onBlur callback handler
+   */
+  onBlur: PropTypes.func,
+  /**
    * onChange callback handler
    */
   onChange: PropTypes.func.isRequired,

@@ -122,6 +122,7 @@ declare module 'react-clean-select' {
     name?: string;
     noDataLabel?: string;
     noDataRenderer?: ({ props, state, methods }: SelectRenderer<T>) => JSX.Element;
+    onBlur?: () => void;
     onChange: (value: T[]) => void;
     onClearAll?: () => void;
     onDeselect?: (value: T[]) => void;

@@ -42,7 +42,11 @@ class Input extends Component {
 
   onBlur = (event) => {
     event.stopPropagation()
-    if (!this.props.state.dropdown) {
+    const { props, state } = this.props
+    if (props.onBlur) {
+      props.onBlur()
+    }
+    if (!state.dropdown) {
       return this.input.current.blur()
     }
 
