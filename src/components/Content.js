@@ -61,14 +61,13 @@ const Content = ({ props, state, methods }) => {
       }}
     >
       {renderContent()}
-      {(props.name || props.required) && (
+      {props.required && (
         <input
           className={`${LIB_NAME}-input-zero`}
           data-testid={`${LIB_NAME}-${props.name}-input-zero`}
           defaultValue={state.values}
           disabled={props.disabled}
           name={props.name}
-          pattern={props.pattern}
           required={props.required}
           tabIndex={-1}
         />

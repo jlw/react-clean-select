@@ -144,7 +144,6 @@ declare module 'react-clean-select' {
       methods
     }: SelectOptionRenderer<T>) => JSX.Element;
     options: T[];
-    pattern?: string;
     placeholder?: string;
     required?: boolean;
     searchable?: boolean;

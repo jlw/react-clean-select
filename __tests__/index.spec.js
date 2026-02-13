@@ -63,8 +63,14 @@ describe('<Select />', () => {
     expect(screen.getByTestId('react-clean-select-something-Loading')).toBeInTheDocument()
   })
 
-  it('adds name to base input', () => {
+  it('does not include the base input by default', () => {
     renderComponent()
+
+    expect(screen.queryAllByTestId('react-clean-select-something-input-zero')).toHaveLength(0)
+  })
+
+  it('adds base input when required', () => {
+    renderComponent({ required: true })
 
     expect(screen.getByTestId('react-clean-select-something-input-zero')).toHaveProperty('name', 'something')
   })
@@ -244,7 +250,7 @@ describe('<Select />', () => {
     it('safely renders when provided value is not in options', () => {
       const female = { value: 'female', label: 'Female' }
       const options = [female, { value: 'male', label: 'Male' }]
-      renderComponent({ name: 'gender', options, values: ['none'] })
+      renderComponent({ name: 'gender', options, required: true, values: ['none'] })
 
       expect(screen.getByTestId('react-clean-select-gender-Content').textContent).toEqual('')
       expect(screen.getByTestId('react-clean-select-gender-input-zero')).toHaveProperty('value', 'none')
@@ -521,7 +527,7 @@ describe('<Select />', () => {
     it('safely renders when provided value is not in options', () => {
       const female = { value: 'female', label: 'Female' }
       const options = [female, { value: 'male', label: 'Male' }]
-      renderComponent({ name: 'gender', multi: true, options, values: ['none'] })
+      renderComponent({ name: 'gender', multi: true, options, required: true, values: ['none'] })
 
       expect(screen.getByTestId('react-clean-select-gender-Content').textContent).toEqual('')
       expect(screen.getByTestId('react-clean-select-gender-input-zero')).toHaveProperty('value', 'none')

@@ -198,10 +198,6 @@ const SelectPropsModel = Object.freeze({
    */
   options: PropTypes.array.isRequired,
   /**
-   * If set, input type hidden would be added in the component with pattern prop as regex
-   */
-  pattern: PropTypes.string,
-  /**
    * Placeholder shown where there are no selected values
    */
   placeholder: PropTypes.string,
