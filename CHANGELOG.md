@@ -1,5 +1,17 @@
 # Change Log
 
+## [0.0.8 (2026-02-13)](https://github.com/jlw/react-clean-select/compare/v0.0.7...v0.0.8)
+
+- Fix rendering NoData component (broken in 0.0.6)
+- Add data-testid to ClickOutside container
+- Support optional onBlur
+- Safely handle single-select with unmatched value
+- Only include the base input when field is marked as required
+- Add data-testid on single-selection Content text
+- Apply `<Option>` styles to `<NoData>`å for mostly-matching presentation
+- Safely handle null/undefined values
+
+
 ## [0.0.7 (2026-02-12)](https://github.com/jlw/react-clean-select/compare/v0.0.6...v0.0.7)
 
 - Fix class name for selection clear widget
