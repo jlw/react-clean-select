@@ -24,7 +24,10 @@ const Content = ({ props, state, methods }) => {
           />
         ))
       } else {
-        return (<span>{selections[0][props.labelField]}</span>)
+        const selection = selections[0]
+        if (selection && selection[props.labelField]) {
+          return (<span>{selection[props.labelField]}</span>)
+        }
       }
     }
   }

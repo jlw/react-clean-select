@@ -238,6 +238,15 @@ describe('<Select />', () => {
 
       expect(screen.getByTestId('react-clean-select-gender-Content')).toHaveTextContent('Female')
     })
+
+    it('safely renders when provided value is not in options', () => {
+      const female = { value: 'female', label: 'Female' }
+      const options = [female, { value: 'male', label: 'Male' }]
+      renderComponent({ name: 'gender', options, values: ['none'] })
+
+      expect(screen.getByTestId('react-clean-select-gender-Content').textContent).toEqual('')
+      expect(screen.getByTestId('react-clean-select-gender-input-zero')).toHaveProperty('value', 'none')
+    })
   })
 
   describe('with a multiple select', () => {
@@ -503,6 +512,15 @@ describe('<Select />', () => {
       await user.click(screen.getByTestId('react-clean-select-schools-Selection-remove-1'))
 
       expect(onChange).toHaveBeenCalledWith([2])
+    })
+
+    it('safely renders when provided value is not in options', () => {
+      const female = { value: 'female', label: 'Female' }
+      const options = [female, { value: 'male', label: 'Male' }]
+      renderComponent({ name: 'gender', multi: true, options, values: ['none'] })
+
+      expect(screen.getByTestId('react-clean-select-gender-Content').textContent).toEqual('')
+      expect(screen.getByTestId('react-clean-select-gender-input-zero')).toHaveProperty('value', 'none')
     })
   })
 })
