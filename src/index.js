@@ -203,7 +203,7 @@ export class Select extends Component {
     const pendingState = {}
     const addValue = this.getValue(option)
     if (this.props.multi) {
-      if (this.state.values.includes(addValue)) {
+      if (this.state.values && this.state.values.includes(addValue)) {
         return this.removeOption(null, option, false)
       }
 
@@ -281,7 +281,7 @@ export class Select extends Component {
     this.setState({ values: this.props.options.filter((option) => !option.disabled).map((option) => this.getValue(option)) })
   }
 
-  isSelected = (option) => this.state.values.includes(this.getValue(option))
+  isSelected = (option) => this.state.values && this.state.values.includes(this.getValue(option))
 
   areAllSelected = () =>
     this.state.values.length === this.props.options.filter((option) => !option.disabled).length

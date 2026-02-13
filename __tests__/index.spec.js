@@ -12,6 +12,11 @@ const defaultProps = {
   name: 'something',
   onChange: () => {}
 }
+
+const female = { value: 'female', label: 'Female' }
+const male = { value: 'male', label: 'Male' }
+const genders = [female, male]
+
 const german = { value: 'de', label: 'Deutsch' }
 const english = { value: 'en', label: 'English' }
 const spanish = { value: 'es', label: 'Español' }
@@ -240,20 +245,28 @@ describe('<Select />', () => {
     })
 
     it('renders the currently-selected option', () => {
-      const female = { value: 'female', label: 'Female' }
-      const options = [female, { value: 'male', label: 'Male' }]
-      renderComponent({ name: 'gender', options, values: ['female'] })
+      renderComponent({ name: 'gender', options: genders, values: ['female'] })
 
-      expect(screen.getByTestId('react-clean-select-gender-Content')).toHaveTextContent('Female')
+      expect(screen.getByTestId('react-clean-select-gender-Selection')).toHaveTextContent('Female')
     })
 
     it('safely renders when provided value is not in options', () => {
-      const female = { value: 'female', label: 'Female' }
-      const options = [female, { value: 'male', label: 'Male' }]
-      renderComponent({ name: 'gender', options, required: true, values: ['none'] })
+      renderComponent({ name: 'gender', options: genders, required: true, values: ['none'] })
 
-      expect(screen.getByTestId('react-clean-select-gender-Content').textContent).toEqual('')
+      expect(screen.queryAllByTestId('react-clean-select-gender-Selection')).toHaveLength(0)
       expect(screen.getByTestId('react-clean-select-gender-input-zero')).toHaveProperty('value', 'none')
+    })
+
+    it('safely renders when receiving null value', () => {
+      renderComponent({ name: 'gender', options: genders, values: null })
+
+      expect(screen.queryAllByTestId('react-clean-select-gender-Selection')).toHaveLength(0)
+    })
+
+    it('safely renders when receiving undefined value', () => {
+      renderComponent({ name: 'gender', options: genders, values: undefined })
+
+      expect(screen.queryAllByTestId('react-clean-select-gender-Selection')).toHaveLength(0)
     })
   })
 
@@ -525,12 +538,22 @@ describe('<Select />', () => {
     })
 
     it('safely renders when provided value is not in options', () => {
-      const female = { value: 'female', label: 'Female' }
-      const options = [female, { value: 'male', label: 'Male' }]
-      renderComponent({ name: 'gender', multi: true, options, required: true, values: ['none'] })
+      renderComponent({ name: 'language', multi: true, options: languages, required: true, values: ['none'] })
 
-      expect(screen.getByTestId('react-clean-select-gender-Content').textContent).toEqual('')
-      expect(screen.getByTestId('react-clean-select-gender-input-zero')).toHaveProperty('value', 'none')
+      expect(screen.getByTestId('react-clean-select-language-Content').textContent).toEqual('')
+      expect(screen.getByTestId('react-clean-select-language-input-zero')).toHaveProperty('value', 'none')
+    })
+
+    it('safely renders when receiving null value', () => {
+      renderComponent({ name: 'language', multi: true, options: languages, values: null })
+
+      expect(screen.getByTestId('react-clean-select-language-Content').textContent).toEqual('')
+    })
+
+    it('safely renders when receiving undefined value', () => {
+      renderComponent({ name: 'language', multi: true, options: languages, values: undefined })
+
+      expect(screen.getByTestId('react-clean-select-language-Content').textContent).toEqual('')
     })
   })
 })
