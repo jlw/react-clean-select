@@ -51,6 +51,12 @@ describe('<Content />', () => {
     expect(screen.getByTestId('react-clean-select-something-Selection-remove-foo')).toBeInTheDocument()
   })
 
+  it('renders the single-selection', () => {
+    renderComponent({ props: { options: [defaultOption], multi: false, values: ['foo'] } })
+
+    expect(screen.getByTestId('react-clean-select-something-Selection')).toHaveTextContent('Foo')
+  })
+
   it('renders selected options with customized object keys', () => {
     const option = { id: 3, name: 'Foo' }
     renderComponent({

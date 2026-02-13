@@ -26,7 +26,11 @@ const Content = ({ props, state, methods }) => {
       } else {
         const selection = selections[0]
         if (selection && selection[props.labelField]) {
-          return (<span>{selection[props.labelField]}</span>)
+          return (
+            <span data-testid={`${LIB_NAME}-${props.name}-Selection`}>
+              {selection[props.labelField]}
+            </span>
+          )
         }
       }
     }
