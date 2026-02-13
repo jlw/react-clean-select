@@ -82,9 +82,11 @@ describe('<Select />', () => {
       const select = screen.getByTestId('react-clean-select-language')
       expect(select).not.toHaveTextContent('Deutsch')
       expect(screen.queryAllByTestId('react-clean-select-language-Option-de')).toHaveLength(0)
+      expect(screen.getByTestId('react-clean-select-language')).toHaveAttribute('aria-expanded', 'false')
 
       await user.click(screen.getByTestId('react-clean-select-language-DropdownHandle'))
 
+      expect(screen.getByTestId('react-clean-select-language')).toHaveAttribute('aria-expanded', 'true')
       expect(screen.queryAllByTestId('react-clean-select-language-Option-de')).toHaveLength(1)
       expect(screen.queryAllByTestId('react-clean-select-language-Option-en')).toHaveLength(1)
       expect(screen.queryAllByTestId('react-clean-select-language-Option-es')).toHaveLength(1)
@@ -256,9 +258,11 @@ describe('<Select />', () => {
       const select = screen.getByTestId('react-clean-select-language')
       expect(select).not.toHaveTextContent('Deutsch')
       expect(screen.queryAllByTestId('react-clean-select-language-Option-de')).toHaveLength(0)
+      expect(screen.getByTestId('react-clean-select-language')).toHaveAttribute('aria-expanded', 'false')
 
       await user.click(screen.getByTestId('react-clean-select-language-DropdownHandle'))
 
+      expect(screen.getByTestId('react-clean-select-language')).toHaveAttribute('aria-expanded', 'true')
       expect(screen.queryAllByTestId('react-clean-select-language-Option-de')).toHaveLength(1)
       expect(screen.queryAllByTestId('react-clean-select-language-Option-en')).toHaveLength(1)
       expect(screen.queryAllByTestId('react-clean-select-language-Option-es')).toHaveLength(1)
