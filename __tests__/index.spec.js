@@ -87,6 +87,12 @@ describe('<Select />', () => {
   })
 
   describe('with a single select', () => {
+    it('renders the currently-selected option', () => {
+      renderComponent({ name: 'gender', options: genders, values: ['female'] })
+
+      expect(screen.getByTestId('react-clean-select-gender-Selection')).toHaveTextContent('Female')
+    })
+
     it('opens and closes', async () => {
       const user = userEvent.setup()
       renderComponent({ name: 'language', options: languages })
@@ -216,6 +222,18 @@ describe('<Select />', () => {
       expect(screen.getByTestId('react-clean-select-language')).toHaveAttribute('aria-expanded', 'false')
     })
 
+    it('allows clearing selections with backspace', async () => {
+      const user = userEvent.setup()
+      const onChange = jest.fn()
+      renderComponent({ name: 'gender', onChange, options: genders, values: ['female'] })
+
+      await user.click(screen.getByTestId('react-clean-select-gender-DropdownHandle'))
+      await user.keyboard('[Backspace]')
+
+      expect(onChange).toHaveBeenCalledWith([])
+      expect(screen.getByTestId('react-clean-select-gender')).toHaveAttribute('aria-expanded', 'true')
+    })
+
     it('closes when selecting with the keyboard', async () => {
       const user = userEvent.setup()
       renderComponent({ closeOnSelect: false, name: 'language', options: languages })
@@ -242,12 +260,6 @@ describe('<Select />', () => {
       expect(screen.queryAllByTestId('react-clean-select-language-Option-de')).toHaveLength(1)
       expect(screen.queryAllByTestId('react-clean-select-language-Option-en')).toHaveLength(1)
       expect(screen.queryAllByTestId('react-clean-select-language-Option-es')).toHaveLength(1)
-    })
-
-    it('renders the currently-selected option', () => {
-      renderComponent({ name: 'gender', options: genders, values: ['female'] })
-
-      expect(screen.getByTestId('react-clean-select-gender-Selection')).toHaveTextContent('Female')
     })
 
     it('safely renders when provided value is not in options', () => {
@@ -497,6 +509,18 @@ describe('<Select />', () => {
       await user.click(screen.getByTestId('react-clean-select-language-Selection-remove-en'))
 
       expect(onChange).toHaveBeenCalledWith(['es'])
+    })
+
+    it('allows clearing selections with backspace', async () => {
+      const user = userEvent.setup()
+      const onChange = jest.fn()
+      renderComponent({ name: 'language', multi: true, onChange, options: languages, values: ['en', 'es'] })
+
+      await user.click(screen.getByTestId('react-clean-select-language-DropdownHandle'))
+      await user.keyboard('[Backspace]')
+
+      expect(onChange).toHaveBeenCalledWith(['en'])
+      expect(screen.getByTestId('react-clean-select-language')).toHaveAttribute('aria-expanded', 'true')
     })
 
     it('optionally allows clearing all selections', async () => {
