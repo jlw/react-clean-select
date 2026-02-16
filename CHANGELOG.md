@@ -1,5 +1,10 @@
 # Change Log
 
+## [0.0.9 (2026-02-16)](https://github.com/jlw/react-clean-select/compare/v0.0.8...v0.0.9)
+
+- No functional changes: ensuring NPM was published from the master branch
+
+
 ## [0.0.8 (2026-02-13)](https://github.com/jlw/react-clean-select/compare/v0.0.7...v0.0.8)
 
 - Fix rendering NoData component (broken in 0.0.6)
