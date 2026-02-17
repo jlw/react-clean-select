@@ -72,7 +72,6 @@ class Input extends Component {
         onFocus={(event) => event.stopPropagation()}
         onKeyDown={methods.handleKeyDown}
         placeholder={handlePlaceHolder(props, state)}
-        tabIndex='-1'
         value={state.search}
       />
     )

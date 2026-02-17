@@ -32,6 +32,8 @@ describe('<Input />', () => {
 
   it('TODO: build sufficient tests', () => {
     renderComponent()
+
+    expect(screen.getByTestId('react-clean-select-something-Input')).not.toHaveProperty('tabindex')
   })
 
   it('supports disabled prop', () => {
