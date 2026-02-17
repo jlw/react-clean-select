@@ -424,7 +424,6 @@ export class Select extends Component {
           onClick={(event) => { event.stopPropagation(); this.dropDown('open') }}
           onKeyDown={this.handleKeyDown}
           ref={this.select}
-          tabIndex={this.props.disabled ? '-1' : '0'}
           {...this.props.additionalProps}
         >
           <Content props={this.props} state={this.state} methods={this.methods} />

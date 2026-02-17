@@ -41,7 +41,6 @@ class Input extends Component {
   }
 
   onBlur = (event) => {
-    event.stopPropagation()
     const { props, state } = this.props
     if (props.onBlur) {
       props.onBlur()
@@ -69,7 +68,7 @@ class Input extends Component {
         onBlur={this.onBlur}
         onChange={methods.setSearch}
         onClick={(event) => { event.stopPropagation(); methods.dropDown('open') }}
-        onFocus={(event) => event.stopPropagation()}
+        onFocus={() => methods.dropDown('open')}
         onKeyDown={methods.handleKeyDown}
         placeholder={handlePlaceHolder(props, state)}
         value={state.search}

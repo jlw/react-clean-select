@@ -3,7 +3,7 @@
  */
 import React from 'react'
 import '@testing-library/jest-dom'
-import { fireEvent, render, screen } from '@testing-library/react'
+import { act, fireEvent, render, screen } from '@testing-library/react'
 
 import Input from 'components/Input'
 
@@ -16,6 +16,7 @@ const defaultState = {
   values: []
 }
 const defaultMethods = {
+  dropDown: () => undefined,
   getInputSize: () => undefined
 }
 
@@ -42,12 +43,27 @@ describe('<Input />', () => {
     expect(screen.getByTestId('react-clean-select-something-Input')).toHaveProperty('disabled', true)
   })
 
+  it('opens the dropdown on focus (i.e. tabbing from another field)', async () => {
+    const dropDown = jest.fn()
+    renderComponent({ methods: { dropDown } })
+
+    await act(async () => {
+      fireEvent.focus(screen.getByTestId('react-clean-select-something-Input'))
+    })
+
+    expect(dropDown).toHaveBeenCalledWith('open')
+  })
+
   it('optionally triggers onBlur', async () => {
     const onBlur = jest.fn()
     renderComponent({ props: { onBlur } })
 
-    await fireEvent.focus(screen.getByTestId('react-clean-select-something-Input'))
-    await fireEvent.blur(screen.getByTestId('react-clean-select-something-Input'))
+    await act(async () => {
+      fireEvent.focus(screen.getByTestId('react-clean-select-something-Input'))
+    })
+    await act(async () => {
+      fireEvent.blur(screen.getByTestId('react-clean-select-something-Input'))
+    })
 
     expect(onBlur).toHaveBeenCalled()
   })
