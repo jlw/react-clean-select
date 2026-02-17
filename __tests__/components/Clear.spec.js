@@ -3,7 +3,7 @@
  */
 import React from 'react'
 import '@testing-library/jest-dom'
-import { fireEvent, render, screen } from '@testing-library/react'
+import { act, fireEvent, render, screen } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 
 import Clear from 'components/Clear'
@@ -35,7 +35,9 @@ describe('<Clear />', () => {
   it('clears all on keyDown', async () => {
     renderComponent()
 
-    await fireEvent.keyDown(screen.getByTestId('react-clean-select-something-Clear'))
+    await act(async () => {
+      fireEvent.keyDown(screen.getByTestId('react-clean-select-something-Clear'))
+    })
 
     expect(defaultProps.methods.clearAll).toHaveBeenCalled()
   })
