@@ -29,8 +29,7 @@ class Input extends Component {
 
   componentDidUpdate (prevProps) {
     if (
-      this.props.state.dropdown || (prevProps.state.dropdown !== this.props.state.dropdown && this.props.state.dropdown) ||
-      this.props.props.autoFocus
+      this.props.state.dropdown || (prevProps.state.dropdown !== this.props.state.dropdown && this.props.state.dropdown)
     ) {
       this.input.current.focus()
     }

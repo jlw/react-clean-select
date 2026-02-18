@@ -10,10 +10,6 @@ const SelectPropsModel = Object.freeze({
    */
   additionalProps: PropTypes.object,
   /**
-   * If true, and searchable, dropdown will autofocus
-   */
-  autoFocus: PropTypes.bool,
-  /**
    * If true, backspace key will delete last value
    */
   backspaceDelete: PropTypes.bool,

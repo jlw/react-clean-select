@@ -80,7 +80,6 @@ declare module 'react-clean-select' {
   export interface SelectProps<T> {
     additionalProps?: HTMLAttributes<HTMLDivElement>;
     addPlaceholder?: string;
-    autoFocus?: boolean;
     backspaceDelete?: boolean;
     className?: string;
     clearable?: boolean;

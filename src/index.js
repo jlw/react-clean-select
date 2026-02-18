@@ -456,7 +456,6 @@ export class Select extends Component {
 Select.defaultProps = {
   additionalProps: null,
   addPlaceholder: '',
-  autoFocus: false,
   backspaceDelete: true,
   clearable: false,
   clearAllLabel: 'Clear all',
