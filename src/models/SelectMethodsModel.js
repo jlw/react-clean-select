@@ -37,7 +37,7 @@ const SelectMethodsModel = Object.freeze({
   /**
    * Handle key down event
    */
-  handleKeyDown: PropTypes.func.isRequired,
+  handleKeyUp: PropTypes.func.isRequired,
   /**
    * Check if an option is selected
    */

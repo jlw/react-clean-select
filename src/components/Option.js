@@ -69,7 +69,7 @@ class Option extends Component {
         data-testid={dataTestId}
         data-non-selectable={nonSelectable ? 'true' : null}
         onClick={this.addOption.bind(this)}
-        onKeyDown={this.addOption.bind(this)}
+        onKeyUp={this.addOption.bind(this)}
       >
         {option[props.labelField]}{option.disabled && <ins>{props.disabledLabel}</ins>}
       </span>

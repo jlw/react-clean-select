@@ -35,7 +35,7 @@ declare module 'react-clean-select' {
     getInputSize: () => number;
     getSelectBounds: () => {} | DOMRect;
     getSelectRef: () => HTMLDivElement;
-    handleKeyDown: (event: KeyboardEvent) => void;
+    handleKeyUp: (event: KeyboardEvent) => void;
     isSelected: (option: T) => boolean;
     removeOption: (event: MouseEvent<HTMLElement> | null, option: T, close: boolean) => void;
     safeString: (input: string) => string;
@@ -59,7 +59,7 @@ declare module 'react-clean-select' {
     state: SelectState<T>;
   }
 
-  export interface SelectKeyDown<T> {
+  export interface SelectKeyUp<T> {
     event: KeyboardEvent;
     methods: SelectMethods<T>;
     props: SelectProps<T>;
@@ -102,15 +102,12 @@ declare module 'react-clean-select' {
     dropdownHeight?: string;
     dropdownPosition?: 'top' | 'bottom' | 'auto';
     dropdownRenderer?: ({ props, state, methods }: SelectRenderer<T>) => JSX.Element;
-    handleKeyDownFn?: ({ event, props, state, methods, setState }: SelectKeyDown<T>) => void;
+    handleKeyUpFn?: ({ event, props, state, methods, setState }: SelectKeyUp<T>) => void;
     inputRenderer?: ({
       props,
       state,
-      methods,
-      inputRef
-    }: SelectRenderer<T> & {
-      inputRef: RefObject<HTMLInputElement>;
-    }) => JSX.Element;
+      methods
+    }: SelectRenderer<T>) => JSX.Element;
     instructionsOption?: string;
     keepOpen?: boolean;
     keepSelectedInList?: boolean;

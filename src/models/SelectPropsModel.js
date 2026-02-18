@@ -104,9 +104,9 @@ const SelectPropsModel = Object.freeze({
    */
   dropdownRenderer: PropTypes.func,
   /**
-   * Overrides internal keyDown function
+   * Overrides internal keyUp function
    */
-  handleKeyDownFn: PropTypes.func,
+  handleKeyUpFn: PropTypes.func,
   /**
    * Overrides internal input text
    */

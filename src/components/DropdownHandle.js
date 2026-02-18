@@ -18,7 +18,7 @@ const DropdownHandle = ({ props, state, methods }) => {
       }
       data-testid={`${LIB_NAME}-${props.name}-DropdownHandle`}
       onClick={toggle}
-      onKeyDown={toggle}
+      onKeyUp={toggle}
       tabIndex='-1'
     >
       {props.dropdownHandleRenderer

@@ -45,7 +45,7 @@ export class Select extends Component {
       getSelectBounds: this.getSelectBounds,
       getSelectRef: this.getSelectRef,
       getValue: this.getValue,
-      handleKeyDown: this.handleKeyDown,
+      handleKeyUp: this.handleKeyUp,
       isSelected: this.isSelected,
       removeOption: this.removeOption,
       safeString: this.safeString,
@@ -336,7 +336,7 @@ export class Select extends Component {
       activeCursorOption
     })
 
-  handleKeyDown = (event) => {
+  handleKeyUp = (event) => {
     const args = {
       event,
       state: this.state,
@@ -345,18 +345,18 @@ export class Select extends Component {
       setState: this.setState.bind(this)
     }
 
-    return this.props.handleKeyDownFn(args) || this.handleKeyDownFn(args)
+    return this.props.handleKeyUpFn(args) || this.handleKeyUpFn(args)
   }
 
-  handleKeyDownFn = ({ event, state, props, methods, setState }) => {
+  handleKeyUpFn = ({ event, state, props, methods, setState }) => {
+    if (event.key === 'Tab') { return }
+
     const { cursor, searchResults } = state
     const escape = event.key === 'Escape'
     const enter = event.key === 'Enter'
     const arrowUp = event.key === 'ArrowUp'
     const arrowDown = event.key === 'ArrowDown'
     const backspace = event.key === 'Backspace'
-    const tab = event.key === 'Tab' && !event.shiftKey
-    const shiftTab = event.shiftKey && event.key === 'Tab'
 
     if (escape) {
       return this.dropDown('close')
@@ -422,7 +422,6 @@ export class Select extends Component {
           className={classNames.join(' ')}
           data-testid={`${LIB_NAME}-${this.props.name}`}
           onClick={(event) => { event.stopPropagation(); this.dropDown('open') }}
-          onKeyDown={this.handleKeyDown}
           ref={this.select}
           {...this.props.additionalProps}
         >
@@ -474,7 +473,7 @@ Select.defaultProps = {
   dropdownHandle: true,
   dropdownHeight: '300px',
   dropdownPosition: 'bottom',
-  handleKeyDownFn: () => undefined,
+  handleKeyUpFn: () => undefined,
   keepOpen: false,
   keepSelectedInList: true,
   labelField: 'label',

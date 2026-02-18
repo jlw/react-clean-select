@@ -68,7 +68,7 @@ class Input extends Component {
         onChange={methods.setSearch}
         onClick={(event) => { event.stopPropagation(); methods.dropDown('open') }}
         onFocus={() => methods.dropDown('open')}
-        onKeyDown={methods.handleKeyDown}
+        onKeyUp={methods.handleKeyUp}
         placeholder={handlePlaceHolder(props, state)}
         value={state.search}
       />

@@ -13,7 +13,7 @@ const Clear = ({ props, state, methods }) =>
         data-testid={`${LIB_NAME}-${props.name}-Clear`}
         tabIndex='-1'
         onClick={(event) => { event.stopPropagation(); methods.clearAll() }}
-        onKeyDown={(event) => { event.stopPropagation(); methods.clearAll() }}
+        onKeyUp={(event) => { event.stopPropagation(); methods.clearAll() }}
       >
         &times;
       </div>

@@ -65,12 +65,12 @@ describe('<Option />', () => {
     expect(addOption).not.toHaveBeenCalled()
   })
 
-  it('adds the option on keydown', async () => {
+  it('adds the option on keyUp', async () => {
     const addOption = jest.fn()
     renderComponent({ methods: { addOption } })
 
     await act(async () => {
-      fireEvent.keyDown(screen.getByTestId('react-clean-select-something-Option-foo'))
+      fireEvent.keyUp(screen.getByTestId('react-clean-select-something-Option-foo'))
     })
 
     expect(addOption).toHaveBeenCalledWith(defaultOption)
@@ -81,7 +81,7 @@ describe('<Option />', () => {
     renderComponent({ methods: { addOption }, option: { disabled: true } })
 
     await act(async () => {
-      fireEvent.keyDown(screen.getByTestId('react-clean-select-something-Option-foo'))
+      fireEvent.keyUp(screen.getByTestId('react-clean-select-something-Option-foo'))
     })
 
     expect(addOption).not.toHaveBeenCalled()

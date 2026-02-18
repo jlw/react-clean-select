@@ -48,11 +48,11 @@ describe('<DropdownHandle />', () => {
     expect(defaultMethods.dropDown).toHaveBeenCalledWith('toggle')
   })
 
-  it('toggles dropdown on keyDown', async () => {
+  it('toggles dropdown on keyUp', async () => {
     renderComponent()
 
     await act(async () => {
-      fireEvent.keyDown(screen.getByTestId('react-clean-select-something-DropdownHandle'))
+      fireEvent.keyUp(screen.getByTestId('react-clean-select-something-DropdownHandle'))
     })
 
     expect(defaultMethods.dropDown).toHaveBeenCalledWith('toggle')

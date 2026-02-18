@@ -32,11 +32,11 @@ describe('<Clear />', () => {
     expect(defaultProps.methods.clearAll).toHaveBeenCalled()
   })
 
-  it('clears all on keyDown', async () => {
+  it('clears all on keyUp', async () => {
     renderComponent()
 
     await act(async () => {
-      fireEvent.keyDown(screen.getByTestId('react-clean-select-something-Clear'))
+      fireEvent.keyUp(screen.getByTestId('react-clean-select-something-Clear'))
     })
 
     expect(defaultProps.methods.clearAll).toHaveBeenCalled()
