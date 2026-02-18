@@ -9,7 +9,7 @@ import SelectMethodsModel from '../models/SelectMethodsModel'
 import SelectPropsModel from '../models/SelectPropsModel'
 import SelectStateModel from '../models/SelectStateModel'
 
-const Content = ({ props, state, methods }) => {
+const Content = ({ props, state, methods, inputRef }) => {
   const renderSelection = () => {
     if (state.values && state.values.length > 0) {
       const selections = methods.selectedOptions()
@@ -44,7 +44,7 @@ const Content = ({ props, state, methods }) => {
     return (
       <>
         {renderSelection()}
-        <Input props={props} methods={methods} state={state} />
+        <Input props={props} methods={methods} state={state} inputRef={inputRef} />
       </>
     )
   }
@@ -83,7 +83,11 @@ const Content = ({ props, state, methods }) => {
 Content.propTypes = {
   props: PropTypes.shape(SelectPropsModel),
   state: PropTypes.shape(SelectStateModel),
-  methods: PropTypes.shape(SelectMethodsModel)
+  methods: PropTypes.shape(SelectMethodsModel),
+  inputRef: PropTypes.oneOfType([
+    PropTypes.func,
+    PropTypes.shape({ current: PropTypes.any })
+  ])
 }
 
 export default Content

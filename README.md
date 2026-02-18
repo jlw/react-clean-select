@@ -146,7 +146,6 @@ const options = [
 | onDropdownOpen                                                                                           | func |           | Fires upon dropdown open                                                                       |
 | onClearAll                                                                                               | func |           | Fires upon clearing all values (via custom renderers)                                          |
 | onSelectAll                                                                                              | func |           | Fires upon selecting all values (via custom renderers)                                         |
-| onDropdownCloseRequest                                                                                   | func | undefined | Fires upon dropdown closing state, stops the closing and provides own method `close()`         |
 | [contentRenderer](https://jlw.github.io/react-clean-select/prop/content-renderer)                | func |           | Overrides internal content component (the contents of the select component)                    |
 | [optionRenderer](https://jlw.github.io/react-clean-select/prop/option-renderer)                  | func |           | Overrides internal option in a dropdown                                                          |
 | [noDataRenderer](https://jlw.github.io/react-clean-select/prop/no-data-renderer)                 | func |           | Overrides internal "no data" (shown where search has no results)                               |

@@ -35,6 +35,10 @@ const SelectMethodsModel = Object.freeze({
    */
   getValue: PropTypes.func.isRequired,
   /**
+   * Handle blur event
+   */
+  handleBlur: PropTypes.func.isRequired,
+  /**
    * Handle key down event
    */
   handleKeyDown: PropTypes.func.isRequired,

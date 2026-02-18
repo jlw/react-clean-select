@@ -45,6 +45,7 @@ export class Select extends Component {
       getSelectBounds: this.getSelectBounds,
       getSelectRef: this.getSelectRef,
       getValue: this.getValue,
+      handleBlur: this.handleBlur,
       handleKeyDown: this.handleKeyDown,
       isSelected: this.isSelected,
       removeOption: this.removeOption,
@@ -59,6 +60,7 @@ export class Select extends Component {
     }
 
     this.select = React.createRef()
+    this.input = React.createRef()
     this.dropdownRoot = typeof document !== 'undefined' && document.createElement('div')
   }
 
@@ -151,29 +153,19 @@ export class Select extends Component {
 
   getSelectBounds = () => this.state.selectBounds
 
-  dropDown = (action = 'toggle', force = false) => {
+  dropDown = (action = 'toggle', fromInput = false) => {
     if (this.props.keepOpen) {
-      if (this.state.dropdown !== true) { this.setState({ dropdown: true }) }
+      if (!this.state.dropdown) {
+        this.setState({ dropdown: true })
+        if (!fromInput) {
+          this.input.current.focus()
+        }
+      }
       return
     }
 
-    if (
-      this.props.onDropdownCloseRequest !== undefined &&
-      this.state.dropdown &&
-      force === false &&
-      action === 'close'
-    ) {
-      return this.props.onDropdownCloseRequest({
-        props: this.props,
-        methods: this.methods,
-        state: this.state,
-        close: () => this.dropDown('close', true)
-      })
-    }
-
-    if (action === 'close' && this.state.dropdown) {
+    if ((action === 'close' || action === 'toggle') && this.state.dropdown) {
       this.select.current.blur()
-
       this.setState({
         dropdown: false,
         search: this.props.clearOnBlur ? '' : this.state.search
@@ -181,13 +173,12 @@ export class Select extends Component {
       return this.setState({ searchResults: this.searchResults() })
     }
 
-    if (action === 'open' && !this.state.dropdown) {
-      return this.setState({ dropdown: true })
-    }
-
-    if (action === 'toggle') {
-      this.select.current.focus()
-      return this.setState({ dropdown: !this.state.dropdown })
+    if ((action === 'open' || action === 'toggle') && !this.state.dropdown) {
+      this.setState({ dropdown: true })
+      if (!fromInput) {
+        this.input.current.focus()
+      }
+      return
     }
 
     return false
@@ -331,10 +322,13 @@ export class Select extends Component {
     return rawSearchResults
   }
 
-  activeCursorOption = (activeCursorOption) =>
-    this.setState({
-      activeCursorOption
-    })
+  activeCursorOption = (activeCursorOption) => this.setState({ activeCursorOption })
+
+  handleBlur = () => {
+    if (this.props.onBlur) {
+      this.props.onBlur()
+    }
+  }
 
   handleKeyDown = (event) => {
     const args = {
@@ -349,18 +343,13 @@ export class Select extends Component {
   }
 
   handleKeyDownFn = ({ event, state, props, methods, setState }) => {
-    const { cursor, searchResults } = state
-    const escape = event.key === 'Escape'
-    const enter = event.key === 'Enter'
-    const arrowUp = event.key === 'ArrowUp'
-    const arrowDown = event.key === 'ArrowDown'
-    const backspace = event.key === 'Backspace'
-    const tab = event.key === 'Tab' && !event.shiftKey
-    const shiftTab = event.shiftKey && event.key === 'Tab'
+    if (event.key === 'Escape' || event.key === 'Tab') { return this.dropDown('close') }
 
-    if (escape) {
-      return this.dropDown('close')
-    }
+    const { cursor, searchResults } = state
+    const arrowDown = event.key === 'ArrowDown'
+    const arrowUp = event.key === 'ArrowUp'
+    const backspace = event.key === 'Backspace'
+    const enter = event.key === 'Enter'
 
     if (enter) {
       const currentOption = searchResults[cursor]
@@ -372,7 +361,7 @@ export class Select extends Component {
       }
     }
 
-    if (arrowUp || arrowDown || (shiftTab && state.dropdown) || (tab && state.dropdown)) {
+    if (arrowUp || arrowDown) {
       event.preventDefault()
     }
 
@@ -383,19 +372,19 @@ export class Select extends Component {
       })
     }
 
-    if ((arrowDown || (tab && state.dropdown)) && (cursor === null || searchResults.length - 1 === cursor)) {
+    if (arrowDown && (cursor === null || searchResults.length - 1 === cursor)) {
       setState({
         cursor: 0
       })
-    } else if (arrowDown || (tab && state.dropdown)) {
+    } else if (arrowDown) {
       setState({
         cursor: cursor + 1
       })
-    } else if ((arrowUp || (shiftTab && state.dropdown)) && (cursor === null || cursor === 0)) {
+    } else if (arrowUp && (cursor === null || cursor === 0)) {
       setState({
         cursor: searchResults.length - 1
       })
-    } else if ((arrowUp || (shiftTab && state.dropdown)) && cursor > 0) {
+    } else if (arrowUp && cursor > 0) {
       setState({
         cursor: cursor - 1
       })
@@ -417,16 +406,16 @@ export class Select extends Component {
     return (
       <ClickOutside props={this.props} onClickOutside={() => this.dropDown('close')}>
         <div
+          ref={this.select}
           aria-expanded={this.state.dropdown}
           aria-label='Dropdown select'
           className={classNames.join(' ')}
           data-testid={`${LIB_NAME}-${this.props.name}`}
+          onBlur={this.handleBlur}
           onClick={(event) => { event.stopPropagation(); this.dropDown('open') }}
-          onKeyDown={this.handleKeyDown}
-          ref={this.select}
           {...this.props.additionalProps}
         >
-          <Content props={this.props} state={this.state} methods={this.methods} />
+          <Content props={this.props} state={this.state} methods={this.methods} inputRef={this.input} />
 
           {this.props.loading && <Loading props={this.props} />}
 
@@ -487,7 +476,6 @@ Select.defaultProps = {
   onClearAll: () => undefined,
   onDeselect: () => undefined,
   onDropdownClose: () => undefined,
-  onDropdownCloseRequest: undefined,
   onDropdownOpen: () => undefined,
   onSelect: () => undefined,
   onSelectAll: () => undefined,

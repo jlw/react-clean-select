@@ -173,11 +173,6 @@ const SelectPropsModel = Object.freeze({
    */
   onDropdownClose: PropTypes.func,
   /**
-   * Fires upon dropdown closing state, stops the closing and provides own method close()
-   * @return undefined
-   */
-  onDropdownCloseRequest: PropTypes.func,
-  /**
    * Fires upon dropdown open
    */
   onDropdownOpen: PropTypes.func,

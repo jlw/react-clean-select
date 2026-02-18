@@ -31,7 +31,7 @@ declare module 'react-clean-select' {
     addOption: (option: T) => void;
     areAllSelected: () => boolean;
     clearAll: () => void;
-    dropDown: (action: string, event?: MouseEvent<HTMLElement> | null) => void;
+    dropDown: (action: string) => void;
     getInputSize: () => number;
     getSelectBounds: () => {} | DOMRect;
     getSelectRef: () => HTMLDivElement;
@@ -126,12 +126,6 @@ declare module 'react-clean-select' {
     onClearAll?: () => void;
     onDeselect?: (value: T[]) => void;
     onDropdownClose?: () => void;
-    onDropdownCloseRequest?: ({
-      props,
-      state,
-      methods,
-      close
-    }: SelectOnDropdownCloseRequest<T>) => T[];
     onDropdownOpen?: () => void;
     onSelect?: (value: T[]) => void;
     onSelectAll?: () => void;

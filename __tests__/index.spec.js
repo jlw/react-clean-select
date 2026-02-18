@@ -3,7 +3,7 @@
  */
 import React from 'react'
 import '@testing-library/jest-dom'
-import { render, screen } from '@testing-library/react'
+import { act, fireEvent, render, screen } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 
 import Select from '../src/index'
@@ -86,6 +86,50 @@ describe('<Select />', () => {
     expect(screen.getByTestId('react-clean-select-something-Input')).toHaveProperty('disabled', true)
   })
 
+  it('optionally triggers onBlur', async () => {
+    const onBlur = jest.fn()
+    renderComponent({ onBlur })
+
+    await act(async () => {
+      fireEvent.focus(screen.getByTestId('react-clean-select-something'))
+    })
+    await act(async () => {
+      fireEvent.blur(screen.getByTestId('react-clean-select-something'))
+    })
+
+    expect(onBlur).toHaveBeenCalled()
+  })
+
+  it('blurs on Escape', async () => {
+    const user = userEvent.setup()
+    const onBlur = jest.fn()
+    const onChange = jest.fn()
+    renderComponent({ name: 'gender', onBlur, onChange, options: genders })
+
+    await user.click(screen.getByTestId('react-clean-select-gender-DropdownHandle'))
+    await user.keyboard('[ArrowUp]')
+    await user.keyboard('[Escape]')
+
+    expect(screen.getByTestId('react-clean-select-gender')).toHaveAttribute('aria-expanded', 'false')
+    expect(onBlur).toHaveBeenCalled()
+    expect(onChange).not.toHaveBeenCalled()
+  })
+
+  it('blurs on Tab', async () => {
+    const user = userEvent.setup()
+    const onBlur = jest.fn()
+    const onChange = jest.fn()
+    renderComponent({ name: 'gender', onBlur, onChange, options: genders })
+
+    await user.click(screen.getByTestId('react-clean-select-gender-DropdownHandle'))
+    await user.keyboard('[ArrowUp]')
+    await user.keyboard('[Tab]')
+
+    expect(screen.getByTestId('react-clean-select-gender')).toHaveAttribute('aria-expanded', 'false')
+    expect(onBlur).toHaveBeenCalled()
+    expect(onChange).not.toHaveBeenCalled()
+  })
+
   describe('with a single select', () => {
     it('renders the currently-selected option', () => {
       renderComponent({ name: 'gender', options: genders, values: ['female'] })
@@ -110,6 +154,7 @@ describe('<Select />', () => {
 
       await user.click(screen.getByTestId('react-clean-select-language-DropdownHandle'))
 
+      expect(screen.getByTestId('react-clean-select-language')).toHaveAttribute('aria-expanded', 'false')
       expect(screen.queryAllByTestId('react-clean-select-language-Option-de')).toHaveLength(0)
       expect(screen.queryAllByTestId('react-clean-select-language-Option-en')).toHaveLength(0)
       expect(screen.queryAllByTestId('react-clean-select-language-Option-es')).toHaveLength(0)

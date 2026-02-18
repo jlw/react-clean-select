@@ -17,7 +17,8 @@ const defaultState = {
 }
 const defaultMethods = {
   dropDown: () => undefined,
-  getInputSize: () => undefined
+  getInputSize: () => undefined,
+  handleBlur: () => undefined
 }
 
 const compileProps = ({ props = {}, state = {}, methods = {} }) => {
@@ -37,6 +38,12 @@ describe('<Input />', () => {
     expect(screen.getByTestId('react-clean-select-something-Input')).not.toHaveProperty('tabindex')
   })
 
+  it('adds a placeholder', () => {
+    renderComponent({ props: { placeholder: 'test' } })
+
+    expect(screen.getByTestId('react-clean-select-something-Input')).toHaveProperty('placeholder', 'test')
+  })
+
   it('supports disabled prop', () => {
     renderComponent({ props: { disabled: true } })
 
@@ -51,21 +58,7 @@ describe('<Input />', () => {
       fireEvent.focus(screen.getByTestId('react-clean-select-something-Input'))
     })
 
-    expect(dropDown).toHaveBeenCalledWith('open')
-  })
-
-  it('optionally triggers onBlur', async () => {
-    const onBlur = jest.fn()
-    renderComponent({ props: { onBlur } })
-
-    await act(async () => {
-      fireEvent.focus(screen.getByTestId('react-clean-select-something-Input'))
-    })
-    await act(async () => {
-      fireEvent.blur(screen.getByTestId('react-clean-select-something-Input'))
-    })
-
-    expect(onBlur).toHaveBeenCalled()
+    expect(dropDown).toHaveBeenCalledWith('open', true)
   })
 
   it('supports a custom renderer', () => {
