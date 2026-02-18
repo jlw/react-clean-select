@@ -1,5 +1,13 @@
 # Change Log
 
+## [0.0.10 (2026-02-18)](https://github.com/jlw/react-clean-select/compare/v0.0.9...v0.0.10)
+
+- Remove tabindex from Input for expected form behavior
+- Fix basic input focusing and blurring
+- Fix tab to change fields and not move the option cursor
+- Remove untested, questionable autofocus and onDropdownCloseRequest options
+
+
 ## [0.0.9 (2026-02-16)](https://github.com/jlw/react-clean-select/compare/v0.0.8...v0.0.9)
 
 - No functional changes: ensuring NPM was published from the master branch
