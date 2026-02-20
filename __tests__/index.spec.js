@@ -279,6 +279,46 @@ describe('<Select />', () => {
       expect(screen.getByTestId('react-clean-select-gender')).toHaveAttribute('aria-expanded', 'true')
     })
 
+    it('optionally allows free text entry (via dropDownClose)', async () => {
+      const user = userEvent.setup()
+      const onChange = jest.fn()
+      renderComponent({ allowFreeTextEntry: true, name: 'gender', onChange, options: genders, values: [] })
+
+      await user.click(screen.getByTestId('react-clean-select-gender-DropdownHandle'))
+      await user.keyboard('femal')
+
+      expect(screen.queryAllByTestId('react-clean-select-gender-Option-female')).toHaveLength(1)
+
+      await user.keyboard('en')
+
+      expect(screen.queryAllByTestId('react-clean-select-gender-Option-female')).toHaveLength(0)
+
+      await user.keyboard('[Tab]')
+
+      expect(onChange).toHaveBeenCalledWith(['femalen'])
+      expect(screen.getByTestId('react-clean-select-gender')).toHaveAttribute('aria-expanded', 'false')
+    })
+
+    it('optionally allows free text entry (via handleKeyDown)', async () => {
+      const user = userEvent.setup()
+      const onChange = jest.fn()
+      renderComponent({ allowFreeTextEntry: true, name: 'gender', onChange, options: genders, values: [] })
+
+      await user.click(screen.getByTestId('react-clean-select-gender-DropdownHandle'))
+      await user.keyboard('femal')
+
+      expect(screen.queryAllByTestId('react-clean-select-gender-Option-female')).toHaveLength(1)
+
+      await user.keyboard('en')
+
+      expect(screen.queryAllByTestId('react-clean-select-gender-Option-female')).toHaveLength(0)
+
+      await user.keyboard('[Enter]')
+
+      expect(onChange).toHaveBeenCalledWith(['femalen'])
+      expect(screen.getByTestId('react-clean-select-gender')).toHaveAttribute('aria-expanded', 'false')
+    })
+
     it('closes when selecting with the keyboard', async () => {
       const user = userEvent.setup()
       renderComponent({ closeOnSelect: false, name: 'language', options: languages })
@@ -297,6 +337,23 @@ describe('<Select />', () => {
       expect(screen.getByTestId('react-clean-select-language-Content')).toHaveTextContent('Deutsch')
       expect(screen.queryAllByTestId('react-clean-select-language-Option-de')).toHaveLength(0)
       expect(screen.queryAllByTestId('react-clean-select-language-Option-en')).toHaveLength(0)
+    })
+
+    it('closes when selecting with the keyboard (bypassing allowFreeTextEntry)', async () => {
+      const user = userEvent.setup()
+      const onChange = jest.fn()
+      renderComponent({ allowFreeTextEntry: true, closeOnSelect: false, name: 'language', onChange, options: languages })
+      expect(screen.queryAllByTestId('react-clean-select-language-Option-de')).toHaveLength(0)
+
+      await user.click(screen.getByTestId('react-clean-select-language-DropdownHandle'))
+      await user.keyboard('Eng')
+
+      expect(screen.queryAllByTestId('react-clean-select-language-Option-en')).toHaveLength(1)
+
+      await user.keyboard('[ArrowDown]')
+      await user.keyboard('[Enter]')
+
+      expect(onChange).toHaveBeenCalledWith(['en'])
     })
 
     it('optionally renders open for debugging', () => {
@@ -583,6 +640,26 @@ describe('<Select />', () => {
       await user.click(screen.getByTestId('react-clean-select-language-Clear'))
 
       expect(onChange).toHaveBeenCalledWith([])
+    })
+
+    it('IGNORES allowFreeTextEntry', async () => {
+      const user = userEvent.setup()
+      const onChange = jest.fn()
+      renderComponent({ allowFreeTextEntry: true, name: 'gender', multi: true, onChange, options: genders, values: [] })
+
+      await user.click(screen.getByTestId('react-clean-select-gender-DropdownHandle'))
+      await user.keyboard('femal')
+
+      expect(screen.queryAllByTestId('react-clean-select-gender-Option-female')).toHaveLength(1)
+
+      await user.keyboard('en')
+
+      expect(screen.queryAllByTestId('react-clean-select-gender-Option-female')).toHaveLength(0)
+
+      await user.keyboard('[Tab]')
+
+      expect(onChange).not.toHaveBeenCalled()
+      expect(screen.getByTestId('react-clean-select-gender')).toHaveAttribute('aria-expanded', 'false')
     })
 
     it('supports custom fields and numerical values', async () => {

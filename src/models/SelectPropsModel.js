@@ -10,6 +10,10 @@ const SelectPropsModel = Object.freeze({
    */
   additionalProps: PropTypes.object,
   /**
+   * If true - and multi is false - anything the user types will be accepted, treating options as mere suggestions
+   */
+  allowFreeTextEntry: PropTypes.bool,
+  /**
    * If true, backspace key will delete last value
    */
   backspaceDelete: PropTypes.bool,

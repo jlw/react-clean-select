@@ -166,10 +166,14 @@ export class Select extends Component {
 
     if ((action === 'close' || action === 'toggle') && this.state.dropdown) {
       this.select.current.blur()
-      this.setState({
+      const changes = {
         dropdown: false,
         search: this.props.clearOnBlur ? '' : this.state.search
-      })
+      }
+      if (this.props.allowFreeTextEntry && !this.props.multi && this.state.search !== '') {
+        changes.values = [this.state.search]
+      }
+      this.setState(changes)
       return this.setState({ searchResults: this.searchResults() })
     }
 
@@ -352,16 +356,27 @@ export class Select extends Component {
     const enter = event.key === 'Enter'
 
     if (enter) {
-      const currentOption = searchResults[cursor]
-      if (currentOption && !currentOption.disabled) {
-        if (props.multi && !props.keepSelectedInList && cursor > 0) {
-          setState({ cursor: cursor - 1 })
+      if (cursor !== null) {
+        const currentOption = searchResults[cursor]
+        if (currentOption && !currentOption.disabled) {
+          if (props.multi && !props.keepSelectedInList && cursor > 0) {
+            setState({ cursor: cursor - 1 })
+          }
+          event.preventDefault()
+          return methods.addOption(currentOption)
         }
-        return methods.addOption(currentOption)
+      } else if (this.props.allowFreeTextEntry && !this.props.multi && this.state.search !== '') {
+        event.preventDefault()
+        this.setState({
+          dropdown: false,
+          search: '',
+          values: [this.state.search]
+        })
+        return this.setState({ searchResults: this.searchResults() })
       }
     }
 
-    if (arrowUp || arrowDown) {
+    if (arrowDown || arrowUp) {
       event.preventDefault()
     }
 
@@ -445,6 +460,7 @@ export class Select extends Component {
 Select.defaultProps = {
   additionalProps: null,
   addPlaceholder: '',
+  allowFreeTextEntry: false,
   backspaceDelete: true,
   clearable: false,
   clearAllLabel: 'Clear all',
