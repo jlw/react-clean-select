@@ -11,19 +11,12 @@ const Input = ({ props, state, methods, inputRef }) => {
 
   const getPlaceHolder = () => {
     const { addPlaceholder, searchable, placeholder } = props
-    const noValues = state.values && state.values.length === 0
     const hasValues = state.values && state.values.length > 0
 
-    if (hasValues && addPlaceholder && searchable) {
-      return addPlaceholder
-    }
-
-    if (noValues) {
+    if (!hasValues) {
       return placeholder
-    }
-
-    if (hasValues && !searchable) {
-      return ''
+    } else if (hasValues && addPlaceholder && searchable) {
+      return addPlaceholder
     }
 
     return ''

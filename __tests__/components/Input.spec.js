@@ -44,6 +44,18 @@ describe('<Input />', () => {
     expect(screen.getByTestId('react-clean-select-something-Input')).toHaveProperty('placeholder', 'test')
   })
 
+  it('suppresses the placeholder when has values and is not searchable', () => {
+    renderComponent({ props: { placeholder: 'test', searchable: false }, state: { values: ['foo'] } })
+
+    expect(screen.getByTestId('react-clean-select-something-Input')).toHaveProperty('placeholder', '')
+  })
+
+  it('optionally adds a second placeholder when has values and is searchable', () => {
+    renderComponent({ props: { addPlaceholder: 'add', placeholder: 'test' }, state: { values: ['foo'] } })
+
+    expect(screen.getByTestId('react-clean-select-something-Input')).toHaveProperty('placeholder', 'add')
+  })
+
   it('supports disabled prop', () => {
     renderComponent({ props: { disabled: true } })
 
