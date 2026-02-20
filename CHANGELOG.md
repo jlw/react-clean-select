@@ -1,5 +1,12 @@
 # Change Log
 
+## [0.1.0 (2026-02-20)](https://github.com/jlw/react-clean-select/compare/v0.0.10...v0.1.0)
+
+- Add allowFreeTextEntry option for single-select mode
+  - accept anything the user types, treating options as mere suggestions
+- Display selections from a customized searchFn even if not in options
+
+
 ## [0.0.10 (2026-02-18)](https://github.com/jlw/react-clean-select/compare/v0.0.9...v0.0.10)
 
 - Remove tabindex from Input for expected form behavior
@@ -21,7 +28,7 @@
 - Safely handle single-select with unmatched value
 - Only include the base input when field is marked as required
 - Add data-testid on single-selection Content text
-- Apply `<Option>` styles to `<NoData>`å for mostly-matching presentation
+- Apply `<Option>` styles to `<NoData>` for mostly-matching presentation
 - Safely handle null/undefined values
 
 
