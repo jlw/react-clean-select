@@ -201,6 +201,19 @@ describe('<Select />', () => {
       expect(screen.getByTestId('react-clean-select-language')).toHaveAttribute('aria-expanded', 'false')
     })
 
+    it('supports options only returned by searchFn', async () => {
+      const user = userEvent.setup()
+      const onChange = jest.fn()
+      const searchFn = () => [{ value: 'Bar', label: 'Bar' }]
+      renderComponent({ name: 'foo', onChange, options: [], searchFn })
+
+      await user.click(screen.getByTestId('react-clean-select-foo-DropdownHandle'))
+      await user.keyboard('ba[ArrowDown][Enter]')
+
+      expect(onChange).toHaveBeenCalledWith(['Bar'])
+      expect(screen.getByTestId('react-clean-select-foo-Selection')).toHaveTextContent('Bar')
+    })
+
     it('supports keyboard navigation and selection', async () => {
       const user = userEvent.setup()
       const onChange = jest.fn()
@@ -376,11 +389,11 @@ describe('<Select />', () => {
       expect(screen.queryAllByTestId('react-clean-select-language-Option-es')).toHaveLength(1)
     })
 
-    it('safely renders when provided value is not in options', () => {
-      renderComponent({ name: 'gender', options: genders, required: true, values: ['none'] })
+    it('safely renders when provided value is not in options (e.g. from a custom searchFn)', () => {
+      renderComponent({ name: 'language', options: languages, required: true, values: ['None of the above'] })
 
-      expect(screen.queryAllByTestId('react-clean-select-gender-Selection')).toHaveLength(0)
-      expect(screen.getByTestId('react-clean-select-gender-input-zero')).toHaveProperty('value', 'none')
+      expect(screen.getByTestId('react-clean-select-language-Selection')).toHaveTextContent('None of the above')
+      expect(screen.getByTestId('react-clean-select-language-input-zero')).toHaveProperty('value', 'None of the above')
     })
 
     it('safely renders when receiving null value', () => {

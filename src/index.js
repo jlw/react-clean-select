@@ -281,7 +281,14 @@ export class Select extends Component {
   areAllSelected = () =>
     this.state.values.length === this.props.options.filter((option) => !option.disabled).length
 
-  selectedOptions = () => this.props.options.filter((option) => this.isSelected(option))
+  selectedOptions = () => {
+    const rawSelections = this.props.options.filter((option) => this.isSelected(option))
+    if (!this.props.multi && rawSelections.length === 0 && this.state.values.length === 1) {
+      const value = this.state.values[0]
+      return [{ value, label: value }]
+    }
+    return rawSelections
+  }
 
   safeString = (string) => string.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')
 
