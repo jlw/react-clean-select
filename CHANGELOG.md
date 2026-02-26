@@ -1,5 +1,17 @@
 # Change Log
 
+## [0.2.0 (2026-02-26)](https://github.com/jlw/react-clean-select/compare/v0.1.0...v0.2.0)
+
+- Fix custom search function handling to allow for async code
+  - extract logic for filtering and setting search results
+  - use custom searchFn return value directly if it is an array
+- Replace pattern of default functions returning undefined
+  - check if prop is a function before calling it
+- Add lodash as peer dependency to simplify identifying array vs. object
+  - TODO: replace other custom code here with lodash
+- Add default <input `autocomplete="off"`> and allow overrides
+
+
 ## [0.1.0 (2026-02-20)](https://github.com/jlw/react-clean-select/compare/v0.0.10...v0.1.0)
 
 - Add allowFreeTextEntry option for single-select mode
