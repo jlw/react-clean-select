@@ -1,3 +1,4 @@
+import _ from 'lodash'
 import React, { Component } from 'react'
 import ClickOutside from './components/ClickOutside'
 
@@ -41,6 +42,7 @@ export class Select extends Component {
       areAllSelected: this.areAllSelected,
       clearAll: this.clearAll,
       dropDown: this.dropDown,
+      findSearchResults: this.findSearchResults,
       getInputSize: this.getInputSize,
       getSelectBounds: this.getSelectBounds,
       getSelectRef: this.getSelectRef,
@@ -51,10 +53,10 @@ export class Select extends Component {
       removeOption: this.removeOption,
       safeString: this.safeString,
       searchExistsInOptions: this.searchExistsInOptions,
-      searchResults: this.searchResults,
       selectAll: this.selectAll,
       selectedOptions: this.selectedOptions,
       setSearch: this.setSearch,
+      setSearchResults: this.setSearchResults,
       sortBy: this.sortBy,
       toggleSelectAll: this.toggleSelectAll
     }
@@ -76,7 +78,7 @@ export class Select extends Component {
     } else {
       this.dropDown('close')
     }
-    this.setState({ searchResults: this.searchResults() })
+    this.findSearchResults()
   }
 
   componentDidUpdate (prevProps, prevState) {
@@ -96,7 +98,7 @@ export class Select extends Component {
     }
 
     if (prevProps.options !== this.props.options) {
-      this.setState({ searchResults: this.searchResults() })
+      this.findSearchResults()
     }
 
     if (prevState.values !== this.state.values) {
@@ -117,7 +119,7 @@ export class Select extends Component {
     }
 
     if (!prevState.dropdown && prevState.dropdown !== this.state.dropdown) {
-      this.props.onDropdownOpen()
+      if (_.isFunction(this.props.onDropdownOpen)) { this.props.onDropdownOpen() }
     }
   }
 
@@ -134,7 +136,7 @@ export class Select extends Component {
 
   onDropdownClose = () => {
     this.setState({ cursor: null })
-    this.props.onDropdownClose()
+    if (_.isFunction(this.props.onDropdownClose)) { this.props.onDropdownClose() }
   }
 
   onScroll = () => {
@@ -174,7 +176,7 @@ export class Select extends Component {
         changes.values = [this.state.search]
       }
       this.setState(changes)
-      return this.setState({ searchResults: this.searchResults() })
+      return this.findSearchResults()
     }
 
     if ((action === 'open' || action === 'toggle') && !this.state.dropdown) {
@@ -203,10 +205,14 @@ export class Select extends Component {
       }
 
       pendingState.values = [...this.state.values, addValue]
-      this.props.onSelect([...this.state.values, addValue])
+      if (_.isFunction(this.props.onSelect)) {
+        this.props.onSelect([...this.state.values, addValue])
+      }
     } else {
       pendingState.values = [addValue]
-      this.props.onSelect([addValue])
+      if (_.isFunction(this.props.onSelect)) {
+        this.props.onSelect([addValue])
+      }
     }
 
     if (this.props.clearOnSelect) {
@@ -232,7 +238,7 @@ export class Select extends Component {
       dropdown: !close,
       values
     })
-    this.props.onDeselect(values)
+    if (_.isFunction(this.props.onDeselect)) { this.props.onDeselect(values) }
   }
 
   setSearch = (event) => {
@@ -242,7 +248,7 @@ export class Select extends Component {
   setSearchState = (searchValue) => {
     this.setState(
       { cursor: null, search: searchValue },
-      () => this.setState({ searchResults: this.searchResults() })
+      () => this.findSearchResults()
     )
   }
 
@@ -265,14 +271,12 @@ export class Select extends Component {
   }
 
   clearAll = () => {
-    this.props.onClearAll()
-    this.setState({
-      values: []
-    })
+    if (_.isFunction(this.props.onClearAll)) { this.props.onClearAll() }
+    this.setState({ values: [] })
   }
 
   selectAll = () => {
-    this.props.onSelectAll()
+    if (_.isFunction(this.props.onSelectAll)) { this.props.onSelectAll() }
     this.setState({ values: this.props.options.filter((option) => !option.disabled).map((option) => this.getValue(option)) })
   }
 
@@ -322,21 +326,30 @@ export class Select extends Component {
       )
   }
 
-  searchResults = () => {
+  findSearchResults = () => {
     const args = { state: this.state, props: this.props, methods: this.methods }
-    const rawSearchResults = this.props.searchFn(args) || this.searchFn(args)
-
-    if (this.props.multi && !this.props.keepSelectedInList) {
-      return rawSearchResults.filter((option) => !this.methods.isSelected(option))
+    if (_.isFunction(this.props.searchFn)) {
+      const result = this.props.searchFn(args)
+      if (_.isArray(result)) {
+        this.setSearchResults(result)
+      }
+      return
     }
+    this.setSearchResults(this.searchFn(args))
+  }
 
-    return rawSearchResults
+  setSearchResults = (rawSearchResults) => {
+    let searchResults = rawSearchResults
+    if (this.props.multi && !this.props.keepSelectedInList) {
+      searchResults = rawSearchResults.filter((option) => !this.methods.isSelected(option))
+    }
+    this.setState({ searchResults })
   }
 
   activeCursorOption = (activeCursorOption) => this.setState({ activeCursorOption })
 
   handleBlur = () => {
-    if (this.props.onBlur) {
+    if (_.isFunction(this.props.onBlur)) {
       this.props.onBlur()
     }
   }
@@ -350,7 +363,8 @@ export class Select extends Component {
       setState: this.setState.bind(this)
     }
 
-    return this.props.handleKeyDownFn(args) || this.handleKeyDownFn(args)
+    const handleFunc = _.isFunction(this.props.handleKeyDownFn) ? this.props.handleKeyDownFn : this.handleKeyDownFn
+    return handleFunc(args)
   }
 
   handleKeyDownFn = ({ event, state, props, methods, setState }) => {
@@ -379,7 +393,7 @@ export class Select extends Component {
           search: '',
           values: [this.state.search]
         })
-        return this.setState({ searchResults: this.searchResults() })
+        return this.findSearchResults()
       }
     }
 
@@ -468,6 +482,7 @@ Select.defaultProps = {
   additionalProps: null,
   addPlaceholder: '',
   allowFreeTextEntry: false,
+  autoComplete: 'off',
   backspaceDelete: true,
   clearable: false,
   clearAllLabel: 'Clear all',
@@ -486,7 +501,7 @@ Select.defaultProps = {
   dropdownHandle: true,
   dropdownHeight: '300px',
   dropdownPosition: 'bottom',
-  handleKeyDownFn: () => undefined,
+  handleKeyDownFn: null,
   keepOpen: false,
   keepSelectedInList: true,
   labelField: 'label',
@@ -496,18 +511,18 @@ Select.defaultProps = {
   noDataLabel: 'No data',
   onBlur: null,
   onChange: () => undefined,
-  onClearAll: () => undefined,
-  onDeselect: () => undefined,
-  onDropdownClose: () => undefined,
-  onDropdownOpen: () => undefined,
-  onSelect: () => undefined,
-  onSelectAll: () => undefined,
+  onClearAll: null,
+  onDeselect: null,
+  onDropdownClose: null,
+  onDropdownOpen: null,
+  onSelect: null,
+  onSelectAll: null,
   options: [],
   placeholder: 'Select...',
   required: false,
   searchable: true,
   searchBy: 'label',
-  searchFn: () => undefined,
+  searchFn: null,
   selectAll: false,
   selectAllLabel: 'Select all',
   separator: false,

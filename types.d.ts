@@ -32,6 +32,7 @@ declare module 'react-clean-select' {
     areAllSelected: () => boolean;
     clearAll: () => void;
     dropDown: (action: string) => void;
+    findSearchResults: () => void;
     getInputSize: () => number;
     getSelectBounds: () => {} | DOMRect;
     getSelectRef: () => HTMLDivElement;
@@ -39,9 +40,10 @@ declare module 'react-clean-select' {
     isSelected: (option: T) => boolean;
     removeOption: (event: MouseEvent<HTMLElement> | null, option: T, close: boolean) => void;
     safeString: (input: string) => string;
-    searchResults: () => T[];
+    setSearchResults: () => void;
     selectAll: () => void;
     setSearch: (event: ChangeEvent<HTMLInputElement>) => void;
+    setSearchResults: () => void;
     sortBy: () => T[];
     toggleSelectAll: () => void;
   }
@@ -81,6 +83,7 @@ declare module 'react-clean-select' {
     additionalProps?: HTMLAttributes<HTMLDivElement>;
     addPlaceholder?: string;
     allowFreeTextEntry?: boolean;
+    autoComplete?: string;
     backspaceDelete?: boolean;
     className?: string;
     clearable?: boolean;

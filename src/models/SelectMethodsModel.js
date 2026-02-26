@@ -19,6 +19,10 @@ const SelectMethodsModel = Object.freeze({
    */
   dropDown: PropTypes.func.isRequired,
   /**
+   * Get search results (from internal or custom searchFn)
+   */
+  findSearchResults: PropTypes.func.isRequired,
+  /**
    * Get the input size
    */
   getInputSize: PropTypes.func.isRequired,
@@ -59,10 +63,6 @@ const SelectMethodsModel = Object.freeze({
    */
   searchExistsInOptions: PropTypes.func.isRequired,
   /**
-   * Get search results
-   */
-  searchResults: PropTypes.func.isRequired,
-  /**
    * Select all options
    */
   selectAll: PropTypes.func.isRequired,
@@ -74,6 +74,10 @@ const SelectMethodsModel = Object.freeze({
    * Set the search string
    */
   setSearch: PropTypes.func.isRequired,
+  /**
+   * Set the filtered options (from internal or custom searchFn)
+   */
+  setSearchResults: PropTypes.func.isRequired,
   /**
    * Sort options
    */

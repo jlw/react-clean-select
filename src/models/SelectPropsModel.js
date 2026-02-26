@@ -14,6 +14,10 @@ const SelectPropsModel = Object.freeze({
    */
   allowFreeTextEntry: PropTypes.bool,
   /**
+   * If present, this will override the default `autocomplete="off"` input attribute
+   */
+  autoComplete: PropTypes.string,
+  /**
    * If true, backspace key will delete last value
    */
   backspaceDelete: PropTypes.bool,

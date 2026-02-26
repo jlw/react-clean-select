@@ -49,6 +49,7 @@
   "author": "Jeremy Weathers <jeremy@codekindly.com>",
   "license": "MIT",
   "peerDependencies": {
+    "lodash": ">=4.x",
     "prop-types": ">=15.7.2",
     "react": ">=16.x",
     "react-dom": ">=16.x"
@@ -89,6 +90,7 @@
     "husky": "9",
     "jest": "30",
     "jest-environment-jsdom": "30",
+    "lodash": "4",
     "prop-types": "15",
     "react": "19",
     "react-dom": "19",

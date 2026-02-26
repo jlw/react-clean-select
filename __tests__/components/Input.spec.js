@@ -8,6 +8,7 @@ import { act, fireEvent, render, screen } from '@testing-library/react'
 import Input from 'components/Input'
 
 const defaultProps = {
+  autoComplete: 'off',
   inputRenderer: null,
   name: 'something',
   searchable: true
@@ -35,6 +36,7 @@ describe('<Input />', () => {
   it('TODO: build sufficient tests', () => {
     renderComponent()
 
+    expect(screen.getByTestId('react-clean-select-something-Input')).toHaveProperty('autocomplete', 'off')
     expect(screen.getByTestId('react-clean-select-something-Input')).not.toHaveProperty('tabindex')
   })
 

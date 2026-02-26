@@ -157,8 +157,8 @@ const options = [
 | [separatorRenderer](https://jlw.github.io/react-clean-select/prop/separator-renderer)            | func |           | Overrides internal separator                                                                   |
 | [dropdownRenderer](https://jlw.github.io/react-clean-select/prop/dropdown-renderer)              | func |           | Overrides internal dropdown component                                                          |
 | [dropdownHandleRenderer](https://jlw.github.io/react-clean-select/prop/dropdown-handle-renderer) | func |           | Overrides internal dropdown handle                                                             |
-| searchFn                                                                                                 | func | undefined | Overrides internal search function                                                             |
-| handleKeyDownFn                                                                                          | func | undefined | Overrides internal keyDown function                                                            |
+| searchFn                                                                                                 | func |           | Overrides internal search function                                                             |
+| handleKeyDownFn                                                                                          | func |           | Overrides internal keyDown function                                                            |
 
 ### License
 

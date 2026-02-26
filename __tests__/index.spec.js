@@ -3,14 +3,13 @@
  */
 import React from 'react'
 import '@testing-library/jest-dom'
-import { act, fireEvent, render, screen } from '@testing-library/react'
+import { act, fireEvent, render, screen, waitFor } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 
 import Select from '../src/index'
 
 const defaultProps = {
-  name: 'something',
-  onChange: () => {}
+  name: 'something'
 }
 
 const female = { value: 'female', label: 'Female' }
@@ -201,7 +200,7 @@ describe('<Select />', () => {
       expect(screen.getByTestId('react-clean-select-language')).toHaveAttribute('aria-expanded', 'false')
     })
 
-    it('supports options only returned by searchFn', async () => {
+    it('supports options only returned (directly) by searchFn', async () => {
       const user = userEvent.setup()
       const onChange = jest.fn()
       const searchFn = () => [{ value: 'Bar', label: 'Bar' }]
@@ -209,6 +208,21 @@ describe('<Select />', () => {
 
       await user.click(screen.getByTestId('react-clean-select-foo-DropdownHandle'))
       await user.keyboard('ba[ArrowDown][Enter]')
+
+      expect(onChange).toHaveBeenCalledWith(['Bar'])
+      expect(screen.getByTestId('react-clean-select-foo-Selection')).toHaveTextContent('Bar')
+    })
+
+    it('supports searchFn using setSearchResults (for simple async processing)', async () => {
+      const user = userEvent.setup()
+      const onChange = jest.fn()
+      const searchFn = ({ methods }) => { methods.setSearchResults([{ value: 'Bar', label: 'Bar' }]) }
+      renderComponent({ name: 'foo', onChange, options: [], searchFn })
+
+      await user.click(screen.getByTestId('react-clean-select-foo-DropdownHandle'))
+      await user.keyboard('ba')
+      expect(screen.queryAllByTestId('react-clean-select-foo-Option-Bar')).toHaveLength(1)
+      await user.click(screen.getByTestId('react-clean-select-foo-Option-Bar'))
 
       expect(onChange).toHaveBeenCalledWith(['Bar'])
       expect(screen.getByTestId('react-clean-select-foo-Selection')).toHaveTextContent('Bar')

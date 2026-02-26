@@ -25,6 +25,7 @@ const Input = ({ props, state, methods, inputRef }) => {
   return (
     <input
       ref={inputRef}
+      autoComplete={props.autoComplete}
       className={`${LIB_NAME}-input${props.searchable ? '' : ` ${LIB_NAME}-input-readonly`}`}
       data-testid={`${LIB_NAME}-${props.name}-Input`}
       disabled={props.disabled}
