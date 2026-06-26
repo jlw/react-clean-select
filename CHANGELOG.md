@@ -1,5 +1,11 @@
 # Change Log
 
+## [0.3.1 (2026-06-26)](https://github.com/jlw/react-clean-select/compare/v0.3.0...v0.3.1)
+
+- Open the dropdown again onKeyDown
+  - Input already retains focus after using the keyboard for multi selection
+
+
 ## [0.3.0 (2026-06-26)](https://github.com/jlw/react-clean-select/compare/v0.2.0...v0.3.0)
 
 - Replace <ClickOutside /> with <Container /> relying on onBlur()
