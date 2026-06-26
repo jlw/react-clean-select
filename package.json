@@ -1,6 +1,6 @@
 {
   "name": "react-clean-select",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "description": "Customizable single- and multi- select component for react with basic, easily-overrideable CSS",
   "main": "dist/react-clean-select.js",
   "module": "lib/index.js",
@@ -105,7 +105,7 @@
     "collectCoverage": false,
     "collectCoverageFrom": [
       "src/**/*.{js,jsx}",
-      "!src/**/ClickOutside.js",
+      "!src/**/Container.js",
       "!node_modules/**",
       "!docs/**",
       "!dist/**",

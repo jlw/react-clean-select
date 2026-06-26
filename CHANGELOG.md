@@ -1,5 +1,12 @@
 # Change Log
 
+## [0.3.0 (2026-06-26)](https://github.com/jlw/react-clean-select/compare/v0.2.0...v0.3.0)
+
+- Replace <ClickOutside /> with <Container /> relying on onBlur()
+  - more than one field on the same page could cause havoc on each other with multiple selections
+- DRY calling onSelect()
+
+
 ## [0.2.0 (2026-02-26)](https://github.com/jlw/react-clean-select/compare/v0.1.0...v0.2.0)
 
 - Fix custom search function handling to allow for async code
