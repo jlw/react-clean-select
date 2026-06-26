@@ -1,7 +1,7 @@
 import _ from 'lodash'
 import React, { Component } from 'react'
-import ClickOutside from './components/ClickOutside'
 
+import Container from './components/Container'
 import Content from './components/Content'
 import Dropdown from './components/Dropdown'
 import Loading from './components/Loading'
@@ -205,14 +205,11 @@ export class Select extends Component {
       }
 
       pendingState.values = [...this.state.values, addValue]
-      if (_.isFunction(this.props.onSelect)) {
-        this.props.onSelect([...this.state.values, addValue])
-      }
     } else {
       pendingState.values = [addValue]
-      if (_.isFunction(this.props.onSelect)) {
-        this.props.onSelect([addValue])
-      }
+    }
+    if (_.isFunction(this.props.onSelect)) {
+      this.props.onSelect(pendingState.values)
     }
 
     if (this.props.clearOnSelect) {
@@ -440,7 +437,7 @@ export class Select extends Component {
     if (this.props.className !== undefined) { classNames.push(this.props.className) }
 
     return (
-      <ClickOutside props={this.props} onClickOutside={() => this.dropDown('close')}>
+      <Container props={this.props}>
         <div
           ref={this.select}
           aria-expanded={this.state.dropdown}
@@ -473,7 +470,7 @@ export class Select extends Component {
 
           {this.state.dropdown && !this.props.disabled && this.renderDropdown()}
         </div>
-      </ClickOutside>
+      </Container>
     )
   }
 }
