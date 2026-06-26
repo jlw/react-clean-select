@@ -398,11 +398,13 @@ export class Select extends Component {
       event.preventDefault()
     }
 
-    if ((arrowDown || arrowUp) && !state.dropdown) {
+    if (!state.dropdown) {
       this.dropDown('open')
-      return setState({
-        cursor: arrowDown ? 0 : searchResults.length - 1
-      })
+      if (arrowDown || arrowUp) {
+        return setState({
+          cursor: arrowDown ? 0 : searchResults.length - 1
+        })
+      }
     }
 
     if (arrowDown && (cursor === null || searchResults.length - 1 === cursor)) {

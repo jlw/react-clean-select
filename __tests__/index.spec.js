@@ -477,6 +477,16 @@ describe('<Select />', () => {
       expect(screen.getByTestId('react-clean-select-language')).toHaveAttribute('aria-expanded', 'true')
     })
 
+    it('re-opens with typing after selecting another option', async () => {
+      renderComponent({ name: 'language', multi: true, options: languages })
+
+      await act(async () => {
+        fireEvent.keyDown(screen.getByTestId('react-clean-select-language-Input'), )
+      })
+
+      expect(screen.queryAllByTestId('react-clean-select-language-Option-de')).toHaveLength(1)
+    })
+
     it('supports custom searchBy option property', async () => {
       const user = userEvent.setup()
       const onChange = jest.fn()
